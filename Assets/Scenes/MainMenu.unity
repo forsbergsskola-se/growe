@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 633026973}
   - component: {fileID: 633026972}
   - component: {fileID: 633026971}
+  - component: {fileID: 633026974}
   m_Layer: 5
   m_Name: New game / continue
   m_TagString: Untagged
@@ -526,7 +527,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633026972}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 633026974}
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: PlayScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &633026972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,6 +578,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633026969}
   m_CullTransparentMesh: 1
+--- !u!114 &633026974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633026969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13f08037ed83c2428de82bec18ce382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &704764620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,46 +1388,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8241629344760197620, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 475
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241629344760197620, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 275
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241629344760197620, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241629344760197620, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241629345364085942, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 475
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241629345364085942, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 275
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241629345364085942, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241629345364085942, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8241629345492630776, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 471489258}
-    - target: {fileID: 8241629345492630777, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8241629346133361664, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1490,10 +1479,6 @@ PrefabInstance:
     - target: {fileID: 8241629346133361668, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
       propertyPath: m_Name
       value: ExitCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241629346133361668, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0a4e8e224e4fb04da297a2b3ae58aeb, type: 3}

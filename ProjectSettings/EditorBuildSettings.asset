@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SettingsScene.unity
     guid: 03f0b377f056b8a4e950b3204a3873d6
+  - enabled: 1
+    path: Assets/Scenes/GameplayPlaceholderScene.unity
+    guid: a01936b89354be74c90c6685c255064d
+  - enabled: 1
+    path: Assets/Scenes/StoreScene.unity
+    guid: 4be9e24c293feb5499e6188f959794f8
+  - enabled: 1
+    path: Assets/Scenes/InventoryScreen.unity
+    guid: 9b5b2628897fddb47b7f6a45f9f0f23c
   m_configObjects: {}
