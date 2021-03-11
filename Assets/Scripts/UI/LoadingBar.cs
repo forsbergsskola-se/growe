@@ -20,7 +20,7 @@ public class LoadingBar : MonoBehaviour
         while ( !op.isDone )
         {
             float progress = Mathf.Clamp01(op.progress / .9f);
-	
+    
             slider.value = progress;
     
             yield return null;
