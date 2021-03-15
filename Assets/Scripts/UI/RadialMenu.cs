@@ -1,18 +1,29 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class RadialMenu : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,  IEndDragHandler, IPointerUpHandler
+public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
-    public float waitTime = 1f;
-    public Image radialWheel;
+    [Header("Settings")]
+    [SerializeField, Range(0.0f, 10f), Tooltip("How long the button must be held until the menu shows up")] float waitTime = 1f;
+    
+    //variables
     private bool menuButtonHeldDown = false;
     private float endTime;
+    private bool RadialWheelActive => radialWheel.activeSelf;
     
+    //references
+    public GameObject radialWheel;
+    private EventSystem eventSystem;
     
-    
+    private void OnEnable()
+    {
+        eventSystem = GetComponent<EventSystem>();
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         menuButtonHeldDown = true;
@@ -20,20 +31,13 @@ public class RadialMenu : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
         Debug.Log("pointer down on radial menu");
         StartCoroutine(ButtonHeldRoutine());
     }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void OnPointerUp(PointerEventData eventData)
     {
+        Debug.Log("Pointer up");
         menuButtonHeldDown = false;
+        
+        if(RadialWheelActive)
+            CheckIfToolIsHovered();
     }
 
     IEnumerator ButtonHeldRoutine()
@@ -41,7 +45,27 @@ public class RadialMenu : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,
         while (Time.time < endTime) {
             if (!menuButtonHeldDown)
                 yield break;
+            yield return null;
         }
-        radialWheel.enabled = true;
+        radialWheel.SetActive(true);
     }
+
+    private void CheckIfToolIsHovered()
+    {
+        PointerEventData eventData = new PointerEventData(eventSystem);
+        eventData.position = Input.mousePosition;
+             
+        GraphicRaycaster graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
+        List<RaycastResult> results = new List<RaycastResult>();
+        graphicRaycaster.Raycast(eventData, results);
+        
+        foreach (RaycastResult result in results)
+        {
+            Debug.Log("Hit " + result.gameObject.name);
+        }
+        
+    }
+    
+
+
 }
