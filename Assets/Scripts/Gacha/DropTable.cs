@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
 
 [CreateAssetMenu(fileName = "DropTable", menuName = "Drop Table", order = 1)]
 public class DropTable : ScriptableObject

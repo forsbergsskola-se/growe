@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DroppableItems:
   - Item: Poor
-    DropChance: 60
+    DropChance: 50
   - Item: Avarage
-    DropChance: 35
+    DropChance: 45
   - Item: Omage Cool
     DropChance: 5
