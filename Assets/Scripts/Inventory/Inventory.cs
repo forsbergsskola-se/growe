@@ -6,6 +6,7 @@ namespace Inventory
     public static class Inventory
     {
         public static List<Item> items = new List<Item>();
+        public static CreateItemSlot CreateItemSlot;
 
         public static void Add(ItemSO newItemSO)
         {
@@ -14,10 +15,12 @@ namespace Inventory
                 item.lifeTime = newItemSO.lifeTimeHoursInInventory;
             item.ItemSo = newItemSO;
             items.Add(item);
+            CreateItemSlot.UpdateItemSlots();
         }
         public static void Remove(Item removeItem)
         {
             items.Remove(removeItem);
+            CreateItemSlot.UpdateItemSlots();
         }
 
         public static int CountItem(ItemSO itemSo)

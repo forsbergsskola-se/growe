@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,31 +6,74 @@ namespace Inventory
 {
     public class CreateItemSlot : MonoBehaviour
     {
-        public GameObject SlotPrefab;
-        private List<Item> foundUniqueItem = new List<Item>();
-        
+        public GameObject slotPrefab;
+        public List<Item> itemStackable = new List<Item>();
+        public List<Item> itemNonStackable = new List<Item>();
+
+        private void Start()
+        {
+            Inventory.CreateItemSlot = this;
+        }
+
         public void FindUniqueItems()
         {
-            foundUniqueItem.Clear();
+            itemStackable.Clear();
+            itemNonStackable.Clear();
+            
             foreach (var item in Inventory.items)
             {
                 if (item.ItemSo.maxAmount == 1)
                 {
-                    foundUniqueItem.Add(item);
+                    itemNonStackable.Add(item);
+                    if (item.ItemSo.itemType == "def")
+                    {
+                        Debug.Log("added wrong");
+                    }
                 }
-                else if (item.ItemSo.maxAmount > 1 && !foundUniqueItem.Contains(item))
+                else if (item.ItemSo.maxAmount > 1)
                 {
-                    foundUniqueItem.Add(item);
+                    if (itemStackable.Contains(item) == false)
+                    {
+                        itemStackable.Add(item);
+                        if (item.ItemSo.itemType == "def")
+                        {
+                            Debug.Log("added right");
+                        }
+                    }
                 }
             }
         }
 
         public void CreateItemSLot()
         {
-            foreach (var UniqueItem in foundUniqueItem)
+            foreach (Transform child in transform) 
+                Destroy(child.gameObject);
+
+            foreach (var stackable in itemStackable)
             {
-                var newItemSlot = Instantiate(SlotPrefab, transform);
-                newItemSlot.GetComponent<ItemData>().ItemSo = UniqueItem.ItemSo;
+                
+                var newItemSlot = Instantiate(slotPrefab, transform);
+                var itemData = newItemSlot.GetComponent<ItemData>();
+                itemData.itemSo = stackable.ItemSo;
+            }
+            foreach (var nonStackable in itemNonStackable)
+            {
+                
+                var newItemSlot = Instantiate(slotPrefab, transform);
+                var itemData = newItemSlot.GetComponent<ItemData>();
+                itemData.itemSo = nonStackable.ItemSo;
+                itemData.amount = Inventory.CountItem(nonStackable.ItemSo);
+            }
+        }
+
+        public void UpdateItemSlots()
+        {
+            FindUniqueItems();
+            CreateItemSLot();
+
+            foreach (var found in itemStackable)
+            {
+                Debug.Log(found.ItemSo.itemType);
             }
         }
     }
