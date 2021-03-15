@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 public class GachaUI : MonoBehaviour
 {
+    [Header("UI Elements")]
     public Text droppedItem;
     public GameObject Panel;
+
+    [Header("Test Seedbag Data")]
     public Seedbag Seedbag;
 
     void Awake()
@@ -20,8 +23,8 @@ public class GachaUI : MonoBehaviour
         Panel.SetActive(true);
     }
 
-
-    void Update()
+    public void TestGacha()
     {
+        droppedItem.text = "You got the " + Seedbag.Open();
     }
 }

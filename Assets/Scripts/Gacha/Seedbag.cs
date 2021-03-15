@@ -3,20 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Seedbag : MonoBehaviour
+[System.Serializable]
+public class Seedbag
 {
+    [Header("Seedbag Item Drop Table")]
+    public DropTable Items;
+    [Space]
     public int price;
-    public GachaUI GachaUI;
 
-
-    public DropTable DropTable;
-
-    private void Start()
+    public string Open()
     {
+        return Items.GetRandomItem().Item;
     }
 
-    public void gachaRoll()
+    public void DroppableItems()
     {
-        GachaUI.droppedItem.text = DropTable.GetRandomItem().Item;
+        foreach (var item in Items.ItemDrops())
+        {
+            Debug.Log(item);
+        }
     }
 }

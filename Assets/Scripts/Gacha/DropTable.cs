@@ -9,12 +9,13 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu(fileName = "DropTable", menuName = "Drop Table", order = 1)]
 public class DropTable : ScriptableObject
 {
-    [SerializeField] private List<ItemDrop> DroppableItems;
+    [SerializeField] private List<ItemDrop<string>> DroppableItems;
 
-    public ItemDrop GetRandomItem()
+    public ItemDrop<string> GetRandomItem()
     {
         float total = DroppableItems.Sum(drop => drop.DropChance);
         float roll = Random.Range(0, total);
+
         foreach (var item in DroppableItems)
         {
             if (item.DropChance >= roll)
@@ -27,11 +28,23 @@ public class DropTable : ScriptableObject
 
         throw new SystemException();
     }
+
+    public List<string> ItemDrops()
+    {
+        List<string> items = new List<string>();
+
+        foreach (var item in DroppableItems)
+        {
+            items.Add(item.Item);
+        }
+
+        return items;
+    }
 }
 
 [System.Serializable]
-public class ItemDrop
+public class ItemDrop<TItem>
 {
+    public TItem Item;
     public float DropChance;
-    public string Item;
 }
