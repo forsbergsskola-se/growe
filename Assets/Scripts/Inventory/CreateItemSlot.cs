@@ -32,14 +32,8 @@ namespace Inventory
                 }
                 else if (item.ItemSo.maxAmount > 1)
                 {
-                    if (itemStackable.Contains(item) == false)
-                    {
+                    if (!itemStackable.Exists(stackable => stackable.ItemSo == item.ItemSo))
                         itemStackable.Add(item);
-                        if (item.ItemSo.itemType == "def")
-                        {
-                            Debug.Log("added right");
-                        }
-                    }
                 }
             }
         }
@@ -49,20 +43,20 @@ namespace Inventory
             foreach (Transform child in transform) 
                 Destroy(child.gameObject);
 
-            foreach (var stackable in itemStackable)
-            {
-                
-                var newItemSlot = Instantiate(slotPrefab, transform);
-                var itemData = newItemSlot.GetComponent<ItemData>();
-                itemData.itemSo = stackable.ItemSo;
-            }
             foreach (var nonStackable in itemNonStackable)
             {
                 
                 var newItemSlot = Instantiate(slotPrefab, transform);
                 var itemData = newItemSlot.GetComponent<ItemData>();
                 itemData.itemSo = nonStackable.ItemSo;
-                itemData.amount = Inventory.CountItem(nonStackable.ItemSo);
+            }
+            foreach (var stackable in itemStackable)
+            {
+                
+                var newItemSlot = Instantiate(slotPrefab, transform);
+                var itemData = newItemSlot.GetComponent<ItemData>();
+                itemData.itemSo = stackable.ItemSo;
+                itemData.amount = Inventory.CountItem(stackable.ItemSo);
             }
         }
 

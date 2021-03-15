@@ -8,11 +8,13 @@ namespace Inventory
     {
         public ItemSO itemSo;
         public int amount;
-        private Text AmountText => GetComponentInChildren<Text>();
+        public Text AmountText;
+        public Text TypeText;
 
         private void Start()
         {
             AmountText.text = amount.ToString();
+            TypeText.text = itemSo.itemType;
         }
     }
 }
