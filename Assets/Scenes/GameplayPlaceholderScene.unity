@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 70989585}
   - component: {fileID: 70989587}
   m_Layer: 5
-  m_Name: pizza2
+  m_Name: WateringCan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -923,7 +923,7 @@ GameObject:
   - component: {fileID: 855794960}
   - component: {fileID: 855794962}
   m_Layer: 5
-  m_Name: pizza3
+  m_Name: Cutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1740,7 +1740,7 @@ GameObject:
   - component: {fileID: 1363601451}
   - component: {fileID: 1363601453}
   m_Layer: 5
-  m_Name: pizza1
+  m_Name: Fertilizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

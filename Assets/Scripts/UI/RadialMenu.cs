@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,9 +34,12 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
         Debug.Log("Pointer up");
         menuButtonHeldDown = false;
-        
-        if(RadialWheelActive)
+
+        if (RadialWheelActive)
+        {
             CheckIfToolIsHovered();
+            radialWheel.SetActive(false);
+        }
     }
 
     IEnumerator ButtonHeldRoutine()
@@ -63,7 +65,6 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         {
             Debug.Log("Hit " + result.gameObject.name);
         }
-        
     }
     
 
