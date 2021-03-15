@@ -21,7 +21,6 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        Debug.Log("Kevins log");
         this.dragStartPosition = this.transform.localPosition;
     }
 
