@@ -22,6 +22,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData eventData) {
         this.dragStartPosition = this.transform.localPosition;
+        
     }
 
     public void OnEndDrag(PointerEventData eventData) {
