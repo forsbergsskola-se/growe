@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Inventory
 {
-    public class CreateItemSlot : MonoBehaviour
+    public class ItemSlot : MonoBehaviour
     {
         public GameObject slotPrefab;
         public List<Item> itemStackable = new List<Item>();
@@ -12,7 +12,7 @@ namespace Inventory
 
         private void Start()
         {
-            Inventory.CreateItemSlot = this;
+            Inventory.ItemSlot = this;
         }
 
         public void FindUniqueItems()
@@ -20,16 +20,11 @@ namespace Inventory
             itemStackable.Clear();
             itemNonStackable.Clear();
             
-            foreach (var item in Inventory.items)
+            foreach (var item in Inventory.Items)
             {
-                if (item.ItemSo.maxAmount == 1)
-                {
+                if (item.ItemSo.maxAmount == 1) 
                     itemNonStackable.Add(item);
-                    if (item.ItemSo.itemType == "def")
-                    {
-                        Debug.Log("added wrong");
-                    }
-                }
+                
                 else if (item.ItemSo.maxAmount > 1)
                 {
                     if (!itemStackable.Exists(stackable => stackable.ItemSo == item.ItemSo))
@@ -38,7 +33,7 @@ namespace Inventory
             }
         }
 
-        public void CreateItemSLot()
+        public void CreateItemSlot()
         {
             foreach (Transform child in transform) 
                 Destroy(child.gameObject);
@@ -63,12 +58,7 @@ namespace Inventory
         public void UpdateItemSlots()
         {
             FindUniqueItems();
-            CreateItemSLot();
-
-            foreach (var found in itemStackable)
-            {
-                Debug.Log(found.ItemSo.itemType);
-            }
+            CreateItemSlot();
         }
     }
 }

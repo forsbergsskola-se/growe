@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
-  m_Name: TestItemMaxAmount
+  m_Name: Hello Mate
   m_EditorClassIdentifier: 
-  itemType: def
-  icon: {fileID: 0}
-  maxAmount: 5
+  itemType: ghi
+  icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  rarity: 0
+  maxAmount: 1
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
   sizeDimensions: {x: 0, y: 0}
-  itemLore: 
+  itemLore: yes

@@ -5,8 +5,8 @@ namespace Inventory
 {
     public static class Inventory
     {
-        public static List<Item> items = new List<Item>();
-        public static CreateItemSlot CreateItemSlot;
+        public static readonly List<Item> Items = new List<Item>();
+        public static ItemSlot ItemSlot;
 
         public static void Add(ItemSO newItemSO)
         {
@@ -14,19 +14,19 @@ namespace Inventory
             if (newItemSO.hasLifeTime)
                 item.lifeTime = newItemSO.lifeTimeHoursInInventory;
             item.ItemSo = newItemSO;
-            items.Add(item);
-            CreateItemSlot.UpdateItemSlots();
+            Items.Add(item);
+            ItemSlot.UpdateItemSlots();
         }
         public static void Remove(Item removeItem)
         {
-            items.Remove(removeItem);
-            CreateItemSlot.UpdateItemSlots();
+            Items.Remove(removeItem);
+            ItemSlot.UpdateItemSlots();
         }
 
         public static int CountItem(ItemSO itemSo)
         {
-            return items.Count
-                (item => item.ItemSo.itemType != null && item.ItemSo.itemType.StartsWith(itemSo.itemType));
+            return Items.Count
+                (item => item.ItemSo.name.StartsWith(itemSo.name));
         }
     }
 }

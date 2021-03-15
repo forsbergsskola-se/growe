@@ -7,13 +7,9 @@ namespace Inventory
         {
                 public string itemType;
                 public Sprite icon;
-                public enum Rarity
-                {
-                        Survivor,
-                        Mediocre,
-                        Diva,
-                        Mystery
-                }
+                public Rarity rarity; // field
+                public enum Rarity { Survivor, Mediocre, Diva, Mystery }
+                
                 public int maxAmount;
                 public bool hasLifeTime;
                 public float lifeTimeHoursInInventory;

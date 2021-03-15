@@ -7,14 +7,22 @@ namespace Inventory
     public class ItemData : MonoBehaviour
     {
         public ItemSO itemSo;
+        private GameObject ShowInfoScreen;
         public int amount;
-        public Text AmountText;
-        public Text TypeText;
+        public Text amountText;
 
         private void Start()
         {
-            AmountText.text = amount.ToString();
-            TypeText.text = itemSo.itemType;
+            amountText.text = amount.ToString();
         }
+
+        public void ShowItemInfo() 
+        {
+            var go = ItemInfoData.Instance;
+            go.gameObject.SetActive(true);
+            go.itemData = this;
+            go.UpdateItemInfo();
+        }
+        
     }
 }
