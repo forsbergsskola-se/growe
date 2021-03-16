@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,51 +6,42 @@ namespace Inventory
     public class ItemSlot : MonoBehaviour
     {
         public GameObject slotPrefab;
-        public List<Item> itemStackable = new List<Item>();
-        public List<Item> itemNonStackable = new List<Item>();
+        public List<Item> uniqueItemStack = new List<Item>();
 
         private void Start()
         {
             Inventory.ItemSlot = this;
         }
 
-        public void FindUniqueItems()
+        private void FindUniqueItems()
         {
-            itemStackable.Clear();
-            itemNonStackable.Clear();
-            
+            uniqueItemStack.Clear();
+
             foreach (var item in Inventory.Items)
             {
                 if (item.ItemSo.maxAmount == 1) 
-                    itemNonStackable.Add(item);
+                    uniqueItemStack.Add(item);
                 
                 else if (item.ItemSo.maxAmount > 1)
                 {
-                    if (!itemStackable.Exists(stackable => stackable.ItemSo == item.ItemSo))
-                        itemStackable.Add(item);
+                    if (!uniqueItemStack.Exists(stackable => stackable.ItemSo == item.ItemSo))
+                        uniqueItemStack.Add(item);
                 }
             }
         }
 
-        public void CreateItemSlot()
+        private void CreateItemSlot()
         {
             foreach (Transform child in transform) 
                 Destroy(child.gameObject);
 
-            foreach (var nonStackable in itemNonStackable)
+            foreach (var unique in uniqueItemStack)
             {
-                
                 var newItemSlot = Instantiate(slotPrefab, transform);
                 var itemData = newItemSlot.GetComponent<ItemData>();
-                itemData.itemSo = nonStackable.ItemSo;
-            }
-            foreach (var stackable in itemStackable)
-            {
-                
-                var newItemSlot = Instantiate(slotPrefab, transform);
-                var itemData = newItemSlot.GetComponent<ItemData>();
-                itemData.itemSo = stackable.ItemSo;
-                itemData.amount = Inventory.CountItem(stackable.ItemSo);
+                itemData.itemSo = unique.ItemSo;
+                if (unique.ItemSo.maxAmount > 1) 
+                    itemData.amount = Inventory.CountItem(unique.ItemSo);
             }
         }
 

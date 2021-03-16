@@ -5,15 +5,15 @@ namespace Inventory
         [CreateAssetMenu(fileName = "New item", menuName = "Inventory/item")]
         public class ItemSO : ScriptableObject
         {
-            public string itemType;
-            public Sprite icon;
-            public Rarity rarity; // field
-            public enum Rarity { Survivor, Mediocre, Diva, Mystery }
-            public int maxAmount;
-            public bool hasLifeTime;
-            public bool isShiny;
-            public float lifeTimeHoursInInventory;
-            public Vector2 sizeDimensions;
-            public string itemLore;
+                public Sprite icon;
+                public ItemType itemType;
+                public enum ItemType { Seed, Plant, Cutting }
+                public Rarity rarity;
+                public enum Rarity { Survivor, Mediocre, Diva }
+                public int maxAmount, compostValue, sellValue;
+                public bool isShiny, hasLifeTime;
+                public float lifeTimeHoursInInventory, survivability;
+                public Vector2 sizeDimensions;
+                public string itemLore;
         }
 }
