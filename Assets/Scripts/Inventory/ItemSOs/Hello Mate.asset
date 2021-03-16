@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: Hello Mate
   m_EditorClassIdentifier: 
-  itemType: ghi
   icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  itemType: 1
   rarity: 0
   maxAmount: 1
+  isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
   sizeDimensions: {x: 0, y: 0}

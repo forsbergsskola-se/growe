@@ -1,4 +1,4 @@
-using System;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,22 +7,23 @@ namespace Inventory
     public class ItemData : MonoBehaviour
     {
         public ItemSO itemSo;
-        private GameObject ShowInfoScreen;
         public int amount;
         public Text amountText;
+        private ItemInfoData _showInfoScreen;
+        private Image Icon => GetComponent<Image>();
 
         private void Start()
         {
+            _showInfoScreen = UIReferences.Instance.itemInfoBox;
+            Icon.sprite = itemSo.icon;
             amountText.text = amount.ToString();
         }
 
-        public void ShowItemInfo() 
+        public void ShowItemInfo()
         {
-            var go = ItemInfoData.Instance;
-            go.gameObject.SetActive(true);
-            go.itemData = this;
-            go.UpdateItemInfo();
+            _showInfoScreen.gameObject.SetActive(true);
+            _showInfoScreen.itemData = this;
+            _showInfoScreen.UpdateItemInfo();
         }
-        
     }
 }
