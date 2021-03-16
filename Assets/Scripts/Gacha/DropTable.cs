@@ -17,9 +17,18 @@ public class DropTable : ScriptableObject
 
         foreach (var item in DroppableItems)
         {
+            float shinyRoll = Random.Range(0, 100);
             if (item.DropChance >= roll)
             {
-                return item;
+                if (shinyRoll >= 98)
+                {
+                    item.Item.isShiny = true;
+                    return item;
+                }
+                else
+                {
+                    return item;
+                }
             }
 
             roll -= item.DropChance;

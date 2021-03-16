@@ -11,6 +11,7 @@ namespace Inventory
             public enum Rarity { Survivor, Mediocre, Diva, Mystery }
             public int maxAmount;
             public bool hasLifeTime;
+            public bool isShiny;
             public float lifeTimeHoursInInventory;
             public Vector2 sizeDimensions;
             public string itemLore;
