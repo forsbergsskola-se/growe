@@ -6,6 +6,5 @@ namespace Inventory
     {
         public ItemSO ItemSo;
         public float lifeTime;
-        
     }
 }

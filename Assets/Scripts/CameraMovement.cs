@@ -6,12 +6,12 @@ public class CameraMovement : MonoBehaviour
     Vector3 current_position = Vector3.zero;
     Vector3 camera_position = Vector3.zero;
     float z = 0.0f;
-    
+
     float MouseZoomSpeed = 15.0f;
     float TouchZoomSpeed = 0.1f;
     float ZoomMinBound = 0.1f;
     float ZoomMaxBound = 179.9f;
-    
+
     Camera cam;
 
     void Start() {
@@ -22,13 +22,13 @@ public class CameraMovement : MonoBehaviour
         if(Input.GetMouseButtonDown(0)){
             hit_position = Input.mousePosition;
             camera_position = transform.position;
-            
+
         }
         if(Input.GetMouseButton(0)){
             current_position = Input.mousePosition;
-            TouchDrag();        
+            TouchDrag();
         }
-        
+
         if (Input.touchSupported)
         {
             // Pinch to zoom
@@ -59,18 +59,18 @@ public class CameraMovement : MonoBehaviour
 
 
 
-        if(cam.fieldOfView < ZoomMinBound) 
+        if(cam.fieldOfView < ZoomMinBound)
         {
             cam.orthographicSize = 0.1f;
         }
         else
-        if(cam.fieldOfView > ZoomMaxBound ) 
+        if(cam.fieldOfView > ZoomMaxBound )
         {
             cam.orthographicSize = 179.9f;
         }
-        
+
     }
-    
+
     void Zoom(float deltaMagnitudeDiff, float speed)
     {
         cam.orthographicSize += deltaMagnitudeDiff * speed;
@@ -80,13 +80,13 @@ public class CameraMovement : MonoBehaviour
 
     void TouchDrag(){
         current_position.z = hit_position.z = camera_position.y;
-        
+
         Vector3 direction = cam.ScreenToWorldPoint(current_position) - cam.ScreenToWorldPoint(hit_position);
-        
+
         direction = direction * -1;
-        
+
         Vector3 position = camera_position + direction;
-        
+
         transform.position = position;
     }
 }

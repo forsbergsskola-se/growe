@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestDropTable
   m_EditorClassIdentifier: 
   DroppableItems:
-  - Item: Poor
+  - Item: {fileID: 11400000, guid: 091a6cac7e2ec014aa0bebf8e8548a71, type: 2}
     DropChance: 50
-  - Item: Avarage
+  - Item: {fileID: 11400000, guid: 5b398a30b3e62734eae3f804757435e4, type: 2}
     DropChance: 45
-  - Item: Omage Cool
+  - Item: {fileID: 11400000, guid: d73e5eea2bd68d44d9d04bbedb84e3c2, type: 2}
     DropChance: 5

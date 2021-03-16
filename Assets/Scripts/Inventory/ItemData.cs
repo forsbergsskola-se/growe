@@ -16,13 +16,12 @@ namespace Inventory
             amountText.text = amount.ToString();
         }
 
-        public void ShowItemInfo() 
+        public void ShowItemInfo()
         {
             var go = ItemInfoData.Instance;
             go.gameObject.SetActive(true);
             go.itemData = this;
             go.UpdateItemInfo();
         }
-        
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Inventory;
 
 [System.Serializable]
 public class Seedbag
@@ -11,9 +12,18 @@ public class Seedbag
     [Space]
     public int price;
 
-    public string Open()
+    public List<ItemSO> Open(int amount)
     {
-        return Items.GetRandomItem().Item;
+        List<ItemSO> items = new List<ItemSO>();
+
+        for (int i = 0; i < amount; i++)
+        {
+            Item item = new Item();
+            items.Add(Items.GetRandomItem().Item);
+            return items;
+        }
+
+        throw new SystemException();
     }
 
     public void DroppableItems()

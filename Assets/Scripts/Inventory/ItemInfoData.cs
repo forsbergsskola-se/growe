@@ -8,9 +8,7 @@ namespace Inventory {
         public static ItemInfoData Instance;
         public Image itemIcon;
         public Text itemName, itemAmount, itemParameters, itemLore;
-        
         public ItemData itemData;
-        
         private void Start()
         {
             Instance = this;
