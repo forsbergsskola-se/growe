@@ -6,11 +6,12 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public Vector2Int Size;
     Vector3 dragStartPosition;
     private bool isDragging;
-    
+    private CameraMovement cameraMovement;
 
     void Start() {
         var grid = GetComponentInParent<Grid>();
         grid.AddObject(this, this.transform.localPosition);
+        cameraMovement = Camera.main.GetComponent<CameraMovement>();
     }
     
     public void OnDrag(PointerEventData eventData){
@@ -35,16 +36,16 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             this.transform.localPosition = this.dragStartPosition;
         }
     }
-
-    //TODO doesn't register with android input
-    public void OnPointerUp(PointerEventData eventData) //TODO TEST what happens when holding one finger and tap with the other. 
+    
+    public void OnPointerUp(PointerEventData eventData) 
     {
         if (!isDragging)
         {
             Debug.Log("Tap! Zooom the thing. Also there are som TODO's here come check 'em out");
-            Camera.main.GetComponent<CameraMovement>().StartMoveRoutine(transform.position); //TODO change call method. Where is ruben when I need a pub sub?
+            cameraMovement.StartMoveRoutine(transform.position); //TODO change call method. Where is ruben when I need a pub sub?
         }
     }
-
+    
     public void OnPointerDown(PointerEventData eventData) { } // not implemented. Required by OnPointerUp.
+
 }

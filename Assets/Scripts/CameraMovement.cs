@@ -1,15 +1,18 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CameraMovement : MonoBehaviour
 {
+    public UnityEvent OnMoveToRoutineFinished;
+    
     // Settings
     float MouseZoomSpeed = 15.0f;
     float TouchZoomSpeed = 0.1f;
     float ZoomMinBound = 0.1f;
     float ZoomMaxBound = 179.9f;
     [Header("MoveRoutine Settings")]
-    [SerializeField, Tooltip("How long it takes for move to to reach its target position"), Range(0.001f, 2f)] 
-    private float moveDuration = 0.3F;
+    [SerializeField, Tooltip("How long it takes for move to to reach its target position. For some reason this value is not exact but should at least affect how long it takes"), Range(0.001f, 2f)] 
+    private float moveDuration = 0.6f; 
     [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] private float targetCamSize = 3.65f; 
     
     //references
@@ -21,7 +24,6 @@ public class CameraMovement : MonoBehaviour
     private float cameraZ;
     
     private bool moveRoutineActive;
-    private float moveTimer;
     private Vector2 moveXYTarget;
     private float moveCamSizeVelocity = 0.0f;     // variable used by Mathf.Smoothdamp
     private Vector2 moveXYVelocity = Vector2.zero; // variable used by Vector3.Smoothdamp
@@ -145,16 +147,19 @@ public class CameraMovement : MonoBehaviour
         // instead the zoom level is represented by orthographicSize. target is set in targetCamSize 
         this.moveXYTarget = (Vector2) targetWorldPos; 
         moveRoutineActive = true;
-        moveTimer = Time.time + moveDuration;
     }
 
     private void MoveRoutine()
     {
-        Vector2 result = Vector2.SmoothDamp(transform.position, moveXYTarget, ref moveXYVelocity, moveDuration);
+        Vector2 result = Vector2.SmoothDamp(transform.position, moveXYTarget, ref moveXYVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
         transform.position = new Vector3(result.x, result.y, this.cameraZ); 
-        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, ref moveCamSizeVelocity, moveDuration);
+        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, ref moveCamSizeVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
         
-        if (Time.deltaTime >= moveTimer)
+        if (Mathf.Abs(cam.orthographicSize - targetCamSize) < 0.1f ) 
+        {
             moveRoutineActive = false;
+            OnMoveToRoutineFinished.Invoke();
+        }
+            
     }
 }
