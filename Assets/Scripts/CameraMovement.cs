@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -72,9 +71,12 @@ public class CameraMovement : MonoBehaviour
 
     private void HandleAndroidInput()
     {
-        if (Input.touchCount > 0)
-            moveRoutineActive = false;
-        
+        if (moveRoutineActive && Input.touchCount > 0)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+                moveRoutineActive = false;
+        }
+
         if (Input.touchCount == 2)
         {
             Touch tZero = Input.GetTouch(0);
