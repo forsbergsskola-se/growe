@@ -12,7 +12,7 @@ namespace Inventory
         {
             var item = new Item();
             if (newItemSO.hasLifeTime)
-                item.lifeTime = newItemSO.lifeTimeHoursInInventory;
+                item.LifeTime = newItemSO.lifeTimeHoursInInventory;
             item.ItemSo = newItemSO;
             Items.Add(item);
             ItemSlot.UpdateItemSlots();

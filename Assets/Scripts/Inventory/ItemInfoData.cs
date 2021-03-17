@@ -23,7 +23,7 @@ namespace Inventory
 
         public void UpdateItemInfo()
         {
-            var itemInfo = itemData.itemSo;
+            var itemInfo = itemData.ItemInfo.ItemSo;
             itemName.text = itemInfo.name;
             itemIcon.sprite = itemInfo.icon;
             itemRarity.text = itemInfo.rarity.ToString();
@@ -33,7 +33,7 @@ namespace Inventory
             itemCompostValue.text = itemInfo.compostValue.ToString();
             itemSellValue.text = itemInfo.sellValue.ToString();
 
-            if (itemData.itemSo.itemType == ItemSO.ItemType.Seedbag)
+            if (itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag)
             {
                 plantButtonText.text = "Open";
             }
@@ -48,9 +48,9 @@ namespace Inventory
         // Testing seedbag open function Adam A
         public void openSeedbag()
         {
-            if (itemData.itemSo.itemType == ItemSO.ItemType.Seedbag)
+            if (itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag)
             {
-                itemData.itemSo.Seedbag.Open(amount: 3);
+                itemData.ItemInfo.ItemSo.Seedbag.Open(amount: 3);
                 
             }
         }

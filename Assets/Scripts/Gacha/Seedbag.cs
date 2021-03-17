@@ -22,7 +22,6 @@ public class Seedbag
             items.Add(randomItem);
             Inventory.Inventory.Add(randomItem);
         }
-
         return items;
     }
 
