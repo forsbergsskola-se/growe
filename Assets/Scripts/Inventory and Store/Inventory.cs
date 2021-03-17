@@ -16,6 +16,11 @@ namespace Inventory_and_Store
                 item.LifeTime = newItemSo.lifeTimeHoursInInventory;
             item.ItemSo = newItemSo;
             Items.Add(item);
+            
+            Debug.Log("Inventory Before Sorting");
+            foreach (var x in Items) Debug.Log(x.ItemSo.name);
+            
+            
             itemSlot.UpdateItemSlots();
         }
         public void Remove(Item removeItem)

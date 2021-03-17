@@ -21,7 +21,7 @@ namespace Inventory_and_Store
                 
                 else if (item.ItemSo.maxAmount > 1)
                 {
-                    if (!uniqueItemStack.Exists(stackable => stackable.ItemSo == item.ItemSo))
+                    if (!uniqueItemStack.Exists(stackable => stackable.ItemSo.name == item.ItemSo.name))
                         uniqueItemStack.Add(item);
                 }
             }
@@ -46,6 +46,8 @@ namespace Inventory_and_Store
         public void UpdateItemSlots()
         {
             FindUniqueItems();
+            Debug.Log("Inventory after Sorting");
+            foreach (var x in uniqueItemStack) Debug.Log(x.ItemSo.name);
             CreateItemSlot();
         }
     }
