@@ -18,12 +18,12 @@ public class Seedbag
 
         for (int i = 0; i < amount; i++)
         {
-            Item item = new Item();
-            items.Add(Items.GetRandomItem().Item);
-            return items;
+            var randomItem = Items.GetRandomItem().Item;
+            items.Add(randomItem);
+            Inventory.Inventory.Add(randomItem);
         }
 
-        throw new SystemException();
+        return items;
     }
 
     public void DroppableItems()

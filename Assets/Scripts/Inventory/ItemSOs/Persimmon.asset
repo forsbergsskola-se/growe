@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
+  m_Name: Persimmon
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: e24fd306e5da54240a3b54fe93aee55a, type: 3}
+  itemType: 0
+  rarity: 2
+  maxAmount: 0
+  compostValue: 0
+  sellValue: 72
+  isShiny: 0
+  hasLifeTime: 0
+  lifeTimeHoursInInventory: 0
+  survivability: 0
+  sizeDimensions: {x: 3, y: 3}
+  itemLore: 
