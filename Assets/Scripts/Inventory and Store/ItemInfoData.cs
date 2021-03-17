@@ -32,10 +32,9 @@ namespace Inventory_and_Store {
             itemSurvivability.text = itemInfo.survivability.ToString();
             itemCompostValue.text = itemInfo.compostValue.ToString();
             itemSellValue.text = itemInfo.sellValue.ToString();
-
-            plantButtonText.text = itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag ? "Open" : "Plant";
-
             itemLore.text = itemInfo.itemLore;
+            
+            plantButtonText.text = itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag ? "Open" : "Plant";
         }
     }
 }

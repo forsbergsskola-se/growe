@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,10 +18,5 @@ public class GachaUI : MonoBehaviour
     public void ActivatePanel()
     {
         Panel.SetActive(true);
-    }
-
-    public void TestGacha()
-    {
-        //droppedItem.text = "You got the " + Seedbag.Open(3)[0].rarity;
     }
 }
