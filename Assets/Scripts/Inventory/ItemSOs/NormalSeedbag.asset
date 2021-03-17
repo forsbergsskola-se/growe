@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
-  m_Name: Persimmon
+  m_Name: NormalSeedbag
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: e24fd306e5da54240a3b54fe93aee55a, type: 3}
-  itemType: 0
-  rarity: 2
+  itemType: 3
+  rarity: 0
   maxAmount: 99
   compostValue: 0
-  sellValue: 72
+  sellValue: 20
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
   survivability: 0
-  sizeDimensions: {x: 3, y: 3}
-  itemLore: A not so good plant with stuff in it!
+  sizeDimensions: {x: 0, y: 0}
+  itemLore: this is a normal very boring seed bag!

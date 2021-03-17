@@ -3367,6 +3367,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5b398a30b3e62734eae3f804757435e4, type: 2}
   - {fileID: 11400000, guid: 091a6cac7e2ec014aa0bebf8e8548a71, type: 2}
   - {fileID: 11400000, guid: d73e5eea2bd68d44d9d04bbedb84e3c2, type: 2}
+  - {fileID: 11400000, guid: 52418f14cd891de48a1b70c3a3f8034b, type: 2}
   seedbag:
     Items: {fileID: 0}
     price: 0

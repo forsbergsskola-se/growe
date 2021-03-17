@@ -7,7 +7,7 @@ namespace Inventory
         {
                 public Sprite icon;
                 public ItemType itemType;
-                public enum ItemType { Seed, Plant, Cutting }
+                public enum ItemType { Seed, Plant, Cutting, Seedbag }
                 public Rarity rarity;
                 public enum Rarity { Survivor, Mediocre, Diva }
                 public int maxAmount, compostValue, sellValue;

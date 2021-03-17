@@ -5,9 +5,9 @@ namespace Inventory {
     public class ItemInfoData : MonoBehaviour
     {
         public Image itemIcon;
-        public Text itemName, itemAmount, itemRarity, itemSize, itemSurvivability, itemCompostValue, itemSellValue, itemLore;
+        public Text itemName, itemAmount, itemRarity, itemSize, itemSurvivability, itemCompostValue, itemSellValue, itemLore, plantButtonText;
+        public Button PlantButton;
         public ItemData itemData;
-        
 
         public void UpdateItemInfo()
         {
@@ -20,6 +20,15 @@ namespace Inventory {
             itemSurvivability.text = itemInfo.survivability.ToString();
             itemCompostValue.text = itemInfo.compostValue.ToString();
             itemSellValue.text = itemInfo.sellValue.ToString();
+
+            if(itemData.itemSo.itemType == ItemSO.ItemType.Seedbag)
+            {
+                plantButtonText.text = "Open";
+            }
+            else
+            {
+                plantButtonText.text = "Plant";
+            }
 
             itemLore.text = itemInfo.itemLore;
         }

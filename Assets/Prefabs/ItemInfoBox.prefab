@@ -1177,6 +1177,8 @@ MonoBehaviour:
   itemCompostValue: {fileID: 2688311703582770735}
   itemSellValue: {fileID: 6881675515031066594}
   itemLore: {fileID: 2802612279855059993}
+  plantButtonText: {fileID: 2802612280741634784}
+  PlantButton: {fileID: 2802612281730707400}
   itemData: {fileID: 0}
 --- !u!1 &2802612281075837635
 GameObject:
