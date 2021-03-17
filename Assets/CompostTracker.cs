@@ -14,6 +14,9 @@ public class CompostTracker : MonoBehaviour {
         rightSlider.minValue = 0;
         leftSlider.maxValue = maxValue;
         rightSlider.maxValue = maxValue;
+        
+        //TODO set _compostValue value to saved compost data
+        UpdateSliders();
     }
 
     public void AddCompost(int compostAmount) {
