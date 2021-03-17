@@ -15,6 +15,7 @@ namespace Inventory_and_Store
 
             foreach (var item in inventory.Items)
             {
+                
                 if (item.ItemSo.maxAmount == 1) 
                     uniqueItemStack.Add(item);
                 
@@ -35,7 +36,7 @@ namespace Inventory_and_Store
             {
                 var newItemSlot = Instantiate(slotPrefab, transform);
                 var itemData = newItemSlot.GetComponent<ItemData>();
-                itemData.ItemInfo.ItemSo = unique.ItemSo;
+                itemData.ItemInfo = unique;
                 
                 if (unique.ItemSo.maxAmount > 1) 
                     itemData.amount = inventory.CountItem(unique.ItemSo);

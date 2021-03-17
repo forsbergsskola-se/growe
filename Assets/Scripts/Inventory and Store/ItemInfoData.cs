@@ -4,6 +4,7 @@ using UnityEngine.UI;
 namespace Inventory_and_Store {
     public class ItemInfoData : MonoBehaviour
     {
+        public Inventory inventory;
         public Seedbag Seedbag;
         public Image itemIcon;
 
@@ -32,26 +33,9 @@ namespace Inventory_and_Store {
             itemCompostValue.text = itemInfo.compostValue.ToString();
             itemSellValue.text = itemInfo.sellValue.ToString();
 
-            if (itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag)
-            {
-                plantButtonText.text = "Open";
-            }
-            else
-            {
-                plantButtonText.text = "Plant";
-            }
+            plantButtonText.text = itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag ? "Open" : "Plant";
 
             itemLore.text = itemInfo.itemLore;
-        }
-
-        // Testing seedbag open function Adam A
-        public void openSeedbag()
-        {
-            if (itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag)
-            {
-                itemData.ItemInfo.ItemSo.Seedbag.Open(amount: 3);
-
-            }
         }
     }
 }

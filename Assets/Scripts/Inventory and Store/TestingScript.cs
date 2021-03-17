@@ -19,7 +19,7 @@ namespace Inventory_and_Store
         public void TestOpen()
         {
             //Get Three Items Into The Inventory
-            seedbag.Open(3);
+            //seedbag.Open(3);
         }
     }
 }

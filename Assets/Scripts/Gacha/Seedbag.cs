@@ -11,7 +11,7 @@ public class Seedbag
     [Space]
     public int price;
 
-    public List<ItemSO> Open(int amount)
+    public List<ItemSO> Open(int amount, Inventory inventory)
     {
         List<ItemSO> items = new List<ItemSO>();
 
@@ -19,7 +19,7 @@ public class Seedbag
         {
             var randomItem = Items.GetRandomItem().Item;
             items.Add(randomItem);
-            Inventory.Inventory.Add(randomItem);
+            inventory.Add(randomItem);
         }
         return items;
     }

@@ -25,6 +25,6 @@ public class GachaUI : MonoBehaviour
 
     public void TestGacha()
     {
-        droppedItem.text = "You got the " + Seedbag.Open(3)[0].rarity;
+        //droppedItem.text = "You got the " + Seedbag.Open(3)[0].rarity;
     }
 }

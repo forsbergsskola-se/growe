@@ -8,7 +8,7 @@ public class seedBagOpen : MonoBehaviour
     public void openSeedbag()
     {
       //  if()
-        Seedbag.Open(amount: 3);
+        //Seedbag.Open(amount: 3);
       //  Inventory.Inventory.Remove();
     }
 }
