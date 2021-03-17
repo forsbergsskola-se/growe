@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Inventory;
+using Inventory_and_Store;
 
 [CreateAssetMenu(fileName = "DropTable", menuName = "Drop Table", order = 1)]
 public class DropTable : ScriptableObject

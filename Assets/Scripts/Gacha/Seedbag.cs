@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using Inventory_and_Store;
 using UnityEngine;
-using Inventory;
+
 
 [System.Serializable]
 public class Seedbag
