@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace Inventory_and_Store {
     public class ItemInfoData : MonoBehaviour
     {
-        public Inventory inventory;
+        public Inventory storeInventory, playerInventory;
         public Seedbag Seedbag;
         public Image itemIcon;
 
@@ -33,8 +33,13 @@ namespace Inventory_and_Store {
             itemCompostValue.text = itemInfo.compostValue.ToString();
             itemSellValue.text = itemInfo.sellValue.ToString();
             itemLore.text = itemInfo.itemLore;
+
             
+            //TODO Fix this mess
             plantButtonText.text = itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag ? "Open" : "Plant";
+            
+            if (itemData.ItemInfo.ItemSo.tradeState == ItemSO.TradeState.Buyable)
+                plantButtonText.text = "Buy";
         }
     }
 }

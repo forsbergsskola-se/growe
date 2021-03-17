@@ -1120,6 +1120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2802612281064626955}
   - component: {fileID: 663019248}
+  - component: {fileID: 6664737061215364249}
   m_Layer: 5
   m_Name: ItemInfoBox
   m_TagString: ItemInfo
@@ -1168,6 +1169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33235f943a87f041baadb16923b795b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  storeInventory: {fileID: 0}
+  playerInventory: {fileID: 0}
+  Seedbag:
+    Items: {fileID: 0}
+    price: 0
   itemIcon: {fileID: 2802612281214433603}
   itemName: {fileID: 2802612281075837629}
   itemAmount: {fileID: 2788142280476805854}
@@ -1180,6 +1186,18 @@ MonoBehaviour:
   plantButtonText: {fileID: 2802612280741634784}
   PlantButton: {fileID: 2802612281730707400}
   itemData: {fileID: 0}
+--- !u!114 &6664737061215364249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802612281064626959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0515a9ffb7626ff45b85209b83834a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2802612281075837635
 GameObject:
   m_ObjectHideFlags: 0
