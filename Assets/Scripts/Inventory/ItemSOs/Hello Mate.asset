@@ -16,8 +16,11 @@ MonoBehaviour:
   itemType: 1
   rarity: 0
   maxAmount: 1
+  compostValue: 25
+  sellValue: 55
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
-  sizeDimensions: {x: 0, y: 0}
+  survivability: 0.5
+  sizeDimensions: {x: 1, y: 2}
   itemLore: yes

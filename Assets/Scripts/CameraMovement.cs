@@ -1,21 +1,37 @@
+using System;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    Vector3 mouseOnScrollOriginPosition = Vector3.zero;
-    Vector3 cameraOnScrollOriginPosition = Vector3.zero;
-    float z = 0.0f;
-    
+    // Settings
     float MouseZoomSpeed = 15.0f;
     float TouchZoomSpeed = 0.1f;
     float ZoomMinBound = 0.1f;
     float ZoomMaxBound = 179.9f;
+    [Header("MoveRoutine Settings")]
+    [SerializeField, Tooltip("How long it takes for move to to reach its target position"), Range(0.001f, 2f)] 
+    private float moveDuration = 0.3F;
+    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] private float targetCamSize = 3.65f; 
     
+    //references
     Camera cam;
+    
+    //variables 
+    Vector3 mouseOnScrollOriginPosition = Vector3.zero;
+    Vector3 cameraOnScrollOriginPosition = Vector3.zero;
+    private float cameraZ;
+    
+    private bool moveRoutineActive;
+    private float moveTimer;
+    private Vector2 moveXYTarget;
+    private float moveCamSizeVelocity = 0.0f;     // variable used by Mathf.Smoothdamp
+    private Vector2 moveXYVelocity = Vector2.zero; // variable used by Vector3.Smoothdamp
 
-    void Start() {
+    void OnEnable() {
         cam = Camera.main;
+        cameraZ = cam.transform.position.z;
     }
+    
     void Update()
     {
         if (Input.touchSupported)
@@ -23,13 +39,20 @@ public class CameraMovement : MonoBehaviour
         else
             HandlePcInput();
 
-        ConstrainMaxMinZoom();
+        ConstrainOrthographicSize();
+    }
+
+    private void FixedUpdate()
+    {
+        if (moveRoutineActive)
+            MoveRoutine();
     }
 
     private void HandlePcInput()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            moveRoutineActive = false;
             mouseOnScrollOriginPosition = Input.mousePosition;
             cameraOnScrollOriginPosition = transform.position;
         }
@@ -40,11 +63,18 @@ public class CameraMovement : MonoBehaviour
         }
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        Zoom(scroll, MouseZoomSpeed);
+        if (scroll != 0.0f)
+        {
+            moveRoutineActive = false;
+            Zoom(scroll, MouseZoomSpeed);
+        }
     }
 
     private void HandleAndroidInput()
     {
+        if (Input.touchCount > 0)
+            moveRoutineActive = false;
+        
         if (Input.touchCount == 2)
         {
             Touch tZero = Input.GetTouch(0);
@@ -78,7 +108,7 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    private void ConstrainMaxMinZoom()
+    private void ConstrainOrthographicSize()
     {
         if (cam.fieldOfView < ZoomMinBound)
             cam.orthographicSize = 0.1f;
@@ -98,5 +128,31 @@ public class CameraMovement : MonoBehaviour
         direction.z = 0f;
         Vector3 position = cameraOnScrollOriginPosition + direction;
         transform.position = position;
+    }
+
+    public void StartMoveRoutine(Vector3 targetWorldPos)
+    {
+        // a new routine has started before the previous finished
+        if (moveRoutineActive) 
+        {
+            this.moveCamSizeVelocity = 0;
+            this.moveXYVelocity = Vector3.zero;            
+        }
+        
+        // camera is orthogonal. Better not move the z to ensure everything stays view.
+        // instead the zoom level is represented by orthographicSize. target is set in targetCamSize 
+        this.moveXYTarget = (Vector2) targetWorldPos; 
+        moveRoutineActive = true;
+        moveTimer = Time.time + moveDuration;
+    }
+
+    private void MoveRoutine()
+    {
+        Vector2 result = Vector2.SmoothDamp(transform.position, moveXYTarget, ref moveXYVelocity, moveDuration);
+        transform.position = new Vector3(result.x, result.y, this.cameraZ); 
+        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, ref moveCamSizeVelocity, moveDuration);
+        
+        if (Time.deltaTime >= moveTimer)
+            moveRoutineActive = false;
     }
 }
