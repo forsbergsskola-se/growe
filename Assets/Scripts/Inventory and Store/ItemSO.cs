@@ -9,7 +9,8 @@ namespace Inventory_and_Store
                 public TradeState tradeState;
                 public enum TradeState { Sellable, Buyable, SoulBound }
                 public ItemType itemType;
-                public enum ItemType { Seed, Plant, Cutting }
+                public Seedbag Seedbag;
+                public enum ItemType { Seed, Plant, Cutting, Seedbag }
                 public Rarity rarity;
                 public enum Rarity { Survivor, Mediocre, Diva }
                 public int maxAmount, compostValue, sellValue, buyValue;

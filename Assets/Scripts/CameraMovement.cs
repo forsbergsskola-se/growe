@@ -3,24 +3,27 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    // Settings
+    Vector3 mouseOnScrollOriginPosition = Vector3.zero;
+    Vector3 cameraOnScrollOriginPosition = Vector3.zero;
+    float z = 0.0f;
+
     float MouseZoomSpeed = 15.0f;
     float TouchZoomSpeed = 0.1f;
     float ZoomMinBound = 0.1f;
     float ZoomMaxBound = 179.9f;
     [Header("MoveRoutine Settings")]
-    [SerializeField, Tooltip("How long it takes for move to to reach its target position"), Range(0.001f, 2f)] 
+    [SerializeField, Tooltip("How long it takes for move to to reach its target position"), Range(0.001f, 2f)]
     private float moveDuration = 0.3F;
-    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] private float targetCamSize = 3.65f; 
-    
+    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] private float targetCamSize = 3.65f;
+
     //references
     Camera cam;
-    
-    //variables 
+
+    //variables
     Vector3 mouseOnScrollOriginPosition = Vector3.zero;
     Vector3 cameraOnScrollOriginPosition = Vector3.zero;
     private float cameraZ;
-    
+
     private bool moveRoutineActive;
     private float moveTimer;
     private Vector2 moveXYTarget;
@@ -31,7 +34,7 @@ public class CameraMovement : MonoBehaviour
         cam = Camera.main;
         cameraZ = cam.transform.position.z;
     }
-    
+
     void Update()
     {
         if (Input.touchSupported)
@@ -74,7 +77,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.touchCount > 0)
             moveRoutineActive = false;
-        
+
         if (Input.touchCount == 2)
         {
             Touch tZero = Input.GetTouch(0);
@@ -133,15 +136,15 @@ public class CameraMovement : MonoBehaviour
     public void StartMoveRoutine(Vector3 targetWorldPos)
     {
         // a new routine has started before the previous finished
-        if (moveRoutineActive) 
+        if (moveRoutineActive)
         {
             this.moveCamSizeVelocity = 0;
-            this.moveXYVelocity = Vector3.zero;            
+            this.moveXYVelocity = Vector3.zero;
         }
-        
+
         // camera is orthogonal. Better not move the z to ensure everything stays view.
-        // instead the zoom level is represented by orthographicSize. target is set in targetCamSize 
-        this.moveXYTarget = (Vector2) targetWorldPos; 
+        // instead the zoom level is represented by orthographicSize. target is set in targetCamSize
+        this.moveXYTarget = (Vector2) targetWorldPos;
         moveRoutineActive = true;
         moveTimer = Time.time + moveDuration;
     }
@@ -149,9 +152,9 @@ public class CameraMovement : MonoBehaviour
     private void MoveRoutine()
     {
         Vector2 result = Vector2.SmoothDamp(transform.position, moveXYTarget, ref moveXYVelocity, moveDuration);
-        transform.position = new Vector3(result.x, result.y, this.cameraZ); 
+        transform.position = new Vector3(result.x, result.y, this.cameraZ);
         cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, ref moveCamSizeVelocity, moveDuration);
-        
+
         if (Time.deltaTime >= moveTimer)
             moveRoutineActive = false;
     }

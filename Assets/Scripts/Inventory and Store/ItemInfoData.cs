@@ -4,14 +4,25 @@ using UnityEngine.UI;
 namespace Inventory_and_Store {
     public class ItemInfoData : MonoBehaviour
     {
+        public Seedbag Seedbag;
         public Image itemIcon;
-        public Text itemName, itemAmount, itemRarity, itemSize, itemSurvivability, itemCompostValue, itemSellValue, itemLore;
+
+        public Text itemName,
+            itemAmount,
+            itemRarity,
+            itemSize,
+            itemSurvivability,
+            itemCompostValue,
+            itemSellValue,
+            itemLore,
+            plantButtonText;
+
+        public Button PlantButton;
         public ItemData itemData;
-        
 
         public void UpdateItemInfo()
         {
-            var itemInfo = itemData.itemSo;
+            var itemInfo = itemData.ItemInfo.ItemSo;
             itemName.text = itemInfo.name;
             itemIcon.sprite = itemInfo.icon;
             itemRarity.text = itemInfo.rarity.ToString();
@@ -21,7 +32,26 @@ namespace Inventory_and_Store {
             itemCompostValue.text = itemInfo.compostValue.ToString();
             itemSellValue.text = itemInfo.sellValue.ToString();
 
+            if (itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag)
+            {
+                plantButtonText.text = "Open";
+            }
+            else
+            {
+                plantButtonText.text = "Plant";
+            }
+
             itemLore.text = itemInfo.itemLore;
+        }
+
+        // Testing seedbag open function Adam A
+        public void openSeedbag()
+        {
+            if (itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag)
+            {
+                itemData.ItemInfo.ItemSo.Seedbag.Open(amount: 3);
+
+            }
         }
     }
 }

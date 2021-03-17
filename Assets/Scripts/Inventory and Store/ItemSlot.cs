@@ -35,7 +35,8 @@ namespace Inventory_and_Store
             {
                 var newItemSlot = Instantiate(slotPrefab, transform);
                 var itemData = newItemSlot.GetComponent<ItemData>();
-                itemData.itemSo = unique.ItemSo;
+                itemData.ItemInfo.ItemSo = unique.ItemSo;
+                
                 if (unique.ItemSo.maxAmount > 1) 
                     itemData.amount = inventory.CountItem(unique.ItemSo);
             }
