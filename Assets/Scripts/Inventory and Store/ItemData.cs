@@ -2,7 +2,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Inventory
+namespace Inventory_and_Store
 {
     public class ItemData : MonoBehaviour
     {

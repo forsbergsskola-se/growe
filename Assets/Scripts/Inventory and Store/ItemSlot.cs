@@ -1,23 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Inventory
+namespace Inventory_and_Store
 {
     public class ItemSlot : MonoBehaviour
     {
         public GameObject slotPrefab;
+        public Inventory inventory;
         public List<Item> uniqueItemStack = new List<Item>();
-
-        private void Start()
-        {
-            Inventory.ItemSlot = this;
-        }
 
         private void FindUniqueItems()
         {
             uniqueItemStack.Clear();
 
-            foreach (var item in Inventory.Items)
+            foreach (var item in inventory.Items)
             {
                 if (item.ItemSo.maxAmount == 1) 
                     uniqueItemStack.Add(item);
@@ -41,7 +37,7 @@ namespace Inventory
                 var itemData = newItemSlot.GetComponent<ItemData>();
                 itemData.itemSo = unique.ItemSo;
                 if (unique.ItemSo.maxAmount > 1) 
-                    itemData.amount = Inventory.CountItem(unique.ItemSo);
+                    itemData.amount = inventory.CountItem(unique.ItemSo);
             }
         }
 

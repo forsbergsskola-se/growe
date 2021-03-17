@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Inventory {
+namespace Inventory_and_Store {
     public class ItemInfoData : MonoBehaviour
     {
         public Image itemIcon;
