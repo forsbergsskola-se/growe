@@ -19,6 +19,7 @@ public class FireBaseInit : MonoBehaviour {
             StartCoroutine(auth.SigninAnonymously());
         });
     }
+  
 
     //WE CAN NOW LOG FIREBASE EVENTS AFTER THIS START METHOD(or inside after set-analytics-collect(true))^^
  
