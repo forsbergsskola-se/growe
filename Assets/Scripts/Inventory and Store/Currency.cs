@@ -1,10 +1,18 @@
 using System.Collections;
+using Broker;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Inventory_and_Store {
+    public class CurrencyUpdateMessage {
+        public float currency;
+
+        public CurrencyUpdateMessage(float currency) {
+            this.currency = currency;
+        }
+    }
     public class Currency : MonoBehaviour {
-        [SerializeField] private int _currency => _data.currency;
+        [SerializeField] private float _currency => _data.currency;
         [SerializeField] private CurrencyData _data;
         private SaveManager saveManager;
         public UnityEvent currencyUpdate;
@@ -26,22 +34,23 @@ namespace Inventory_and_Store {
             }
         }
 
-        public void AddCurrency(int value) {
+        public void AddCurrency(float value) {
             if (!hasLoaded) return;
             _data.currency += value;
             saveManager.SaveCurrency(_data);
-            Debug.Log(_data.currency);
+            MessageBroker.Instance().Send(new CurrencyUpdateMessage(_data.currency));
+          
         }
 
-        public bool TryRemoveCurrency(int value) {
+        public bool TryRemoveCurrency(float value) {
             if (!hasLoaded || value > _data.currency) return false;
             _data.currency -= value;
             saveManager.SaveCurrency(_data);
-            Debug.Log(_data.currency);
+            MessageBroker.Instance().Send(new CurrencyUpdateMessage(_data.currency));
             return true;
         }
 
-        public void SpendMoney(int value) {
+        public void SpendMoney(float value) {
             TryRemoveCurrency(value);
         }
     }
