@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using Inventory_and_Store;
 using UnityEngine.Advertisements;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent (typeof (Button))]
 public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     
-    [SerializeField] public int value;
+    [SerializeField] public float value;
+    [SerializeField] public float seconds;
     
     #if UNITY_IOS
         private string gameId = "4052122";
@@ -18,8 +21,13 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
         string mySurfacingId_Interstitial = "Interstitial_Android";
     #endif
     bool testMode = true;
+    private Button myButton;
 
-    void Start () {
+    void Start ()
+    {
+        myButton = GetComponent<Button>();
+        myButton.interactable = Advertisement.IsReady(mySurfacingId_Reward);
+        if (myButton) myButton.onClick.AddListener (ShowRewardedVideo);
         Advertisement.AddListener (this);
         Advertisement.Initialize(gameId, testMode);
     }
@@ -34,8 +42,10 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     }
     
     public void ShowRewardedVideo() {
-        if (Advertisement.IsReady(mySurfacingId_Reward)) {
+        if (Advertisement.IsReady(mySurfacingId_Reward) && seconds >= 300) {
+            myButton.interactable = true;
             Advertisement.Show(mySurfacingId_Reward);
+            seconds = 0;
         } 
         else {
             Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
@@ -53,7 +63,7 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
         // Define conditional logic for each ad completion status:
         if (showResult == ShowResult.Finished) {
             Currency reward = gameObject.AddComponent<Currency>();
-            reward.AddCurrency(value);
+            reward.AddSoftCurrency(value);
             Debug.Log ("20 amount of A-coins.");
             Debug.Log (value);
         } else if (showResult == ShowResult.Skipped) {
@@ -62,6 +72,11 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
         } else if (showResult == ShowResult.Failed) {
             Debug.LogWarning ("The ad did not finish due to an error.");
         }
+    }
+
+    public void Update()
+    {
+        seconds += Time.deltaTime;
     }
 
     public void OnUnityAdsDidError (string message) {
