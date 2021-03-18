@@ -4,8 +4,16 @@ using UnityEngine.Advertisements;
 using UnityEngine;
 
 public class AdsManagement : MonoBehaviour, IUnityAdsListener {
-    string gameId = "4052123";
-    string myPlacementId = "rewardedVideo";
+    
+    #if UNITY_IOS
+        private string gameId = "4052122";
+        string mySurfacingId_Interstitial = "Interstitial_iOS";
+        string mySurfacingId_Reward = "Rewarded_iOS";
+    #elif UNITY_ANDROID
+        private string gameId = "4052123";
+        string mySurfacingId_Reward = "Rewarded_Android";
+        string mySurfacingId_Interstitial = "Interstitial_Android";
+    #endif
     bool testMode = true;
 
     void Start () {
@@ -14,9 +22,8 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     }
 
     public void ShowInterstitialAd() {
-        // Check if UnityAds ready before calling Show method:
-        if (Advertisement.IsReady()) {
-            Advertisement.Show();
+        if (Advertisement.IsReady(mySurfacingId_Interstitial)) {
+            Advertisement.Show(mySurfacingId_Interstitial);
         } 
         else {
             Debug.Log("Interstitial ad not ready at the moment! Please try again later!");
@@ -24,9 +31,8 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     }
     
     public void ShowRewardedVideo() {
-        // Check if UnityAds ready before calling Show method:
-        if (Advertisement.IsReady("rewardedVideo")) {
-            Advertisement.Show("rewardedVideo");
+        if (Advertisement.IsReady(mySurfacingId_Reward)) {
+            Advertisement.Show(mySurfacingId_Reward);
         } 
         else {
             Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
@@ -35,7 +41,7 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     
     public void OnUnityAdsReady (string surfacingId) {
         // If the ready Ad Unit or legacy Placement is rewarded, activate the button: 
-        if (surfacingId == myPlacementId) {  
+        if (surfacingId == mySurfacingId_Reward) {  
             //todo enable rewards
         }
     }
