@@ -20,6 +20,9 @@ namespace Inventory_and_Store {
             var data = dataTask.Result;
             if (data.HasValue) {
                 _data = data.Value;
+                MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.softCurrency));
+                MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.fertilizer));
+                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.compost));
             }
         }
 
@@ -53,7 +56,7 @@ namespace Inventory_and_Store {
         }
         
         public bool TryRemoveFertilizer(int amount) {
-            if (!_hasLoaded || amount > _data.softCurrency) return false;
+            if (!_hasLoaded || amount > _data.fertilizer) return false;
             _data.fertilizer -= amount;
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.fertilizer));
@@ -61,15 +64,19 @@ namespace Inventory_and_Store {
         }
         
         public bool TryRemoveCompost(int amount) {
-            if (!_hasLoaded || amount > _data.softCurrency) return false;
+            if (!_hasLoaded || amount > _data.compost) return false;
             _data.compost -= amount;
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new CompostUpdateMessage(_data.compost));
             return true;
         }
         
-        public void SpendMoney(float value) {
-            TryRemoveSoftCurrency(value);
+        /// <summary>
+        /// Method used for testing
+        /// </summary>
+        /// <param name="amount"></param>
+        public void RemoveCurrency(int amount) {
+            TryRemoveFertilizer(amount);
         }
     }
 }

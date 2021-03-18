@@ -5,18 +5,25 @@ using UnityEngine.UI;
 
 namespace UI {
     public class CurrencyUI : MonoBehaviour {
-        public Text currencyText;
+        public Text softCurrencyText;
+        public Text fertilizerText;
 
         private void Start() {
-            MessageBroker.Instance().SubscribeTo<SoftCurrencyUpdateMessage>(UpdateText);
+            MessageBroker.Instance().SubscribeTo<SoftCurrencyUpdateMessage>(UpdateSoftCurrencyText);
+            MessageBroker.Instance().SubscribeTo<FertilizerUpdateMessage>(UpdateFertilizerText);
         }
 
-        void UpdateText(SoftCurrencyUpdateMessage m) {
-            currencyText.text = $"{m.amount}";
+        void UpdateSoftCurrencyText(SoftCurrencyUpdateMessage m) {
+            softCurrencyText.text = $"{m.amount}";
         }
-
+        
+        void UpdateFertilizerText(FertilizerUpdateMessage m) {
+            fertilizerText.text = $"{m.amount}";
+        }
+        
         private void OnDisable() {
-            MessageBroker.Instance().UnSubscribeFrom<SoftCurrencyUpdateMessage>(UpdateText);
+            MessageBroker.Instance().UnSubscribeFrom<SoftCurrencyUpdateMessage>(UpdateSoftCurrencyText);
+            MessageBroker.Instance().UnSubscribeFrom<FertilizerUpdateMessage>(UpdateFertilizerText);
         }
     }
 }
