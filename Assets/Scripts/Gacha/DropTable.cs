@@ -10,7 +10,7 @@ public class DropTable : ScriptableObject
 {
     [SerializeField] private List<ItemDrop<ItemSO>> DroppableItems;
 
-    public ItemDrop<ItemSO> GetRandomItem()
+    public ItemSO GetRandomItem()
     {
         float total = DroppableItems.Sum(drop => drop.DropChance);
         float roll = Random.Range(0, total);
@@ -23,30 +23,17 @@ public class DropTable : ScriptableObject
                 if (shinyRoll >= 98)
                 {
                     item.Item.isShiny = true;
-                    return item;
+                    return item.Item;
                 }
                 else
                 {
-                    return item;
+                    return item.Item;
                 }
             }
-
             roll -= item.DropChance;
         }
 
         throw new SystemException();
-    }
-
-    public List<ItemSO> ItemDrops()
-    {
-        List<ItemSO> items = new List<ItemSO>();
-
-        foreach (var item in DroppableItems)
-        {
-            items.Add(item.Item);
-        }
-
-        return items;
     }
 }
 
@@ -54,7 +41,6 @@ public class DropTable : ScriptableObject
 public class ItemDrop<TItem>
 {
     public TItem Item;
-
     [Space]
     public float DropChance;
 }
