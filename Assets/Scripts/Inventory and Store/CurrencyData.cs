@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public struct CurrencyData {
-    public float currency;
+namespace Inventory_and_Store {
+    public struct CurrencyData {
+        public float currency;
+    }
 }
