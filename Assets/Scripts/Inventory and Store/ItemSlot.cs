@@ -46,8 +46,6 @@ namespace Inventory_and_Store
         public void UpdateItemSlots()
         {
             FindUniqueItems();
-            Debug.Log("Inventory after Sorting");
-            foreach (var x in uniqueItemStack) Debug.Log(x.ItemSo.name);
             CreateItemSlot();
         }
     }
