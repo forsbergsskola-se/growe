@@ -8,15 +8,15 @@ namespace UI {
         public Text currencyText;
 
         private void Start() {
-            MessageBroker.Instance().SubscribeTo<CurrencyUpdateMessage>(UpdateText);
+            MessageBroker.Instance().SubscribeTo<SoftCurrencyUpdateMessage>(UpdateText);
         }
 
-        void UpdateText(CurrencyUpdateMessage m) {
-            currencyText.text = $"{m.currency}";
+        void UpdateText(SoftCurrencyUpdateMessage m) {
+            currencyText.text = $"{m.amount}";
         }
 
         private void OnDisable() {
-            MessageBroker.Instance().UnSubscribeFrom<CurrencyUpdateMessage>(UpdateText);
+            MessageBroker.Instance().UnSubscribeFrom<SoftCurrencyUpdateMessage>(UpdateText);
         }
     }
 }
