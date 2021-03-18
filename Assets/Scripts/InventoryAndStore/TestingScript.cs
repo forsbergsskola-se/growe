@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Inventory_and_Store
+namespace InventoryAndStore
 {
     public class TestingScript : MonoBehaviour
     {

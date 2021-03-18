@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Inventory_and_Store
+namespace InventoryAndStore
 {
     public class Inventory : MonoBehaviour
     {
-        public readonly List<Item> Items = new List<Item>();
+        public List<Item> Items = new List<Item>();
         public ItemSlot itemSlot;
 
         public void Add(ItemSO newItemSo)

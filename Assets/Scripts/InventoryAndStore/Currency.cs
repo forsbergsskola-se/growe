@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Inventory_and_Store {
+namespace InventoryAndStore {
     public class Currency : MonoBehaviour {
         [SerializeField] private int _currency => _data.currency;
         [SerializeField] private CurrencyData _data;

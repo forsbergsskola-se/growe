@@ -1,5 +1,5 @@
 using System.Collections;
-using Inventory_and_Store;
+using InventoryAndStore;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,6 +40,7 @@ public class StoreButton : MonoBehaviour
     private void Sell()
     {
         ItemData.itemInfoData.playerInventory.Remove(ItemData.ItemInfo);
+        //Remove from sellables in StoreSwitchSellBuy
     }
 
     private void Buy()

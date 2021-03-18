@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Inventory_and_Store
+namespace InventoryAndStore
 {
     public class ItemSlot : MonoBehaviour
     {
