@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Inventory_and_Store;
 using UnityEngine.Advertisements;
 using UnityEngine;
 
 public class AdsManagement : MonoBehaviour, IUnityAdsListener {
+    
+    [SerializeField] public int value;
     
     #if UNITY_IOS
         private string gameId = "4052122";
@@ -49,11 +52,13 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     public void OnUnityAdsDidFinish (string surfacingId, ShowResult showResult) {
         // Define conditional logic for each ad completion status:
         if (showResult == ShowResult.Finished) {
-            // Reward the user for watching the ad to completion.
-            Debug.Log ("X amount of A-coins.");
+            Currency reward = gameObject.AddComponent<Currency>();
+            reward.AddCurrency(value);
+            Debug.Log ("20 amount of A-coins.");
+            Debug.Log (value);
         } else if (showResult == ShowResult.Skipped) {
-            // Do not reward the user for skipping the ad.
-            Debug.Log ("Next time, don't skip to get X amount of A-coins! ;)");
+            // No reward for you!
+            Debug.Log ("Next time, don't skip! ;)");
         } else if (showResult == ShowResult.Failed) {
             Debug.LogWarning ("The ad did not finish due to an error.");
         }
