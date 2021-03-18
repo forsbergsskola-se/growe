@@ -9,21 +9,21 @@ namespace Inventory_and_Store
         public Item ItemInfo;
         public int amount;
         public Text amountText;
-        private ItemInfoData _showInfoScreen;
+        public ItemInfoData itemInfoData;
         private Image Icon => GetComponent<Image>();
 
         private void Start()
         {
-            _showInfoScreen = UIReferences.Instance.itemInfoBox;
+            itemInfoData = UIReferences.Instance.itemInfoBox;
             Icon.sprite = ItemInfo.ItemSo.icon;
             amountText.text = amount.ToString();
         }
 
         public void ShowItemInfo()
         {
-            _showInfoScreen.gameObject.SetActive(true);
-            _showInfoScreen.itemData = this;
-            _showInfoScreen.UpdateItemInfo();
+            itemInfoData.gameObject.SetActive(true);
+            itemInfoData.itemData = this;
+            itemInfoData.UpdateItemInfo();
         }
     }
 }

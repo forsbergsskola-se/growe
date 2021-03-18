@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -401,6 +401,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7760720308827103383, guid: da3754901ff35894a84947b7e84dfcf9, type: 3}
+      propertyPath: m_Content
+      value: 
+      objectReference: {fileID: 822006498}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da3754901ff35894a84947b7e84dfcf9, type: 3}
 --- !u!114 &139713255 stripped
@@ -1625,6 +1629,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory
       objectReference: {fileID: 0}
+    - target: {fileID: 3859227998599776817, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_Content
+      value: 
+      objectReference: {fileID: 1212813225}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
 --- !u!114 &741734042 stripped
@@ -2129,6 +2137,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782145803}
   m_CullTransparentMesh: 1
+--- !u!224 &822006498 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7760720308545388479, guid: da3754901ff35894a84947b7e84dfcf9, type: 3}
+  m_PrefabInstance: {fileID: 139713254}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &855794958
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,6 +3182,11 @@ PrefabInstance:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3905312120881781408, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
   m_PrefabInstance: {fileID: 1204114534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1212813225 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3859227998855451929, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+  m_PrefabInstance: {fileID: 741734041}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1251411690
 PrefabInstance:
