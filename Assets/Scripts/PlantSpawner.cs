@@ -15,19 +15,22 @@ public class PlantSpawner : MonoBehaviour
     }
 
     // ensure caller checks if a potted plant is selected
-    public void SpawnPlant(Item item)
+    public void SpawnPlant(ItemSO item)
     {
-        // TODO add a check that the item is a potted plant or change the parameter type.
-        GameObject instance = Instantiate(pottedPlantPlaceholder, grid.transform.position + startOffsetFromGrid, grid.transform.rotation, grid.transform );
-        Vector3Int pos = new Vector3Int();
+        GameObject instance = Instantiate(pottedPlantPlaceholder, grid.transform.position + startOffsetFromGrid,
+            grid.transform.rotation, grid.transform );
+        GridObject gridObject = instance.GetComponent<GridObject>();
+        
+        gridObject.Size = Vector2Int.FloorToInt(item.sizeDimensions);
+        Vector3Int pos = Vector3Int.zero;
         pos.x = (int) (grid.width * 0.5);
         pos.y = (int) (grid.height * 0.5);
         instance.transform.localPosition = pos;
-        // TODO pass Item reference to instance
+        instance.GetComponentInChildren<GridItem>().Init(item);
     }
 
     public void SpawnPlant() // TODO temporary method wrapper
     {
-        SpawnPlant(new Item());
+        SpawnPlant(new ItemSO());
     } 
 }
