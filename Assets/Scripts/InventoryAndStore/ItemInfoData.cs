@@ -23,23 +23,21 @@ namespace InventoryAndStore {
 
         public void UpdateItemInfo()
         {
-            var itemInfo = itemData.ItemInfo.ItemSo;
-            itemName.text = itemInfo.name;
-            itemIcon.sprite = itemInfo.icon;
-            itemRarity.text = itemInfo.rarity.ToString();
+            ItemSO itemSO = itemData.ItemSO;
+            itemName.text = itemSO.name;
+            itemIcon.sprite = itemSO.icon;
+            itemRarity.text = itemSO.rarity.ToString();
             itemAmount.text = itemData.amount.ToString();
-            itemSize.text = $"{itemInfo.sizeDimensions.x} x {itemInfo.sizeDimensions.y}";
-            itemSurvivability.text = itemInfo.survivability.ToString();
-            itemCompostValue.text = itemInfo.compostValue.ToString();
-            itemSellValue.text = itemInfo.sellValue.ToString();
-            itemLore.text = itemInfo.itemLore;
-
+            itemSize.text = $"{itemSO.sizeDimensions.x} x {itemSO.sizeDimensions.y}";
+            itemSurvivability.text = itemSO.survivability.ToString();
+            itemCompostValue.text = itemSO.compostValue.ToString();
+            itemSellValue.text = itemSO.sellValue.ToString();
+            itemLore.text = itemSO.itemLore;
             
-            //TODO Fix this mess
-            plantButtonText.text = itemData.ItemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag ? "Open" : "Plant";
+            plantButtonText.text = itemSO.itemType == ItemSO.ItemType.Seedbag ? "Open" : "Plant";
             
-            if (itemData.ItemInfo.ItemSo.tradeState == ItemSO.TradeState.Buyable)
-                plantButtonText.text = "Buy";
+            //TODO Try to move
+            if (itemSO.tradeState == ItemSO.TradeState.Buyable) plantButtonText.text = "Buy";
         }
     }
 }

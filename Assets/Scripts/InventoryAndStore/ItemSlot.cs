@@ -8,22 +8,21 @@ namespace InventoryAndStore
     {
         public GameObject slotPrefab;
         public Inventory inventory;
-        public List<Item> uniqueItemStack = new List<Item>();
+        public List<ItemSO> sortedItems = new List<ItemSO>();
 
-        private void FindUniqueItems()
+        private void SortItemsByStackable()
         {
-            uniqueItemStack.Clear();
+            sortedItems.Clear();
 
-            foreach (var item in inventory.Items)
+            foreach (ItemSO itemSO in inventory.items)
             {
+                if (itemSO.maxAmount == 1) 
+                    sortedItems.Add(itemSO);
                 
-                if (item.ItemSo.maxAmount == 1) 
-                    uniqueItemStack.Add(item);
-                
-                else if (item.ItemSo.maxAmount > 1)
+                else if (itemSO.maxAmount > 1)
                 {
-                    if (!uniqueItemStack.Exists(stackable => stackable.ItemSo.name == item.ItemSo.name))
-                        uniqueItemStack.Add(item);
+                    if (!sortedItems.Exists(stackable => stackable.name == itemSO.name))
+                        sortedItems.Add(itemSO);
                 }
             }
         }
@@ -33,20 +32,20 @@ namespace InventoryAndStore
             foreach (Transform child in transform) 
                 Destroy(child.gameObject);
 
-            foreach (var unique in uniqueItemStack)
+            foreach (ItemSO itemSO in sortedItems)
             {
                 var newItemSlot = Instantiate(slotPrefab, transform);
                 var itemData = newItemSlot.GetComponent<ItemData>();
-                itemData.ItemInfo = unique;
+                itemData.ItemSO = itemSO;
                 
-                if (unique.ItemSo.maxAmount > 1) 
-                    itemData.amount = inventory.CountItem(unique.ItemSo);
+                if (itemSO.maxAmount > 1) 
+                    itemData.amount = inventory.CountItem(itemSO);
             }
         }
 
         public void UpdateItemSlots()
         {
-            FindUniqueItems();
+            SortItemsByStackable();
             CreateItemSlot();
         }
     }

@@ -6,7 +6,7 @@ namespace InventoryAndStore
 {
     public class ItemData : MonoBehaviour
     {
-        public Item ItemInfo;
+        public ItemSO ItemSO;
         public int amount;
         public Text amountText;
         public ItemInfoData itemInfoData;
@@ -15,7 +15,7 @@ namespace InventoryAndStore
         private void Start()
         {
             itemInfoData = UIReferences.Instance.itemInfoBox;
-            Icon.sprite = ItemInfo.ItemSo.icon;
+            Icon.sprite = ItemSO.icon;
             amountText.text = amount.ToString();
         }
 

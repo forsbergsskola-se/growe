@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Inventory_and_Store;
+using InventoryAndStore;
 using UnityEngine.Advertisements;
 using UnityEngine;
 using UnityEngine.UI;

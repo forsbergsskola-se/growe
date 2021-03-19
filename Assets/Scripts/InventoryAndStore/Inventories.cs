@@ -6,11 +6,11 @@ namespace InventoryAndStore
     {
         public Inventory playerInventory, storeInventory;
 
-        public static Inventories instance;
+        public static Inventories Instance;
 
         private void Awake()
         {
-            instance = this;
+            Instance = this;
         }
     }
 }

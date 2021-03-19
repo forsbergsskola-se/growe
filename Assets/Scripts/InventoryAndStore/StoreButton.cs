@@ -1,63 +1,61 @@
 using System.Collections;
-using InventoryAndStore;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StoreButton : MonoBehaviour
+namespace InventoryAndStore
 {
-    private ItemData ItemData => GetComponentInParent<ItemData>();
-    private Text Text => GetComponentInChildren<Text>();
-
-    private void OnEnable()
+    public class StoreButton : MonoBehaviour
     {
-        StartCoroutine(UpdateText());
-    }
+        private ItemData ItemData => GetComponentInParent<ItemData>();
+        private Text Text => GetComponentInChildren<Text>();
 
-    private IEnumerator UpdateText()
-    {
-        while (ItemData.ItemInfo is null) yield return null;
-        Text.text = ItemData.ItemInfo.ItemSo.tradeState switch
+        private void OnEnable()
         {
-            ItemSO.TradeState.Buyable => ItemData.ItemInfo.ItemSo.buyValue + " Buy",
-            ItemSO.TradeState.Sellable => ItemData.ItemInfo.ItemSo.sellValue + " Sell",
-            _ => Text.text
-        };
-    }
-
-    public void ButtonPressed()
-    {
-        switch (ItemData.ItemInfo.ItemSo.tradeState)
-        {
-            case ItemSO.TradeState.Buyable:
-                Buy();
-                break;
-            case ItemSO.TradeState.Sellable:
-                Sell();
-                break;
+            StartCoroutine(UpdateText());
         }
-    }
 
-    private void Sell()
-    {
-        Inventories.instance.storeInventory.Remove(ItemData.ItemInfo);
-        foreach (var y in Inventories.instance.playerInventory.Items)
+        private IEnumerator UpdateText()
         {
-            if (y.ItemSo.name == ItemData.ItemInfo.ItemSo.name)
+            while (ItemData.ItemSO is null) yield return null;
+            Text.text = ItemData.ItemSO.tradeState switch
             {
-                
-                Inventories.instance.playerInventory.Remove(y);
+                ItemSO.TradeState.Buyable => ItemData.ItemSO.buyValue + " Buy",
+                ItemSO.TradeState.Sellable => ItemData.ItemSO.sellValue + " Sell",
+                _ => Text.text
+            };
+        }
+
+        public void ButtonPressed()
+        {
+            switch (ItemData.ItemSO.tradeState)
+            {
+                case ItemSO.TradeState.Buyable:
+                    Buy();
+                    break;
+                case ItemSO.TradeState.Sellable:
+                    Sell();
+                    break;
+            }
+        }
+
+        private void Sell()
+        {
+            Inventories.Instance.storeInventory.Remove(ItemData.ItemSO);
+            foreach (ItemSO itemSO in Inventories.Instance.playerInventory.items.Where(itemSO => itemSO.name == ItemData.ItemSO.name)) {
+                Inventories.Instance.playerInventory.Remove(itemSO);
                 return;
             }
         }
-    }
 
-    private void Buy()
-    {
-        ItemSO clone = Instantiate(ItemData.ItemInfo.ItemSo);
-        clone.tradeState = ItemSO.TradeState.Sellable;
-        clone.name = ItemData.ItemInfo.ItemSo.name;
-        Inventories.instance.playerInventory.Add(clone);
-        Inventories.instance.storeInventory.Remove(ItemData.ItemInfo);
-    }
+        private void Buy()
+        {
+            ItemSO clone = Instantiate(ItemData.ItemSO);
+            clone.tradeState = ItemSO.TradeState.Sellable;
+            clone.name = ItemData.ItemSO.name;
+            Inventories.Instance.playerInventory.Add(clone);
+            Inventories.Instance.storeInventory.Remove(ItemData.ItemSO);
+        }
     
+    }
 }
