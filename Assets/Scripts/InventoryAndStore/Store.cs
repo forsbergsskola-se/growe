@@ -6,7 +6,7 @@ namespace InventoryAndStore
     public class Store : MonoBehaviour
     {
         public ItemSO[] storeBank;
-        public Inventory StoreInventory => GetComponent<Inventory>();
+        private Inventory StoreInventory => GetComponent<Inventory>();
 
         private void Start()
         {

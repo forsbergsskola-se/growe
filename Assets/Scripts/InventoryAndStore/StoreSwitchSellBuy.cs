@@ -1,55 +1,48 @@
-using System.Collections;
 using System.Collections.Generic;
-using InventoryAndStore;
+using System.Linq;
 using UnityEngine;
 
-public class StoreSwitchSellBuy : MonoBehaviour
+namespace InventoryAndStore
 {
-    private List<ItemSO> SellableList = new List<ItemSO>();
-    private List<Item> StoreItems = new List<Item>();
-
-    private bool StoreSwitch;
-
-    void FindSellables()
+    public class StoreSwitchSellBuy : MonoBehaviour
     {
-        foreach (var item in Inventories.instance.playerInventory.Items)
-        {
-            if (item.ItemSo.tradeState == ItemSO.TradeState.Sellable)
-            {
-                SellableList.Add(item.ItemSo);
-            }
-        }
-    }
+        private readonly List<ItemSO> _sellableList = new List<ItemSO>();
+        private readonly List<ItemSO> _storeItems = new List<ItemSO>();
 
-    public void OnSwitchButton()
-    {
-        StoreSwitch = !StoreSwitch;
-        if (StoreSwitch) SwitchToSell();
-        else if (!StoreSwitch) SwitchToBuy();
-    }
+        private bool _storeSwitch;
 
-    void SwitchToSell()
-    {
-        FindSellables();
-        foreach (var x in Inventories.instance.storeInventory.Items)
+        private void FindSellables()
         {
-            StoreItems.Add(x);
+            foreach (ItemSO itemSO in Inventories.Instance.playerInventory.items.Where(itemSO => itemSO.tradeState == ItemSO.TradeState.Sellable))
+                _sellableList.Add(itemSO);
         }
-        Inventories.instance.storeInventory.Items.Clear();
-        foreach (var itemSo in SellableList)
-        {
-            Inventories.instance.storeInventory.Add(itemSo);
-        }
-        SellableList.Clear();
-    }
 
-    void SwitchToBuy()
-    {
-        Inventories.instance.storeInventory.Items.Clear();
-        foreach (var item in StoreItems)
-        {
-            Inventories.instance.storeInventory.Add(item.ItemSo);
+        public void OnSwitchButton() {
+            _storeSwitch = !_storeSwitch;
+            if (_storeSwitch) SwitchToSell();
+            else if (!_storeSwitch) SwitchToBuy();
         }
-        StoreItems.Clear();
+
+        private void SwitchToSell()
+        {
+            foreach (ItemSO itemSO in Inventories.Instance.storeInventory.items)
+                _storeItems.Add(itemSO);
+            
+            Inventories.Instance.storeInventory.items.Clear();
+            
+            FindSellables();
+            foreach (ItemSO itemSO in _sellableList)
+                Inventories.Instance.storeInventory.Add(itemSO);
+            _sellableList.Clear();
+        }
+
+        private void SwitchToBuy()
+        {
+            Inventories.Instance.storeInventory.items.Clear();
+            foreach (ItemSO itemSO in _storeItems)
+                Inventories.Instance.storeInventory.Add(itemSO);
+            
+            _storeItems.Clear();
+        }
     }
 }

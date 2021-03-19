@@ -8,21 +8,21 @@ namespace InventoryAndStore
 
         public void ButtonInteract()
         {
-            var itemInfo = ItemInfoData.itemData.ItemInfo;
+            ItemSO itemSO = ItemInfoData.itemData.ItemSO;
             
-            if (itemInfo.ItemSo.itemType == ItemSO.ItemType.Seedbag && itemInfo.ItemSo.tradeState != ItemSO.TradeState.Buyable)
+            if (itemSO.itemType == ItemSO.ItemType.Seedbag && itemSO.tradeState != ItemSO.TradeState.Buyable)
             {
-                itemInfo.ItemSo.Seedbag.Open(amount: 3, inventory: ItemInfoData.playerInventory);
-                ItemInfoData.playerInventory.Remove(ItemInfoData.itemData.ItemInfo);
+                itemSO.Seedbag.Open(3, Inventories.Instance.playerInventory);
+                Inventories.Instance.playerInventory.Remove(itemSO);
                 ItemInfoData.gameObject.SetActive(false);
             }
-            else if (itemInfo.ItemSo.tradeState == ItemSO.TradeState.Buyable)
+            else if (itemSO.tradeState == ItemSO.TradeState.Buyable)
             {
-                ItemSO clone = Instantiate(itemInfo.ItemSo);
+                ItemSO clone = Instantiate(itemSO);
                 clone.tradeState = ItemSO.TradeState.Sellable;
-                clone.name = itemInfo.ItemSo.name;
+                clone.name = itemSO.name;
                 ItemInfoData.playerInventory.Add(clone);
-                ItemInfoData.storeInventory.Remove(itemInfo);
+                ItemInfoData.storeInventory.Remove(itemSO);
             }
         }
     }

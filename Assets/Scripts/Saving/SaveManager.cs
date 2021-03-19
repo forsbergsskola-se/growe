@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Firebase.Database;
-using Inventory_and_Store;
+using InventoryAndStore;
 using UnityEngine;
 
 namespace Saving {

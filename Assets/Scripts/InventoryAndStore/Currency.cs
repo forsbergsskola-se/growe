@@ -4,7 +4,7 @@ using Broker.Messages;
 using Saving;
 using UnityEngine;
 
-namespace Inventory_and_Store {
+namespace InventoryAndStore {
 
     public class Currency : MonoBehaviour {
         private CurrencyData _data;

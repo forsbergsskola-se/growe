@@ -6,29 +6,25 @@ namespace InventoryAndStore
 {
     public class Inventory : MonoBehaviour
     {
-        public List<Item> Items = new List<Item>();
+        public List<ItemSO> items = new List<ItemSO>();
         public ItemSlot itemSlot;
 
-        public void Add(ItemSO newItemSo)
+        public void Add(ItemSO newItemSO)
         {
-            var item = new Item();
-            if (newItemSo.hasLifeTime && newItemSo.tradeState != ItemSO.TradeState.Buyable)
-                item.LifeTime = newItemSo.lifeTimeHoursInInventory;
-            item.ItemSo = newItemSo;
-            Items.Add(item);
-            
+            ItemSO itemClone = newItemSO;
+            items.Add(itemClone);
             itemSlot.UpdateItemSlots();
         }
-        public void Remove(Item removeItem)
+        public void Remove(ItemSO removeItem)
         {
-            Items.Remove(removeItem);
+            items.Remove(removeItem);
             itemSlot.UpdateItemSlots();
         }
 
-        public int CountItem(ItemSO itemSo)
+        public int CountItem(ItemSO CountSO)
         {
-            return Items.Count
-                (item => item.ItemSo.name.StartsWith(itemSo.name));
+            return items.Count
+                (item => item.name.StartsWith(CountSO.name));
         }
     }
 }
