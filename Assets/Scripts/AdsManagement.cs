@@ -10,6 +10,7 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     
     [SerializeField] public float value;
     [SerializeField] public float seconds;
+    public Text noadtext;
     
     #if UNITY_IOS
         private string gameId = "4052122";
@@ -32,6 +33,7 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
         Advertisement.Initialize(gameId, testMode);
     }
 
+    //designers wanted rewarded video only
     public void ShowInterstitialAd() {
         if (Advertisement.IsReady(mySurfacingId_Interstitial)) {
             Advertisement.Show(mySurfacingId_Interstitial);
@@ -43,11 +45,14 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     
     public void ShowRewardedVideo() {
         if (Advertisement.IsReady(mySurfacingId_Reward) && seconds >= 300) {
+            noadtext.text = "";
             myButton.interactable = true;
             Advertisement.Show(mySurfacingId_Reward);
             seconds = 0;
         } 
-        else {
+        else
+        {
+            noadtext.text = "Ads available every 5 minutes only!";
             Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
         }
     }
@@ -55,7 +60,7 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     public void OnUnityAdsReady (string surfacingId) {
         // If the ready Ad Unit or legacy Placement is rewarded, activate the button: 
         if (surfacingId == mySurfacingId_Reward) {  
-            //todo enable rewards
+            //no legacy
         }
     }
 
