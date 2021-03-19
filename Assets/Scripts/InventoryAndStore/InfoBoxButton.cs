@@ -5,10 +5,33 @@ namespace InventoryAndStore
     public class InfoBoxButton : MonoBehaviour
     {
         private ItemInfoData ItemInfoData => GetComponent<ItemInfoData>();
+        private PlantSpawner plantSpawner;
+        
+        // UI references
+        public GameObject inventoryUI;
+        public GameObject testingCanvasUI;
+        
+        private void Start()
+        {
+            plantSpawner = FindObjectOfType<PlantSpawner>();
+            if (plantSpawner == null)
+                Debug.Log("plantSpawner not found", this);
+        }
 
         public void ButtonInteract()
         {
             ItemSO itemSO = ItemInfoData.itemData.ItemSO;
+            
+            if (itemSO.itemType == ItemSO.ItemType.Plant ||
+                itemSO.itemType == ItemSO.ItemType.Seed) // TODO change to pot with something planted
+            {
+                plantSpawner.SpawnPlant(itemSO);
+                inventoryUI.SetActive(false);
+                testingCanvasUI.SetActive(false);
+                this.gameObject.SetActive(false);
+                // TODO remove item from inventory
+                // TODO place back in inventory if not placed by player
+            }
             
             if (itemSO.itemType == ItemSO.ItemType.Seedbag && itemSO.tradeState != ItemSO.TradeState.Buyable)
             {
