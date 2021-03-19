@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3450450989438438180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3450450989438438181}
+  - component: {fileID: 3450450989438438182}
+  m_Layer: 3
+  m_Name: PlantSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3450450989438438181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3450450989438438180}
+  m_LocalRotation: {x: 0.3391385, y: -0.14047582, z: 0.35596758, w: 0.85938275}
+  m_LocalPosition: {x: 0, y: -3.9312434, z: -82.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 43.071, y: 0, z: 45}
+--- !u!114 &3450450989438438182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3450450989438438180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8063df076a1e4a941e1c184637796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pottedPlantPlaceholder: {fileID: 7919882476770317452, guid: 35df972c32670e6478c41d8e4bbc9c49, type: 3}
+  startOffsetFromGrid: {x: 0, y: 0, z: 0}
