@@ -4248,7 +4248,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 306357897}
         m_TargetAssemblyTypeName: Inventory_and_Store.Currency, Assembly-CSharp
-        m_MethodName: SpendMoney
+        m_MethodName: RemoveCurrency
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

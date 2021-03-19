@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/SettingsScene.unity
     guid: 03f0b377f056b8a4e950b3204a3873d6
   - enabled: 1
-    path: Assets/Scenes/GameplayPlaceholderScene.unity
-    guid: a01936b89354be74c90c6685c255064d
+    path: Assets/Scenes/MainGameplayScreen.unity
+    guid: cfd05a5dbbe3b1843b302db27aede601
   - enabled: 1
     path: Assets/Scenes/StoreScene.unity
     guid: 4be9e24c293feb5499e6188f959794f8

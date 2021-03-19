@@ -1,48 +1,82 @@
 using System.Collections;
+using Broker;
+using Broker.Messages;
+using Saving;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace InventoryAndStore {
+namespace Inventory_and_Store {
+
     public class Currency : MonoBehaviour {
-        [SerializeField] private int _currency => _data.currency;
-        [SerializeField] private CurrencyData _data;
-        private SaveManager saveManager;
-        public UnityEvent currencyUpdate;
-        private bool hasLoaded;
-
-
-        public CurrencyData Data => _data;
-
+        private CurrencyData _data;
+        private SaveManager _saveManager;
+        private bool _hasLoaded;
 
         private IEnumerator Start() {
-            saveManager = FindObjectOfType<SaveManager>();
+            _saveManager = FindObjectOfType<SaveManager>();
             yield return new WaitForSeconds(1f);
-            var dataTask = saveManager.LoadCurrency();
+            var dataTask = _saveManager.LoadCurrency();
             yield return new WaitUntil(() => dataTask.IsCompleted);
-            hasLoaded = true;
+            _hasLoaded = true;
             var data = dataTask.Result;
             if (data.HasValue) {
-                _data.currency = data.Value.currency;
+                _data = data.Value;
+                MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.softCurrency));
+                MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.fertilizer));
+                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.compost));
             }
         }
 
-        public void AddCurrency(int value) {
-            if (!hasLoaded) return;
-            _data.currency += value;
-            saveManager.SaveCurrency(_data);
-            Debug.Log(_data.currency);
+        public void AddSoftCurrency(float amount) {
+            if (!_hasLoaded) return;
+            _data.softCurrency += amount;
+            _saveManager.SaveCurrency(_data);
+            MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.softCurrency));
+        }
+        
+        public void AddFertilizer(int amount) {
+            if (!_hasLoaded) return;
+            _data.fertilizer += amount;
+            _saveManager.SaveCurrency(_data);
+            MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.fertilizer));
+        }
+        
+        public void AddCompost(int amount) {
+            if (!_hasLoaded) return;
+            _data.compost += amount;
+            _saveManager.SaveCurrency(_data);
+            MessageBroker.Instance().Send(new CompostUpdateMessage(_data.compost));
         }
 
-        public bool TryRemoveCurrency(int value) {
-            if (!hasLoaded || value > _data.currency) return false;
-            _data.currency -= value;
-            saveManager.SaveCurrency(_data);
-            Debug.Log(_data.currency);
+        public bool TryRemoveSoftCurrency(float amount) {
+            if (!_hasLoaded || amount > _data.softCurrency) return false;
+            _data.softCurrency -= amount;
+            _saveManager.SaveCurrency(_data);
+            MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.softCurrency));
             return true;
         }
-
-        public void SpendMoney(int value) {
-            TryRemoveCurrency(value);
+        
+        public bool TryRemoveFertilizer(int amount) {
+            if (!_hasLoaded || amount > _data.fertilizer) return false;
+            _data.fertilizer -= amount;
+            _saveManager.SaveCurrency(_data);
+            MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.fertilizer));
+            return true;
+        }
+        
+        public bool TryRemoveCompost(int amount) {
+            if (!_hasLoaded || amount > _data.compost) return false;
+            _data.compost -= amount;
+            _saveManager.SaveCurrency(_data);
+            MessageBroker.Instance().Send(new CompostUpdateMessage(_data.compost));
+            return true;
+        }
+        
+        /// <summary>
+        /// Method used for testing
+        /// </summary>
+        /// <param name="amount"></param>
+        public void RemoveCurrency(int amount) {
+            TryRemoveFertilizer(amount);
         }
     }
 }

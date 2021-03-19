@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public struct CurrencyData {
-    public int currency;
+namespace Inventory_and_Store {
+    public struct CurrencyData {
+        public float softCurrency;
+        public int fertilizer;
+        public int compost;
+    }
 }

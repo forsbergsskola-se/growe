@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77711372ec970ce4e8e87af7723d5559, type: 3}
+  m_Name: Testing
+  m_EditorClassIdentifier: 
+  DroppableItems:
+  - Item: {fileID: 11400000, guid: 091a6cac7e2ec014aa0bebf8e8548a71, type: 2}
+    DropChance: 33
+  - Item: {fileID: 11400000, guid: 5b398a30b3e62734eae3f804757435e4, type: 2}
+    DropChance: 33
+  - Item: {fileID: 11400000, guid: d73e5eea2bd68d44d9d04bbedb84e3c2, type: 2}
+    DropChance: 33
+  - Item: {fileID: 11400000, guid: 3789d07be2ff7fc439b9dcb740692f52, type: 2}
+    DropChance: 1
