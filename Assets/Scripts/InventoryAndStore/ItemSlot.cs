@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Inventory_and_Store
+namespace InventoryAndStore
 {
     public class ItemSlot : MonoBehaviour
     {
@@ -46,8 +47,6 @@ namespace Inventory_and_Store
         public void UpdateItemSlots()
         {
             FindUniqueItems();
-            Debug.Log("Inventory after Sorting");
-            foreach (var x in uniqueItemStack) Debug.Log(x.ItemSo.name);
             CreateItemSlot();
         }
     }

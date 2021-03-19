@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Inventory_and_Store {
+namespace InventoryAndStore {
     public class ItemInfoData : MonoBehaviour
     {
         public Inventory storeInventory, playerInventory;

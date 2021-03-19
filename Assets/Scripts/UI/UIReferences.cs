@@ -1,4 +1,4 @@
-using Inventory_and_Store;
+using InventoryAndStore;
 using UnityEngine;
 
 namespace UI

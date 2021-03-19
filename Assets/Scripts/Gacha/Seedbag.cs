@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Inventory_and_Store;
+using InventoryAndStore;
 using UnityEngine;
 
 [System.Serializable]

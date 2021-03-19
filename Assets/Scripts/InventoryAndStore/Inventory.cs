@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Inventory_and_Store
+namespace InventoryAndStore
 {
     public class Inventory : MonoBehaviour
     {
-        public readonly List<Item> Items = new List<Item>();
+        public List<Item> Items = new List<Item>();
         public ItemSlot itemSlot;
 
         public void Add(ItemSO newItemSo)
@@ -16,10 +16,6 @@ namespace Inventory_and_Store
                 item.LifeTime = newItemSo.lifeTimeHoursInInventory;
             item.ItemSo = newItemSo;
             Items.Add(item);
-            
-            Debug.Log("Inventory Before Sorting");
-            foreach (var x in Items) Debug.Log(x.ItemSo.name);
-            
             
             itemSlot.UpdateItemSlots();
         }

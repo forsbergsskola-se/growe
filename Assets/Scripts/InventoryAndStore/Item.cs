@@ -1,4 +1,4 @@
-namespace Inventory_and_Store
+namespace InventoryAndStore
 {
     public class Item
     {
