@@ -39,8 +39,16 @@ public class StoreButton : MonoBehaviour
 
     private void Sell()
     {
-        ItemData.itemInfoData.playerInventory.Remove(ItemData.ItemInfo);
-        //Remove from sellables in StoreSwitchSellBuy
+        Inventories.instance.storeInventory.Remove(ItemData.ItemInfo);
+        foreach (var y in Inventories.instance.playerInventory.Items)
+        {
+            if (y.ItemSo.name == ItemData.ItemInfo.ItemSo.name)
+            {
+                
+                Inventories.instance.playerInventory.Remove(y);
+                return;
+            }
+        }
     }
 
     private void Buy()
@@ -48,8 +56,8 @@ public class StoreButton : MonoBehaviour
         ItemSO clone = Instantiate(ItemData.ItemInfo.ItemSo);
         clone.tradeState = ItemSO.TradeState.Sellable;
         clone.name = ItemData.ItemInfo.ItemSo.name;
-        ItemData.itemInfoData.playerInventory.Add(clone);
-        ItemData.itemInfoData.storeInventory.Remove(ItemData.ItemInfo);
+        Inventories.instance.playerInventory.Add(clone);
+        Inventories.instance.storeInventory.Remove(ItemData.ItemInfo);
     }
     
 }
