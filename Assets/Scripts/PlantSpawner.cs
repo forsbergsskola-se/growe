@@ -1,17 +1,16 @@
-using System;
 using Inventory_and_Store;
 using UnityEngine;
 
 public class PlantSpawner : MonoBehaviour
 {
-    [Tooltip("The location to spawn the plant")]public Transform spawnPoint;
     public GameObject pottedPlantPlaceholder;  // replace with a gridobject of type potted plant
-    private Grid grid;
+    public Vector3 startOffsetFromGrid;
+    private Transform gridTransform;
 
     private void OnEnable()
     {
-        grid = FindObjectOfType<Grid>();
-        if (grid == null)
+        gridTransform = FindObjectOfType<Grid>().gameObject.transform;
+        if (gridTransform == null)
             Debug.LogWarning("grid not found", this);
     }
 
@@ -19,7 +18,7 @@ public class PlantSpawner : MonoBehaviour
     public void SpawnPlant(Item item)
     {
         // TODO add a check that the item is a potted plant or change the parameter type.
-        GameObject instance = Instantiate(pottedPlantPlaceholder, spawnPoint);
+        GameObject instance = Instantiate(pottedPlantPlaceholder, gridTransform.position + startOffsetFromGrid, gridTransform.rotation, gridTransform );
         //instance.GetComponent<GridObject>();
         // TODO pass Item reference to instance
     }

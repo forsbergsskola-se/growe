@@ -7,7 +7,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     Vector3 dragStartPosition;
     private bool isDragging;
     private CameraMovement cameraMovement;
-
+    
     void Start() {
         var grid = GetComponentInParent<Grid>();
         grid.AddObject(this, this.transform.localPosition);
