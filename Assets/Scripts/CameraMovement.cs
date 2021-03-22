@@ -36,7 +36,7 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         if (Input.touchSupported)
-            HandleAndroidInput();
+            HandleMobileInput();
         else
             HandlePcInput();
 
@@ -71,8 +71,21 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    private void HandleAndroidInput()
+    private void HandleMobileInput()
     {
+        //TODO make grid not interactible through other UI pop ups -> 
+        //Add UI check
+            // Sol 1 - Create events on menu open / close. Deactivate activate this script on event trigger
+            // Sol 2 - 
+            
+            // static bool IsPointerOverUIObject(Vector2 touchPosition, System.Collections.Generic.List<RaycastResult> cachedList) {
+            //     if(EventSystem.current == null)
+            //         return false;
+            //     var eventDataCurrentPosition = new PointerEventData(EventSystem.current) {position = touchPosition};
+            //     EventSystem.current.RaycastAll(eventDataCurrentPosition, cachedList);
+            //     return cachedList.Count > 0;
+            // }
+            
         if (moveRoutineActive && Input.touchCount > 0)
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)
