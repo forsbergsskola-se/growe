@@ -2109,6 +2109,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: IsometricGrid
       objectReference: {fileID: 0}
+    - target: {fileID: 6589783690230365638, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: width
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589783690230365638, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: height
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
 --- !u!1 &1251965907
