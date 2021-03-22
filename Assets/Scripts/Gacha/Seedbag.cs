@@ -7,7 +7,7 @@ public class Seedbag
 {
     [Header("Seedbag Item Drop Table")]
     public DropTable Items;
-	
+
     public void Open(int amount, Inventory inventory)
     {
         for (int i = 0; i < amount; i++)
