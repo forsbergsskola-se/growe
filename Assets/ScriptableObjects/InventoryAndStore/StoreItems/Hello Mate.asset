@@ -17,12 +17,11 @@ MonoBehaviour:
   itemType: 1
   Seedbag:
     Items: {fileID: 0}
-    price: 0
   rarity: 0
   maxAmount: 1
   compostValue: 25
   sellValue: 55
-  buyValue: 0
+  buyValue: 10
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
