@@ -9,7 +9,9 @@ using UnityEngine;
 public class FireBaseInit : MonoBehaviour {
     FireBaseAuthentication auth;
 
-    void Awake() {
+    //It was awake 
+    //I modified it as void to use in "play as guest button"
+    public void PlayAsGuest() {
         auth = GetComponent<FireBaseAuthentication>();
 
 
