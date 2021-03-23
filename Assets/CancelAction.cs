@@ -18,6 +18,7 @@ public class CancelAction : MonoBehaviour, IPointerDownHandler {
     void Update() {
         //TODO: Add other tools here, as booleans.
         if (!isCutting) return;
+        Debug.Log("ASD");
         _image.color = Color.red;
     }
 

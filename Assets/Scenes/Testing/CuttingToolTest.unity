@@ -1485,6 +1485,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862293708}
   m_CullTransparentMesh: 1
+--- !u!1 &911491248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5176443095426435687, guid: 163afe8e4a793254595ab899e428390d, type: 3}
+  m_PrefabInstance: {fileID: 2060849581}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &911491252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911491248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6860ac1fc7ab786448477662b104ee81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCutting: 0
+--- !u!114 &911491253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911491248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d481b76969bfb0d4382351cdaeb03634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 0}
 --- !u!1 &924059906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1568,6 +1599,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4937096503618137823, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3085601
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937096503618137823, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5188679
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937096503618137823, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.23740655
+      objectReference: {fileID: 0}
     - target: {fileID: 6589783690230365632, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3672,6 +3715,10 @@ PrefabInstance:
     - target: {fileID: 5176443095426435680, guid: 163afe8e4a793254595ab899e428390d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176443095426435681, guid: 163afe8e4a793254595ab899e428390d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5176443095426435687, guid: 163afe8e4a793254595ab899e428390d, type: 3}
       propertyPath: m_Name

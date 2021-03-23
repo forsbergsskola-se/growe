@@ -22,8 +22,13 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     //references
     public GameObject radialWheel;
     private EventSystem eventSystem;
+    Image radialImage;
+
+    Color ogColor;
 
     void Awake() {
+        radialImage = GetComponent<Image>();
+        ogColor = radialImage.color;
         _cuttingTool = GetComponent<CuttingTool>();
     }
 
@@ -34,10 +39,17 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        menuButtonHeldDown = true;
-        endTime = Time.time + waitTime;
-        Debug.Log("pointer down on radial menu");
-        StartCoroutine(ButtonHeldRoutine());
+        //CHANGED THIS to do different things depending on color for now, so we can cancel the tool.
+        if (radialImage.color == Color.red) {
+            isCutting = false;
+            Debug.Log("You canceled the current tool....");
+        }
+        else {
+            menuButtonHeldDown = true;
+            endTime = Time.time + waitTime;
+            Debug.Log("pointer down on radial menu");
+            StartCoroutine(ButtonHeldRoutine());   
+        }
     }
     public void OnPointerUp(PointerEventData eventData)
     {
@@ -61,6 +73,15 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         radialWheel.SetActive(true);
     }
 
+    //TODO: Redo this, to work with all the tools( could simply use ifs or switch )
+    void CheckIfWeAreUsingTool() {
+        radialImage.color = _cuttingTool.isCutting ? Color.red : ogColor;
+    }
+
+    void Update() {
+        CheckIfWeAreUsingTool();
+    }
+
     private void CheckIfToolIsHovered()
     {
         PointerEventData eventData = new PointerEventData(eventSystem);
@@ -73,6 +94,8 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         foreach (RaycastResult result in results)
         {
             Debug.Log("Hit " + result.gameObject.name);
+            
+            //TODO: ADD MORE TOOLS HERE JUST AS CUTTER: 
             if (result.gameObject.name == "Cutter") {
                 _cuttingTool.isCutting = true;
             }
