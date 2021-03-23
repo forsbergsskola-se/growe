@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: NormalSeedbag
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e24fd306e5da54240a3b54fe93aee55a, type: 3}
+  icon: {fileID: 21300000, guid: b9b17b8c680566a4ea73f74ac1afc6c7, type: 3}
   tradeState: 1
   itemType: 3
   Seedbag:
-    Items: {fileID: 11400000, guid: 5a4cb0198e8079245aa98daa41c92ca9, type: 2}
-    price: 0
+    Items: {fileID: 11400000, guid: 9b4a9f69847932e4aad10f3fefb602a8, type: 2}
   rarity: 0
   maxAmount: 99
   compostValue: 0
