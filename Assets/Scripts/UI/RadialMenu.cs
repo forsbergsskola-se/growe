@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,24 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     [Header("Settings")]
     [SerializeField, Range(0.0f, 10f), Tooltip("How long the button must be held until the menu shows up")] float waitTime = 1f;
+
+    public bool isCutting;
     
     //variables
     private bool menuButtonHeldDown = false;
     private float endTime;
     private bool RadialWheelActive => radialWheel.activeSelf;
+
+    CuttingTool _cuttingTool;
     
     //references
     public GameObject radialWheel;
     private EventSystem eventSystem;
-    
+
+    void Awake() {
+        _cuttingTool = GetComponent<CuttingTool>();
+    }
+
     private void OnEnable()
     {
         eventSystem = GetComponent<EventSystem>();
@@ -64,9 +73,9 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         foreach (RaycastResult result in results)
         {
             Debug.Log("Hit " + result.gameObject.name);
+            if (result.gameObject.name == "Cutter") {
+                _cuttingTool.isCutting = true;
+            }
         }
     }
-    
-
-
 }
