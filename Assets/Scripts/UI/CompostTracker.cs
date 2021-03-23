@@ -1,5 +1,6 @@
 using Broker;
 using Broker.Messages;
+using InventoryAndStore;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,16 +8,12 @@ namespace UI {
     public class CompostTracker : MonoBehaviour {
         public Slider leftSlider;
         public Slider rightSlider;
-        int _compostAmount;
 
         void Start() {
-            leftSlider.minValue = 0;
-            rightSlider.minValue = 0;
-            leftSlider.maxValue = 15;
-            rightSlider.maxValue = 15;
-            //TODO get maxCompostValue from Currency
+            var maxValue = FindObjectOfType<Currency>().maxCompostValue;
+            SetSlidersMinMaxValues(maxValue);
         }
-
+        
         void OnEnable() {
             MessageBroker.Instance().SubscribeTo<CompostUpdateMessage>(UpdateCompostAmount);
         }
@@ -26,16 +23,15 @@ namespace UI {
         }
         
         void UpdateCompostAmount(CompostUpdateMessage m) {
-            _compostAmount = m.amount;
-            UpdateSliders();
+            leftSlider.value = m.amount;
+            rightSlider.value = m.amount;
         }
 
-        //TODO add event that tells listeners to increase fertilizer by 1
-        //TODO OR use FindObjectOfType -> GameManager -> GetComponent -> Currency and use AddFertilizer(1) method
-
-        void UpdateSliders() {
-            leftSlider.value = _compostAmount;
-            rightSlider.value = _compostAmount;
+        void SetSlidersMinMaxValues(int maxValue) {
+            leftSlider.minValue = 0;
+            rightSlider.minValue = 0;
+            leftSlider.maxValue = maxValue;
+            rightSlider.maxValue = maxValue;
         }
     }
 }
