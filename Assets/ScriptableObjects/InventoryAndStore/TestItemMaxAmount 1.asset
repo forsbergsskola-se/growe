@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: TestItemMaxAmount 1
   m_EditorClassIdentifier: 
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: 76308b5a2c21b0c489ccb8563e5cbe94, type: 3}
   tradeState: 0
   itemType: 0
-  Seedbag:
+  seedbag:
     Items: {fileID: 0}
   rarity: 0
   maxAmount: 5
@@ -26,5 +26,6 @@ MonoBehaviour:
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
   survivability: 0
+  dropChance: 33
   sizeDimensions: {x: 0, y: 0}
   itemLore: 4242324234

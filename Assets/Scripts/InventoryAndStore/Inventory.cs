@@ -11,8 +11,7 @@ namespace InventoryAndStore
 
         public void Add(ItemSO newItemSO)
         {
-            ItemSO itemClone = newItemSO;
-            items.Add(itemClone);
+            items.Add(newItemSO);
             itemSlot.UpdateItemSlots();
         }
         public void Remove(ItemSO removeItem)

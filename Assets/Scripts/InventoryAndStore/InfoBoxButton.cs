@@ -35,7 +35,7 @@ namespace InventoryAndStore
             
             if (itemSO.itemType == ItemSO.ItemType.Seedbag && itemSO.tradeState != ItemSO.TradeState.Buyable)
             {
-                itemSO.Seedbag.Open(3, Inventories.Instance.playerInventory);
+                itemSO.seedbag.Open(3, Inventories.Instance.playerInventory);
                 Inventories.Instance.playerInventory.Remove(itemSO);
                 ItemInfoData.gameObject.SetActive(false);
             }

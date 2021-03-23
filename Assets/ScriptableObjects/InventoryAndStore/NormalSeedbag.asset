@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: NormalSeedbag
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e24fd306e5da54240a3b54fe93aee55a, type: 3}
+  icon: {fileID: 21300000, guid: 8fc64738570c45148abcdc15d1f2bb91, type: 3}
   tradeState: 2
   itemType: 3
-  Seedbag:
-    Items: {fileID: 11400000, guid: 9b4a9f69847932e4aad10f3fefb602a8, type: 2}
+  seedbag:
+    Items: {fileID: 0}
   rarity: 0
   maxAmount: 99
   compostValue: 0
@@ -26,5 +26,6 @@ MonoBehaviour:
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
   survivability: 0
+  dropChance: 33
   sizeDimensions: {x: 0, y: 0}
   itemLore: this is a normal very boring seed bag!
