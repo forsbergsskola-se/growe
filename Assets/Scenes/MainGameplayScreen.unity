@@ -466,6 +466,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4976300947887130966, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
+      propertyPath: storeBank.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976300947887130966, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
+      propertyPath: storeBank.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 091a6cac7e2ec014aa0bebf8e8548a71, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
 --- !u!1 &216556580
@@ -2061,6 +2069,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6589783690171422160, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6589783690230365632, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2116,6 +2128,34 @@ PrefabInstance:
     - target: {fileID: 6589783690230365638, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
       propertyPath: height
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589783690571556000, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589783690571556000, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589783690571556005, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589783690571556005, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589783690571556005, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: isOnGrid
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589783690571556005, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: notMoveable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589783690571556007, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}
+      propertyPath: m_Center.z
+      value: 0.055
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d9a89addecc664a92a9d65c5806e7e, type: 3}

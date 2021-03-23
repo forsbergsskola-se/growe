@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: NormalSeedbag
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   icon: {fileID: 21300000, guid: 76308b5a2c21b0c489ccb8563e5cbe94, type: 3}
   tradeState: 1
   itemType: 3

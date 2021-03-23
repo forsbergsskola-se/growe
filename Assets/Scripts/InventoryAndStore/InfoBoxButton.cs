@@ -22,10 +22,12 @@ namespace InventoryAndStore
         {
             ItemSO itemSO = ItemInfoData.itemData.ItemSO;
             
-            if (itemSO.itemType == ItemSO.ItemType.Plant ||
-                itemSO.itemType == ItemSO.ItemType.Seed) // TODO change to pot with something planted
+            if ((itemSO.itemType == ItemSO.ItemType.Plant && itemSO.tradeState != ItemSO.TradeState.Buyable) ||
+                (itemSO.itemType == ItemSO.ItemType.Seed && itemSO.tradeState != ItemSO.TradeState.Buyable)) // TODO change to pot with something planted
             {
-                plantSpawner.SpawnPlant(itemSO);
+                plantSpawner.SpawnPlant(itemSO,ItemInfoData.playerInventory);
+                ItemInfoData.playerInventory.Remove(itemSO);
+                
                 inventoryUI.SetActive(false);
                 testingCanvasUI.SetActive(false);
                 this.gameObject.SetActive(false);

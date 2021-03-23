@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: Hello Mate
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   icon: {fileID: 21300000, guid: 5c386defbaf8c3e45afbbf16d30accb2, type: 3}
   tradeState: 0
   itemType: 1

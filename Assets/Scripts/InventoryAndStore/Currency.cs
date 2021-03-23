@@ -7,6 +7,8 @@ using UnityEngine;
 namespace InventoryAndStore {
 
     public class Currency : MonoBehaviour {
+        public int maxCompostValue = 15;
+        public int fertilizerAmountFromFilledCompost = 1;
         private CurrencyData _data;
         private SaveManager _saveManager;
         private bool _hasLoaded;
@@ -43,6 +45,15 @@ namespace InventoryAndStore {
         public void AddCompost(int amount) {
             if (!_hasLoaded) return;
             _data.compost += amount;
+            
+            if (_data.compost >= maxCompostValue) {
+                //TODO send event that compost is filled
+                Debug.Log("Compost filled, adding fertilizer " + this);
+                AddFertilizer(fertilizerAmountFromFilledCompost);
+                var overflow = _data.compost - maxCompostValue;
+                _data.compost = overflow;
+            }
+
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new CompostUpdateMessage(_data.compost));
         }
