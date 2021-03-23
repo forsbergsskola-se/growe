@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GridItem : MonoBehaviour
 {
-    private ItemSO item;
+    public ItemSO item;
     
     public void Init(ItemSO item)
     {
