@@ -49,9 +49,8 @@ GameObject:
   - component: {fileID: 5176443094728090731}
   - component: {fileID: 5176443094728090741}
   - component: {fileID: 5176443094728090740}
-  - component: {fileID: 5176443094728090742}
   m_Layer: 5
-  m_Name: Cutter
+  m_Name: CuttingTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,18 +113,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5176443094728090742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5176443094728090730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759dd70d76c11ee46ac582fc223ad1c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5176443094948902507
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,9 +124,8 @@ GameObject:
   - component: {fileID: 5176443094948902516}
   - component: {fileID: 5176443094948902518}
   - component: {fileID: 5176443094948902517}
-  - component: {fileID: 5176443094948902519}
   m_Layer: 5
-  m_Name: WateringCan
+  m_Name: WateringTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,18 +188,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5176443094948902519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5176443094948902507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759dd70d76c11ee46ac582fc223ad1c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5176443095426435687
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +214,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5176443095426435687}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -303,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a945a7565bb9a4bb76ad214b0dc23a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 1
+  waitTime: 0.5
   radialWheel: {fileID: 5176443094664934864}
 --- !u!1 &5176443096368294221
 GameObject:
@@ -316,9 +290,8 @@ GameObject:
   - component: {fileID: 5176443096368294222}
   - component: {fileID: 5176443096368294216}
   - component: {fileID: 5176443096368294223}
-  - component: {fileID: 5176443096368294217}
   m_Layer: 5
-  m_Name: Fertilizer
+  m_Name: FertilizerTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,15 +354,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5176443096368294217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5176443096368294221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759dd70d76c11ee46ac582fc223ad1c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
