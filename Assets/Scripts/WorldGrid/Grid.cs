@@ -82,6 +82,8 @@ public class Grid : MonoBehaviour, IGrid {
     }
 
     bool TryMoveObject(GridObject gridObject, Vector2Int fromPosition, Vector2Int toPosition) {
+        if (toPosition.x < 0 || toPosition.y < 0) return false;
+        
         if (gridObject.isOnGrid)
             RemoveObject(gridObject, fromPosition);
         if (IsFree(toPosition, gridObject.Size)) {
