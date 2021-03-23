@@ -12,11 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: TestItemMaxAmount 1
   m_EditorClassIdentifier: 
-  itemType: Kruka
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  tradeState: 0
+  itemType: 0
+  Seedbag:
+    Items: {fileID: 0}
   rarity: 0
   maxAmount: 5
+  compostValue: 0
+  sellValue: 0
+  buyValue: 10
+  isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
+  survivability: 0
   sizeDimensions: {x: 0, y: 0}
   itemLore: 4242324234

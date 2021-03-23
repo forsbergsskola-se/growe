@@ -47,6 +47,10 @@ namespace InventoryAndStore
                 ItemInfoData.playerInventory.Add(clone);
                 ItemInfoData.storeInventory.Remove(itemSO);
             }
+            else if (itemSO.tradeState == ItemSO.TradeState.Sellable && ItemInfoData.storeUi.activeSelf)
+            {
+                StoreDatabase.instance.Sell(itemSO);
+            }
         }
     }
 }

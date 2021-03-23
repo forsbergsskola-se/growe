@@ -21,7 +21,7 @@ MonoBehaviour:
   maxAmount: 99
   compostValue: 0
   sellValue: 20
-  buyValue: 0
+  buyValue: 10
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
