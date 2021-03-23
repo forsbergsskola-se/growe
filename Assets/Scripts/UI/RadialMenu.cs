@@ -64,9 +64,7 @@ public class RadialMenu : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         foreach (RaycastResult result in results)
         {
             Debug.Log("Hit " + result.gameObject.name);
+            //TODO add event that says which tool was selected
         }
     }
-    
-
-
 }
