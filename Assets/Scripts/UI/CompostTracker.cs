@@ -8,6 +8,8 @@ namespace UI {
     public class CompostTracker : MonoBehaviour {
         public Slider leftSlider;
         public Slider rightSlider;
+        
+        //TODO use CompostBarFilledMessage if we want to add some feedback to the Compost bar being filled
 
         void Start() {
             var maxValue = FindObjectOfType<Currency>().maxCompostValue;

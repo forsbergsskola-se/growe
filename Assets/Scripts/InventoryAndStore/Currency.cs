@@ -47,7 +47,7 @@ namespace InventoryAndStore {
             _data.compost += amount;
             
             if (_data.compost >= maxCompostValue) {
-                //TODO send event that compost is filled
+                MessageBroker.Instance().Send(new CompostBarFilledMessage());
                 Debug.Log("Compost filled, adding fertilizer " + this);
                 AddFertilizer(fertilizerAmountFromFilledCompost);
                 var overflow = _data.compost - maxCompostValue;
