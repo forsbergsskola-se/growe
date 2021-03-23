@@ -22,9 +22,16 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public void OnDrag(PointerEventData eventData) {
         if (notMoveable) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 previousPos = transform.position;
         if (Physics.Raycast(ray, out var hitInfo)) {
             this.transform.position = hitInfo.point;
             this.transform.localPosition = Vector3Int.FloorToInt(this.transform.localPosition);
+            if (transform.localPosition.x + Size.x > transform.parent.transform.GetComponent<Grid>().width || transform.localPosition.x < 0) {
+                transform.position = previousPos;
+            }
+            if (transform.localPosition.y + Size.y > transform.parent.transform.GetComponent<Grid>().height || transform.localPosition.y < 0) {
+                transform.position = previousPos;
+            }
         }
     }
 
