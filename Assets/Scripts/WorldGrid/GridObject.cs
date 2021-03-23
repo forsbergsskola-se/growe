@@ -9,6 +9,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     private CameraMovement cameraMovement;
     public bool notMoveable;
     public bool isOnGrid;
+    public SpriteRenderer sprite;
 
     void Start() {
         var grid = GetComponentInParent<Grid>();
