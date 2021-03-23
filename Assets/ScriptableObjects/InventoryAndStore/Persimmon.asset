@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: Persimmon
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: e24fd306e5da54240a3b54fe93aee55a, type: 3}
-  itemType: 0
+  tradeState: 0
+  itemType: 1
+  Seedbag:
+    Items: {fileID: 0}
   rarity: 2
   maxAmount: 99
   compostValue: 0
   sellValue: 72
+  buyValue: 0
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0

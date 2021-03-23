@@ -7,7 +7,7 @@ namespace Saving {
     public class SaveManager : MonoBehaviour {
         private string key;
         private string PLAYER_KEY {
-            get => "PLAYER_KEY";
+            get => "PLAYER_KEY_2";
             // FindObjectOfType<FireBaseAuthentication>().GetUserId();
         }
         private FirebaseDatabase _database;

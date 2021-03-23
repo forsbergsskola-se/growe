@@ -13,6 +13,7 @@ namespace InventoryAndStore
                 public enum ItemType { Seed, Plant, Cutting, Seedbag }
                 public Rarity rarity;
                 public enum Rarity { Survivor, Mediocre, Diva }
+                public enum GrowthStages {Seed, Cutting, Sapling, Growing, Mature}
                 public int maxAmount, compostValue, sellValue, buyValue;
                 public bool isShiny, hasLifeTime;
                 public float lifeTimeHoursInInventory, survivability;
