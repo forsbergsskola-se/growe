@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3859227998416068060
 RectTransform:
   m_ObjectHideFlags: 0
@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7710c1ece47cccb42bc842fe5fc5492c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items: []
   itemSlot: {fileID: 3859227998855451928}
 --- !u!1 &3859227998599776820
 GameObject:
@@ -598,7 +599,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -900}
-  m_SizeDelta: {x: 1110, y: 250}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3859227998855451930
 MonoBehaviour:
@@ -652,6 +653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 6874058152051950716, guid: 637102fd05566f1409ae0895d7d16103, type: 3}
   inventory: {fileID: 3859227998416068063}
+  sortedItems: []
 --- !u!1 &4436452345137234795
 GameObject:
   m_ObjectHideFlags: 0
