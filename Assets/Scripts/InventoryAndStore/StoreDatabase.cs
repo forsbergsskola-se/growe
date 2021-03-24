@@ -30,6 +30,9 @@ namespace InventoryAndStore
             ItemSO clone = Instantiate(itemSo);
             clone.tradeState = ItemSO.TradeState.Sellable;
             clone.name = itemSo.name;
+
+            clone.isNew = true;
+            
             Inventories.Instance.playerInventory.Add(clone);
             Inventories.Instance.storeInventory.Remove(itemSo);
         }
