@@ -11,6 +11,7 @@ namespace JSON
     public class TestSerialize : MonoBehaviour
     {
         public string str = "";
+        private static Currency Currency => FindObjectOfType<Currency>();
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.A))
@@ -30,7 +31,10 @@ namespace JSON
                 
                 foreach (ItemClass itemClass in newtest) Inventories.Instance.playerInventory.Add(ConvertSO.ClassToSO(itemClass));
             }
-   
+
+            if (Input.GetKeyDown(KeyCode.D)) {
+                Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
+            }
         }
     }
 }

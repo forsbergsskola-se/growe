@@ -12,7 +12,7 @@ namespace InventoryAndStore
             instance = this;
         }
 
-        private Currency Currency => FindObjectOfType<Currency>();
+        private static Currency Currency => FindObjectOfType<Currency>();
         public void Sell(ItemSO itemSo)
         {
             Currency.AddSoftCurrency(itemSo.sellValue);
