@@ -47,6 +47,10 @@ namespace Saving {
             _database.GetReference(PLAYER_KEY).Child("time").SetRawJsonValueAsync(JsonUtility.ToJson(time));
         }
         
+        public void SaveTime2(TimeData time) {
+            _database.GetReference(PLAYER_KEY).Child("time2").SetRawJsonValueAsync(JsonUtility.ToJson(time));
+        }
+        
         public async Task<TimeData?> LoadTime() {
             DataSnapshot dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("time").GetValueAsync();
             if (!dataSnapshot.Exists) {

@@ -65,6 +65,10 @@ namespace TimeManager
             Debug.Log("Time manager disabled");
             time.timeOffsetInSeconds = Timestamp.GetCurrentTimestamp().ToDateTimeOffset().ToUnixTimeSeconds();
             saveManager.SaveTime(time);
+            //temporary testing->
+            TimeData testTime;
+            testTime.timeOffsetInSeconds = 1337;
+            saveManager.SaveTime2(testTime);
         }
 
         private void CalculateAndSendDeltaTime(long timestampOld, long timestampCurrent)
