@@ -1,3 +1,4 @@
+using System;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,16 @@ namespace InventoryAndStore
             itemInfoData.gameObject.SetActive(true);
             itemInfoData.itemData = this;
             itemInfoData.UpdateItemInfo();
+        }
+
+        public void DisableIndicator()
+        {
+            indicatorDot.gameObject.SetActive(false);
+        }
+
+        private void OnDisable()
+        {
+            DisableIndicator();
         }
     }
 }
