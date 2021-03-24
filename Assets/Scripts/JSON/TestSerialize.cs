@@ -31,7 +31,6 @@ namespace JSON
 
                 foreach (ItemClass itemClass in newtest) Inventories.Instance.playerInventory.Add(ConvertSO.ClassToSO(itemClass));
             }
-<<<<<<< Updated upstream
 
 
             if (Input.GetKeyDown(KeyCode.D)) {
@@ -42,13 +41,11 @@ namespace JSON
                     Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
                     */
             }
-=======
 
             if (Input.GetKeyDown(KeyCode.D)) {
                 if(Inventories.Instance.playerInventory.items[0] != null)
                     Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
             }
->>>>>>> main
         }
     }
 }

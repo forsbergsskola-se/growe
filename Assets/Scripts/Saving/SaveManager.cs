@@ -28,11 +28,6 @@ namespace Saving {
         {
             _database.GetReference(PLAYER_KEY).Child("Inventory").SetRawJsonValueAsync(JsonConvert.SerializeObject(data));
         }
-=======
-        public void UploadToAuction(AuctionData data) {
-            _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonUtility.ToJson(data));
-        }
->>>>>>> main
 
 
         public async Task<CurrencyData?> LoadCurrency() {

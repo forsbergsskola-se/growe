@@ -16,10 +16,6 @@ namespace InventoryAndStore {
         private CurrencyData _data;
         private InventoryData _inventoryData;
         private AuctionData _auctionData;
-<<<<<<< Updated upstream
-=======
-        private AuctionData _auctionData;
->>>>>>> main
         private SaveManager _saveManager;
         private bool _hasLoaded;
 
@@ -45,20 +41,17 @@ namespace InventoryAndStore {
                 MessageBroker.Instance().Send(new InventoryUpdateMessage(_inventoryData.Inventory));
                 MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
                 MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
-<<<<<<< Updated upstream
-                MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.softCurrency));
-                MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.fertilizer));
-                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.compost));
+                MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
+                MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
+                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
             }
             else
             {
                 Debug.LogWarning("Couldn't load data" + this);
-=======
                 MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
                 MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
                 MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
                 MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
->>>>>>> main
             }
         }
 
