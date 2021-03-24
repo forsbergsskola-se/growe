@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Firebase.Database;
 using InventoryAndStore;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Saving {
@@ -20,8 +21,7 @@ namespace Saving {
         public void SaveCurrency(CurrencyData data) {
             _database.GetReference(PLAYER_KEY).SetRawJsonValueAsync(JsonUtility.ToJson(data));
         }
-        public void UploadToAuction(AuctionData data)
-        {
+        public void UploadToAuction(AuctionData data) {
             _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonUtility.ToJson(data));
         }
         

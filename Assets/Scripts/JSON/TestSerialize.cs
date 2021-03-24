@@ -33,7 +33,8 @@ namespace JSON
             }
 
             if (Input.GetKeyDown(KeyCode.D)) {
-                Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
+                if(Inventories.Instance.playerInventory.items[0] != null) 
+                    Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
             }
         }
     }
