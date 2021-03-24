@@ -32,6 +32,7 @@ namespace InventoryAndStore
         public void DisableIndicator()
         {
             indicatorDot.gameObject.SetActive(false);
+            ItemSO.isNew = false;
         }
 
         private void OnDisable()
