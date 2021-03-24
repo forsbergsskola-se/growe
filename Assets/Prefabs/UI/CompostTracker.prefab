@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5294118, g: 0.28235295, b: 0, a: 1}
+  m_Color: {r: 0.36078432, g: 0.54509807, b: 0.8156863, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5283019, g: 0.28002885, b: 0, a: 1}
+  m_Color: {r: 0.36078432, g: 0.54509807, b: 0.8156863, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -490,9 +490,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftSlider: {fileID: 4580725520790636482}
   rightSlider: {fileID: 8543889848078112843}
-  maxValue: 15
-  maxAddAmount: 3
-  minAddAmount: 2
 --- !u!1 &8648159671235229073
 GameObject:
   m_ObjectHideFlags: 0
