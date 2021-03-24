@@ -21,6 +21,16 @@ namespace Saving {
         public void SaveCurrency(CurrencyData data) {
             _database.GetReference(PLAYER_KEY).SetRawJsonValueAsync(JsonUtility.ToJson(data));
         }
+<<<<<<< Updated upstream
+=======
+        public void UploadToAuction(AuctionData data) {
+            _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonUtility.ToJson(data));
+        }
+        public void UploadUserInventory(InventoryData data)
+        {
+            _database.GetReference(PLAYER_KEY).Child("Inventory").SetRawJsonValueAsync(JsonConvert.SerializeObject(data));
+        }
+>>>>>>> Stashed changes
         
         
         public async Task<CurrencyData?> LoadCurrency() {
@@ -29,6 +39,13 @@ namespace Saving {
                 return null;
             }
             return JsonUtility.FromJson<CurrencyData>(dataSnapshot.GetRawJsonValue());
+        }
+        
+        public async Task<InventoryData?> LoadInventory()
+        {
+            var dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("Inventory").GetValueAsync();
+            if (!dataSnapshot.Exists) return null;
+            return JsonUtility.FromJson<InventoryData>(dataSnapshot.GetRawJsonValue());
         }
 
         public async Task<bool> SaveExists() {
