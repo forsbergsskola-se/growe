@@ -40,14 +40,15 @@ namespace TimeManager
             var dataTask = saveManager.LoadTime();
             yield return new WaitUntil(() => dataTask.IsCompleted);
             TimeData? timeData = dataTask.Result;
-            if (timeData.HasValue) 
-                timestampOld = (long) timeData.Value.timeOffsetInSeconds;
-            else
+            if (timeData.HasValue) {
+                time = timeData.Value;
+                timestampOld = (long) time.timeOffsetInSeconds;
+                
+            } else
             {
                 Debug.LogWarning("Unable to load time, setting old time to current time", this);
                 timestampOld = Timestamp.GetCurrentTimestamp().ToDateTimeOffset().ToUnixTimeSeconds();
             }
-            
             timestampCurrent = Timestamp.GetCurrentTimestamp().ToDateTimeOffset().ToUnixTimeSeconds();
             CalculateAndSendDeltaTime(timestampOld, timestampCurrent);
         
@@ -62,19 +63,16 @@ namespace TimeManager
     
         private void OnDisable()
         {
-            Debug.Log("Time manager disabled");
+           
             time.timeOffsetInSeconds = Timestamp.GetCurrentTimestamp().ToDateTimeOffset().ToUnixTimeSeconds();
             saveManager.SaveTime(time);
-            //temporary testing->
-            TimeData testTime;
-            testTime.timeOffsetInSeconds = 1337;
-            saveManager.SaveTime2(testTime);
+
         }
 
         private void CalculateAndSendDeltaTime(long timestampOld, long timestampCurrent)
         {
             float deltaTime = (timestampCurrent - timestampOld) * timeMultiplier;
-            Debug.Log((timestampCurrent - timestampOld) * timeMultiplier);
+            Debug.Log($"{(timestampCurrent - timestampOld) * timeMultiplier} seconds passed.");
             broker.Send(new TimePassedMessage(deltaTime));
         }
     }
