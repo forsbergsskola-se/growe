@@ -20,5 +20,7 @@ namespace InventoryAndStore
         public float lifeTimeHoursInInventory, survivability, dropChance;
         public Vector2 sizeDimensions;
         public string itemLore;
+
+        public bool isNew;
     }
 }

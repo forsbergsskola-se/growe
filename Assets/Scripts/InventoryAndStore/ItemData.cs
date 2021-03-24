@@ -11,12 +11,14 @@ namespace InventoryAndStore
         public Text amountText;
         public ItemInfoData itemInfoData;
         private Image Icon => GetComponent<Image>();
+        public Image indicatorDot;
 
         private void Start()
         {
             itemInfoData = UIReferences.Instance.itemInfoBox;
             Icon.sprite = ItemSO.icon;
             amountText.text = amount.ToString();
+            if (ItemSO.isNew) indicatorDot.gameObject.SetActive(true);
         }
 
         public void ShowItemInfo()
