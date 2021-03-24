@@ -18,6 +18,7 @@ namespace Gacha
                 //Get a random item from the drop table
                 var randomItem = items.GetRandomItem();
                 droppedItem[i] = randomItem;
+                randomItem.isNew = true;
                 //Add the random item to the inventory
                 inventory.Add(randomItem);
             }
