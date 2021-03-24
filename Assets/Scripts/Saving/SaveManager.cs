@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase.Database;
 using InventoryAndStore;
+using JSON;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -42,7 +44,7 @@ namespace Saving {
         {
             var dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("Inventory").GetValueAsync();
             if (!dataSnapshot.Exists) return null;
-            return JsonUtility.FromJson<InventoryData>(dataSnapshot.GetRawJsonValue());
+            return JsonConvert.DeserializeObject<InventoryData>(dataSnapshot.GetRawJsonValue());
         }
 
         public async Task<bool> SaveExists() {

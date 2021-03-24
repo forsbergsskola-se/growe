@@ -31,8 +31,10 @@ namespace InventoryAndStore {
             _hasLoaded = true;
             var data = dataTask.Result;
             if (data.HasValue && dataTaskInventory.Result.HasValue) {
-
                 Debug.Log(dataTaskInventory.Result.Value.Inventory);
+
+
+                Inventories.Instance.playerInventory.items[0] = ConvertSO.ClassToSO(dataTaskInventory.Result.Value.Inventory[0]);
 
                 _inventoryData = dataTaskInventory.Result.Value;
                 _data = data.Value;
