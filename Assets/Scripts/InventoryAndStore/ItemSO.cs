@@ -17,7 +17,7 @@ namespace InventoryAndStore
         public enum Rarity { Survivor, Mediocre, Diva }
         public int maxAmount, compostValue, sellValue, buyValue, timesCut, growthStage;
         public bool isShiny, hasLifeTime;
-        public float lifeTimeHoursInInventory, survivability, dropChance;
+        public float lifeTimeHoursInInventory, survivability, dropChance, soilStageTimer, growthDuration;
         public Vector2 sizeDimensions;
         public string itemLore;
     }
