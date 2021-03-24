@@ -1926,9 +1926,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3905312120613663207, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 246
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905312120613663207, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 3905312120881781408, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
       propertyPath: m_Name
       value: SettingsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905312120881781408, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3905312120881781412, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
       propertyPath: m_Pivot.x
@@ -2018,6 +2030,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1089427006}
+    - target: {fileID: 3905312121411919624, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 154
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905312121411919624, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453997819840165831, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453997819840165831, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
 --- !u!1 &1204114535 stripped
