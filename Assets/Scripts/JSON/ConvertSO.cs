@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Gacha;
 using InventoryAndStore;
 using UnityEditor;
 using UnityEngine;
@@ -14,11 +14,9 @@ namespace JSON
             
             clone.SeedBagDropTable = new List<ItemClass>();
             if (itemSo.itemType == ItemSO.ItemType.Seedbag)
-                foreach (var droppableItem in itemSo.seedbag.Items.droppableItems) 
+                foreach (var droppableItem in itemSo.seedbag.items.droppableItems) 
                     clone.SeedBagDropTable.Add(SOToClass(droppableItem));
 
-            clone.Name = itemSo.name;
-            clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
             clone.TradeState = itemSo.tradeState;
             clone.ItemType = itemSo.itemType;
             clone.Rarity = itemSo.rarity;
@@ -30,27 +28,25 @@ namespace JSON
             clone.HasLifeTime = itemSo.hasLifeTime;
             clone.LifeTimeHoursInInventory = itemSo.lifeTimeHoursInInventory;
             clone.Survivability = itemSo.survivability;
+            clone.DropChance = itemSo.dropChance;
             clone.SizeDimensions = itemSo.sizeDimensions;
             clone.ItemLore = itemSo.itemLore;
+            clone.Name = itemSo.name;
+            clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
             return clone;
         }
         public static ItemSO ClassToSO(ItemClass itemClass)
         {
             var clone = ScriptableObject.CreateInstance<ItemSO>();
             
-            
-            clone.seedbag.Items.droppableItems = new List<ItemSO>();
-            if (clone.seedbag.Items.droppableItems != null)
-            {
-                Debug.Log("ListCreated");
+            if (itemClass.ItemType == ItemSO.ItemType.Seedbag) {
+                clone.seedbag = new Seedbag {items = ScriptableObject.CreateInstance<DropTable>()};
+                clone.seedbag.items.droppableItems = new List<ItemSO>();
+
+                foreach (var droppableItem in itemClass.SeedBagDropTable)
+                    clone.seedbag.items.droppableItems.Add(ClassToSO(droppableItem));
             }
-            
-            if (itemClass.ItemType == ItemSO.ItemType.Seedbag)
-                foreach (var droppableItem in itemClass.SeedBagDropTable) 
-                    clone.seedbag.Items.droppableItems.Add(ClassToSO(droppableItem));
-            
-            clone.name = itemClass.Name;
-            clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
+                
             clone.tradeState = itemClass.TradeState;
             clone.itemType = itemClass.ItemType;
             clone.rarity = itemClass.Rarity;
@@ -62,8 +58,11 @@ namespace JSON
             clone.hasLifeTime = itemClass.HasLifeTime;
             clone.lifeTimeHoursInInventory = itemClass.LifeTimeHoursInInventory;
             clone.survivability = itemClass.Survivability;
+            clone.dropChance = itemClass.DropChance;
             clone.sizeDimensions = itemClass.SizeDimensions;
             clone.itemLore = itemClass.ItemLore;
+            clone.name = itemClass.Name;
+            clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
             return clone;
         }
     }
@@ -76,7 +75,7 @@ namespace JSON
         public List<ItemClass> SeedBagDropTable;
         public int MAXAmount, CompostValue, SellValue, BuyValue;
         public bool IsShiny, HasLifeTime;
-        public float LifeTimeHoursInInventory, Survivability;
+        public float LifeTimeHoursInInventory, Survivability, DropChance;
         public Vector2 SizeDimensions;
         public string ItemLore, Name, IconPath;
     }

@@ -28,11 +28,7 @@ namespace JSON
                 string text = File.ReadAllText(Application.dataPath + "/testJson.txt", Encoding.UTF8);
                 List<ItemClass> newtest = new List<ItemClass>(JsonConvert.DeserializeObject<List<ItemClass>>(text));
                 
-                foreach (ItemClass itemClass in newtest)
-                    Inventories.Instance.playerInventory.Add(ConvertSO.ClassToSO(itemClass));
-                
-                //var invsr = File.CreateText(Application.dataPath + "/testListAfter.txt");
-                //invsr.WriteLine(test);
+                foreach (ItemClass itemClass in newtest) Inventories.Instance.playerInventory.Add(ConvertSO.ClassToSO(itemClass));
             }
    
         }

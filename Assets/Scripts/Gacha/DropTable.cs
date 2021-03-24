@@ -10,7 +10,7 @@ namespace Gacha
     [CreateAssetMenu(fileName = "DropTable", menuName = "Drop Table", order = 1)]
     public class DropTable : ScriptableObject
     {
-        [SerializeField] public List<ItemSO> droppableItems = new List<ItemSO>();
+        [SerializeField] public List<ItemSO> droppableItems;
         
         public ItemSO GetRandomItem()
         {

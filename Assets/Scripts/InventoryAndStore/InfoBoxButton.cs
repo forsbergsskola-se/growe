@@ -5,7 +5,7 @@ namespace InventoryAndStore
     public class InfoBoxButton : MonoBehaviour
     {
         private ItemInfoData ItemInfoData => GetComponent<ItemInfoData>();
-        private PlantSpawner plantSpawner;
+        private PlantSpawner _plantSpawner;
         
         // UI references
         public GameObject inventoryUI;
@@ -13,8 +13,8 @@ namespace InventoryAndStore
         
         private void Start()
         {
-            plantSpawner = FindObjectOfType<PlantSpawner>();
-            if (plantSpawner == null)
+            _plantSpawner = FindObjectOfType<PlantSpawner>();
+            if (_plantSpawner == null)
                 Debug.Log("plantSpawner not found", this);
         }
 
@@ -25,7 +25,7 @@ namespace InventoryAndStore
             if ((itemSO.itemType == ItemSO.ItemType.Plant && itemSO.tradeState != ItemSO.TradeState.Buyable) ||
                 (itemSO.itemType == ItemSO.ItemType.Seed && itemSO.tradeState != ItemSO.TradeState.Buyable)) // TODO change to pot with something planted
             {
-                plantSpawner.SpawnPlant(itemSO,ItemInfoData.playerInventory);
+                _plantSpawner.SpawnPlant(itemSO,ItemInfoData.playerInventory);
                 ItemInfoData.playerInventory.Remove(itemSO);
                 
                 inventoryUI.SetActive(false);
@@ -41,17 +41,20 @@ namespace InventoryAndStore
                 Inventories.Instance.playerInventory.Remove(itemSO);
                 ItemInfoData.gameObject.SetActive(false);
             }
-            else if (itemSO.tradeState == ItemSO.TradeState.Buyable)
+            else switch (itemSO.tradeState)
             {
-                ItemSO clone = Instantiate(itemSO);
-                clone.tradeState = ItemSO.TradeState.Sellable;
-                clone.name = itemSO.name;
-                ItemInfoData.playerInventory.Add(clone);
-                ItemInfoData.storeInventory.Remove(itemSO);
-            }
-            else if (itemSO.tradeState == ItemSO.TradeState.Sellable && ItemInfoData.storeUi.activeSelf)
-            {
-                StoreDatabase.instance.Sell(itemSO);
+                case ItemSO.TradeState.Buyable:
+                {
+                    ItemSO clone = Instantiate(itemSO);
+                    clone.tradeState = ItemSO.TradeState.Sellable;
+                    clone.name = itemSO.name;
+                    ItemInfoData.playerInventory.Add(clone);
+                    ItemInfoData.storeInventory.Remove(itemSO);
+                    break;
+                }
+                case ItemSO.TradeState.Sellable when ItemInfoData.storeUi.activeSelf:
+                    StoreDatabase.instance.Sell(itemSO);
+                    break;
             }
         }
     }

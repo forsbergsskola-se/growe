@@ -1,3 +1,4 @@
+using Gacha;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,7 +6,6 @@ namespace InventoryAndStore {
     public class ItemInfoData : MonoBehaviour
     {
         public Inventory storeInventory, playerInventory;
-        public Seedbag Seedbag;
         public Image itemIcon;
         public GameObject storeUi;
 
@@ -19,7 +19,7 @@ namespace InventoryAndStore {
             itemLore,
             plantButtonText;
 
-        public Button PlantButton;
+        public Button plantButton;
         public ItemData itemData;
 
         public void UpdateItemInfo()

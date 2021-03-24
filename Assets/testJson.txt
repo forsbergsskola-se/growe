@@ -1,27 +1,6 @@
 [
   {
     "TradeState": 0,
-    "ItemType": 1,
-    "Rarity": 0,
-    "SeedBagDropTable": [],
-    "MAXAmount": 1,
-    "CompostValue": 25,
-    "SellValue": 55,
-    "BuyValue": 10,
-    "IsShiny": false,
-    "HasLifeTime": false,
-    "LifeTimeHoursInInventory": 0.0,
-    "Survivability": 0.5,
-    "SizeDimensions": {
-      "x": 1.0,
-      "y": 2.0
-    },
-    "ItemLore": "yes",
-    "Name": "Hello Mate",
-    "IconPath": "Assets/Sprites/Temp/unnamed.png"
-  },
-  {
-    "TradeState": 0,
     "ItemType": 3,
     "Rarity": 0,
     "SeedBagDropTable": [
@@ -38,6 +17,7 @@
         "HasLifeTime": false,
         "LifeTimeHoursInInventory": 0.0,
         "Survivability": 0.5,
+        "DropChance": 33.0,
         "SizeDimensions": {
           "x": 1.0,
           "y": 2.0
@@ -59,6 +39,7 @@
         "HasLifeTime": false,
         "LifeTimeHoursInInventory": 0.0,
         "Survivability": 0.0,
+        "DropChance": 33.0,
         "SizeDimensions": {
           "x": 3.0,
           "y": 3.0
@@ -80,6 +61,7 @@
         "HasLifeTime": false,
         "LifeTimeHoursInInventory": 0.0,
         "Survivability": 0.0,
+        "DropChance": 33.0,
         "SizeDimensions": {
           "x": 0.0,
           "y": 0.0
@@ -97,6 +79,7 @@
     "HasLifeTime": false,
     "LifeTimeHoursInInventory": 0.0,
     "Survivability": 0.0,
+    "DropChance": 0.0,
     "SizeDimensions": {
       "x": 0.0,
       "y": 0.0
@@ -104,47 +87,5 @@
     "ItemLore": "this is a normal very boring seed bag!",
     "Name": "NormalSeedbag",
     "IconPath": "Assets/Sprites/Temp/pizza3.png"
-  },
-  {
-    "TradeState": 0,
-    "ItemType": 0,
-    "Rarity": 2,
-    "SeedBagDropTable": [],
-    "MAXAmount": 99,
-    "CompostValue": 0,
-    "SellValue": 72,
-    "BuyValue": 10,
-    "IsShiny": false,
-    "HasLifeTime": false,
-    "LifeTimeHoursInInventory": 0.0,
-    "Survivability": 0.0,
-    "SizeDimensions": {
-      "x": 3.0,
-      "y": 3.0
-    },
-    "ItemLore": "A not so good plant with stuff in it!",
-    "Name": "Persimmon",
-    "IconPath": "Assets/Sprites/Temp/pizza2.png"
-  },
-  {
-    "TradeState": 0,
-    "ItemType": 0,
-    "Rarity": 2,
-    "SeedBagDropTable": [],
-    "MAXAmount": 99,
-    "CompostValue": 0,
-    "SellValue": 72,
-    "BuyValue": 10,
-    "IsShiny": false,
-    "HasLifeTime": false,
-    "LifeTimeHoursInInventory": 0.0,
-    "Survivability": 0.0,
-    "SizeDimensions": {
-      "x": 3.0,
-      "y": 3.0
-    },
-    "ItemLore": "A not so good plant with stuff in it!",
-    "Name": "Persimmon",
-    "IconPath": "Assets/Sprites/Temp/pizza2.png"
   }
 ]
