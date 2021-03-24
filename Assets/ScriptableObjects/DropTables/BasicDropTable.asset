@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77711372ec970ce4e8e87af7723d5559, type: 3}
   m_Name: BasicDropTable
   m_EditorClassIdentifier: 
-  DroppableItems:
-  - Item: {fileID: 11400000, guid: 3789d07be2ff7fc439b9dcb740692f52, type: 2}
-    DropChance: 33
-  - Item: {fileID: 11400000, guid: 52418f14cd891de48a1b70c3a3f8034b, type: 2}
-    DropChance: 33
-  - Item: {fileID: 11400000, guid: 28caab3fbce39384aa28a676cf20a1f9, type: 2}
-    DropChance: 33
+  droppableItems:
+  - {fileID: 11400000, guid: 091a6cac7e2ec014aa0bebf8e8548a71, type: 2}
+  - {fileID: 11400000, guid: 3789d07be2ff7fc439b9dcb740692f52, type: 2}
+  - {fileID: 11400000, guid: d73e5eea2bd68d44d9d04bbedb84e3c2, type: 2}

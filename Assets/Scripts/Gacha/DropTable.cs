@@ -1,46 +1,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InventoryAndStore;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using InventoryAndStore;
 
-[CreateAssetMenu(fileName = "DropTable", menuName = "Drop Table", order = 1)]
-public class DropTable : ScriptableObject
+namespace Gacha
 {
-    [SerializeField] private List<ItemDrop<ItemSO>> DroppableItems;
-
-    public ItemSO GetRandomItem()
+    [CreateAssetMenu(fileName = "DropTable", menuName = "Drop Table", order = 1)]
+    public class DropTable : ScriptableObject
     {
-        float total = DroppableItems.Sum(drop => drop.DropChance);
-        float roll = Random.Range(0, total);
-
-        foreach (var item in DroppableItems)
+        [SerializeField] public List<ItemSO> droppableItems;
+        
+        public ItemSO GetRandomItem()
         {
-            float shinyRoll = Random.Range(0, 100);
-            if (item.DropChance >= roll)
+            float total = droppableItems.Sum(drop => drop.dropChance);
+            float roll = Random.Range(0, total);
+
+            foreach (var item in droppableItems)
             {
-                if (shinyRoll >= 98)
+                float shinyRoll = Random.Range(0, 100);
+                if (item.dropChance >= roll)
                 {
-                    item.Item.isShiny = true;
-                    return item.Item;
+                    if (shinyRoll >= 98)
+                    {
+                        item.isShiny = true;
+                        return item;
+                    }
+                    else
+                    {
+                        return item;
+                    }
                 }
-                else
-                {
-                    return item.Item;
-                }
+                roll -= item.dropChance;
             }
-            roll -= item.DropChance;
+
+            throw new SystemException();
         }
-
-        throw new SystemException();
     }
-}
-
-[System.Serializable]
-public class ItemDrop<TItem>
-{
-    public TItem Item;
-    [Space]
-    public float DropChance;
 }

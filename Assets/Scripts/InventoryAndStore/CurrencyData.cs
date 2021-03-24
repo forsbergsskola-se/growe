@@ -1,7 +1,7 @@
 namespace InventoryAndStore {
     public struct CurrencyData {
-        public float softCurrency;
-        public int fertilizer;
-        public int compost;
+        public float SoftCurrency;
+        public int Fertilizer;
+        public int Compost;
     }
 }

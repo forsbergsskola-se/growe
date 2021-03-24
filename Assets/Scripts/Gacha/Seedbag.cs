@@ -1,21 +1,28 @@
-using System.Collections.Generic;
 using InventoryAndStore;
 using UnityEngine;
 
-[System.Serializable]
-public class Seedbag
+namespace Gacha
 {
-    [Header("Seedbag Item Drop Table")]
-    public DropTable Items;
-
-    public void Open(int amount, Inventory inventory)
+    [System.Serializable]
+    public class Seedbag
     {
-        for (int i = 0; i < amount; i++)
+        [Header("Seedbag Item Drop Table")]
+        public DropTable items;
+
+        public ItemSO[] Open(int amount, Inventory inventory)
         {
-			//Get a random item from the drop table
-            var randomItem = Items.GetRandomItem();
-			//Add the random item to the inventory
-            inventory.Add(randomItem);
+            ItemSO[] droppedItem = new ItemSO[amount];
+
+            for (int i = 0; i < amount; i++)
+            {
+                //Get a random item from the drop table
+                var randomItem = items.GetRandomItem();
+                droppedItem[i] = randomItem;
+                //Add the random item to the inventory
+                inventory.Add(randomItem);
+            }
+
+            return droppedItem;
         }
     }
 }

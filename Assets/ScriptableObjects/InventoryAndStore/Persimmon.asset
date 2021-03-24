@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: Persimmon
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e24fd306e5da54240a3b54fe93aee55a, type: 3}
+  icon: {fileID: 21300000, guid: 8fc64738570c45148abcdc15d1f2bb91, type: 3}
   tradeState: 0
-  itemType: 1
-  Seedbag:
+  itemType: 0
+  seedbag:
     Items: {fileID: 0}
   rarity: 2
   maxAmount: 99
   compostValue: 0
   sellValue: 72
-  buyValue: 0
-  isShiny: 0
+  buyValue: 30
+  isShiny: 1
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
   survivability: 0
+  dropChance: 33
   sizeDimensions: {x: 3, y: 3}
   itemLore: A not so good plant with stuff in it!

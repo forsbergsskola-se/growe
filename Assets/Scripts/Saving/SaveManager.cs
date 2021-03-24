@@ -1,25 +1,28 @@
 using System.Threading.Tasks;
 using Firebase.Database;
 using InventoryAndStore;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Saving {
     public class SaveManager : MonoBehaviour {
         private string key;
         private string PLAYER_KEY {
-            get => "PLAYER_KEY_2";
-            // FindObjectOfType<FireBaseAuthentication>().GetUserId();
+            get => "PLAYER_KEY";
         }
+
+        private string AUCTION_KEY = "AUCTION_KEY";
         private FirebaseDatabase _database;
 
         private void Start() {
-            
             _database = FirebaseDatabase.GetInstance("https://growe-e7606-default-rtdb.europe-west1.firebasedatabase.app/");
-            
         }
 
         public void SaveCurrency(CurrencyData data) {
             _database.GetReference(PLAYER_KEY).SetRawJsonValueAsync(JsonUtility.ToJson(data));
+        }
+        public void UploadToAuction(AuctionData data) {
+            _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonUtility.ToJson(data));
         }
         
         

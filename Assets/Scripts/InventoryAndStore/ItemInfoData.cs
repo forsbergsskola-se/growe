@@ -1,3 +1,4 @@
+using Gacha;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,8 +6,8 @@ namespace InventoryAndStore {
     public class ItemInfoData : MonoBehaviour
     {
         public Inventory storeInventory, playerInventory;
-        public Seedbag Seedbag;
         public Image itemIcon;
+        public GameObject storeUi;
 
         public Text itemName,
             itemAmount,
@@ -18,7 +19,7 @@ namespace InventoryAndStore {
             itemLore,
             plantButtonText;
 
-        public Button PlantButton;
+        public Button plantButton;
         public ItemData itemData;
 
         public void UpdateItemInfo()
@@ -38,6 +39,7 @@ namespace InventoryAndStore {
             
             //TODO Try to move
             if (itemSO.tradeState == ItemSO.TradeState.Buyable) plantButtonText.text = "Buy";
+            else if (itemSO.tradeState == ItemSO.TradeState.Sellable && storeUi.activeSelf) plantButtonText.text = "Sell";
         }
     }
 }

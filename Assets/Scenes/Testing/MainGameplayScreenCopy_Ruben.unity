@@ -3047,14 +3047,6 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4580725520790636482, guid: 75a4180d0701b1f4e97b8e4252dd7b22, type: 3}
-      propertyPath: m_Value
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8543889848078112843, guid: 75a4180d0701b1f4e97b8e4252dd7b22, type: 3}
-      propertyPath: m_Value
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 8636959982239641604, guid: 75a4180d0701b1f4e97b8e4252dd7b22, type: 3}
       propertyPath: m_Name
       value: CompostTracker
