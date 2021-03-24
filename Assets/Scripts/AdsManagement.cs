@@ -11,6 +11,7 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     [SerializeField] public float value;
     [SerializeField] public float seconds;
     public Text noadtext;
+ 
     
     #if UNITY_IOS
         private string gameId = "4052122";
@@ -20,7 +21,13 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
         private string gameId = "4052123";
         string mySurfacingId_Reward = "Rewarded_Android";
         string mySurfacingId_Interstitial = "Interstitial_Android";
+    #else
+        private string gameId = "4052122";
+        string mySurfacingId_Interstitial = "Interstitial_iOS";
+        string mySurfacingId_Reward = "Rewarded_iOS";
     #endif
+    
+    
     bool testMode = true;
     private Button myButton;
 
