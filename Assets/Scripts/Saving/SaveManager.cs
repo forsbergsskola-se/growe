@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Firebase.Database;
 using InventoryAndStore;
-using Newtonsoft.Json;
+using TimeManager;
 using UnityEngine;
 
 namespace Saving {
@@ -41,6 +41,18 @@ namespace Saving {
 
         public void EraseSave() {
             _database.GetReference(PLAYER_KEY).RemoveValueAsync();
+        }
+        
+        public void SaveTime(TimeData time) {
+            _database.GetReference(PLAYER_KEY).Child("time").SetRawJsonValueAsync(JsonUtility.ToJson(time));
+        }
+        
+        public async Task<TimeData?> LoadTime() {
+            DataSnapshot dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("time").GetValueAsync();
+            if (!dataSnapshot.Exists) {
+                return null;
+            }
+            return JsonUtility.FromJson<TimeData?>(dataSnapshot.GetRawJsonValue());
         }
     }
 }
