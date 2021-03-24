@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [
   {
     "TradeState": 0,
@@ -88,8 +87,6 @@
     "ItemLore": "this is a normal very boring seed bag!",
     "Name": "NormalSeedbag",
     "IconPath": "Assets/Sprites/Temp/pizza3.png"
-<<<<<<< Updated upstream
-=======
   },
   {
     "TradeState": 0,
@@ -156,9 +153,5 @@
     "ItemLore": "yes",
     "Name": "Hello Mate",
     "IconPath": "Assets/Sprites/Temp/unnamed.png"
->>>>>>> Stashed changes
   }
 ]
-=======
-[]
->>>>>>> main
