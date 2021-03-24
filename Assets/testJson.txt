@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
   {
     "TradeState": 0,
@@ -158,3 +159,6 @@
 >>>>>>> Stashed changes
   }
 ]
+=======
+[]
+>>>>>>> main

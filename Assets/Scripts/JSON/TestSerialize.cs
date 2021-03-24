@@ -11,6 +11,7 @@ namespace JSON
     public class TestSerialize : MonoBehaviour
     {
         public string str = "";
+        private static Currency Currency => FindObjectOfType<Currency>();
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.A))
@@ -27,22 +28,27 @@ namespace JSON
             {
                 string text = File.ReadAllText(Application.dataPath + "/testJson.txt", Encoding.UTF8);
                 List<ItemClass> newtest = new List<ItemClass>(JsonConvert.DeserializeObject<List<ItemClass>>(text));
-                
+
                 foreach (ItemClass itemClass in newtest) Inventories.Instance.playerInventory.Add(ConvertSO.ClassToSO(itemClass));
             }
 <<<<<<< Updated upstream
-   
-=======
+
 
             if (Input.GetKeyDown(KeyCode.D)) {
                 Currency.FireBaseSetUserInventory(Inventories.Instance.playerInventory);
-                
+
                 /*
                 if(Inventories.Instance.playerInventory.items[0] != null) 
                     Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
                     */
             }
->>>>>>> Stashed changes
+=======
+
+            if (Input.GetKeyDown(KeyCode.D)) {
+                if(Inventories.Instance.playerInventory.items[0] != null)
+                    Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
+            }
+>>>>>>> main
         }
     }
 }

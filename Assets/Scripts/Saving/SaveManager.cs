@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Firebase.Database;
 using InventoryAndStore;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Saving {
@@ -8,21 +9,18 @@ namespace Saving {
         private string key;
         private string PLAYER_KEY {
             get => "PLAYER_KEY";
-            // FindObjectOfType<FireBaseAuthentication>().GetUserId();
         }
+
+        private string AUCTION_KEY = "AUCTION_KEY";
         private FirebaseDatabase _database;
 
         private void Start() {
-            
             _database = FirebaseDatabase.GetInstance("https://growe-e7606-default-rtdb.europe-west1.firebasedatabase.app/");
-            
         }
 
         public void SaveCurrency(CurrencyData data) {
             _database.GetReference(PLAYER_KEY).SetRawJsonValueAsync(JsonUtility.ToJson(data));
         }
-<<<<<<< Updated upstream
-=======
         public void UploadToAuction(AuctionData data) {
             _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonUtility.ToJson(data));
         }
@@ -30,9 +28,13 @@ namespace Saving {
         {
             _database.GetReference(PLAYER_KEY).Child("Inventory").SetRawJsonValueAsync(JsonConvert.SerializeObject(data));
         }
->>>>>>> Stashed changes
-        
-        
+=======
+        public void UploadToAuction(AuctionData data) {
+            _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonUtility.ToJson(data));
+        }
+>>>>>>> main
+
+
         public async Task<CurrencyData?> LoadCurrency() {
             var dataSnapshot = await _database.GetReference(PLAYER_KEY).GetValueAsync();
             if (!dataSnapshot.Exists) {
@@ -40,7 +42,7 @@ namespace Saving {
             }
             return JsonUtility.FromJson<CurrencyData>(dataSnapshot.GetRawJsonValue());
         }
-        
+
         public async Task<InventoryData?> LoadInventory()
         {
             var dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("Inventory").GetValueAsync();
