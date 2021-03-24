@@ -41,11 +41,6 @@ namespace JSON
                     Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
                     */
             }
-
-            if (Input.GetKeyDown(KeyCode.D)) {
-                if(Inventories.Instance.playerInventory.items[0] != null)
-                    Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
-            }
         }
     }
 }
