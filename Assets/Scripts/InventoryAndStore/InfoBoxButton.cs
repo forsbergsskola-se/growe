@@ -28,8 +28,8 @@ namespace InventoryAndStore
         private void Update()
         {
             ItemTypeChecker();
-            
-            if (ItemInfoData.itemData.amount > 3 && ItemInfoData.itemData.ItemSO.itemType == ItemSO.ItemType.Seed)
+
+            if (ItemInfoData.itemData.amount >= 3 && ItemInfoData.itemData.ItemSO.itemType == ItemSO.ItemType.Seed)
             {
                 fusionButtom.interactable = true;
             }
@@ -41,10 +41,15 @@ namespace InventoryAndStore
 
         public void fusionButtomFunction()
         {
-            ItemSO shinyItem = ItemInfoData.itemData.ItemSO;
-            shinyItem.isShiny = true;
-            ItemInfoData.itemData.amount -= 3;
-            ItemInfoData.playerInventory.Add(shinyItem);
+            ItemSO clone = Instantiate(ItemInfoData.itemData.ItemSO);
+            clone.name = "idk man looks kinda shiny";
+            clone.isShiny = true;
+            ItemInfoData.gameObject.SetActive(false);
+            for (int i = 0; i < 3; i++)
+            {
+                ItemInfoData.playerInventory.Remove(ItemInfoData.itemData.ItemSO);
+            }
+            ItemInfoData.playerInventory.Add(clone);
         }
 
         public void ItemTypeChecker()
@@ -60,8 +65,8 @@ namespace InventoryAndStore
                 ItemInfoData.CompostButton.gameObject.SetActive(true);
             }
         }
-        
-        
+
+
         public void ButtonInteract()
         {
             ItemSO itemSO = ItemInfoData.itemData.ItemSO;
