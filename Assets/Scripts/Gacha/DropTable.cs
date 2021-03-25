@@ -20,16 +20,13 @@ namespace Gacha
             foreach (var item in droppableItems)
             {
                 ItemSO clone = Instantiate(item);
+                clone.isNew = true;
                 float shinyRoll = Random.Range(0, 100);
                 if (clone.dropChance >= roll)
                 {
                     if (shinyRoll >= 98)
                     {
                         clone.isShiny = true;
-                        return clone;
-                    }
-                    else
-                    {
                         return clone;
                     }
                 }

@@ -6,15 +6,17 @@ namespace InventoryAndStore
 {
     public class StoreSwitchSellBuy : MonoBehaviour
     {
-        private readonly List<ItemSO> _sellableList = new List<ItemSO>();
-        private readonly List<ItemSO> _storeItems = new List<ItemSO>();
+        private List<ItemSO> _sellableList = new List<ItemSO>();
+        private List<ItemSO> _storeItems = new List<ItemSO>();
 
         private bool _storeSwitch;
 
-        private void FindSellables()
+        private List<ItemSO> GetSellables()
         {
-            foreach (ItemSO itemSO in Inventories.Instance.playerInventory.items.Where(itemSO => itemSO.tradeState == ItemSO.TradeState.Sellable))
+            _sellableList.Clear();
+            foreach (ItemSO itemSO in Inventories.Instance.playerInventory.items.Where(itemSO => itemSO.tradeState == ItemSO.TradeState.Sellable)) 
                 _sellableList.Add(itemSO);
+            return _sellableList;
         }
 
         public void OnSwitchButton() {
@@ -25,23 +27,15 @@ namespace InventoryAndStore
 
         private void SwitchToSell()
         {
-            foreach (ItemSO itemSO in Inventories.Instance.storeInventory.items)
-                _storeItems.Add(itemSO);
-            
             Inventories.Instance.storeInventory.items.Clear();
-            
-            FindSellables();
-            foreach (ItemSO itemSO in _sellableList)
-                Inventories.Instance.storeInventory.Add(itemSO);
-            _sellableList.Clear();
+            Inventories.Instance.storeInventory.Add(GetSellables());
+            _storeItems = Inventories.Instance.storeInventory.items;
         }
 
         private void SwitchToBuy()
         {
             Inventories.Instance.storeInventory.items.Clear();
-            foreach (ItemSO itemSO in _storeItems)
-                Inventories.Instance.storeInventory.Add(itemSO);
-            
+            Inventories.Instance.storeInventory.Add(_storeItems);
             _storeItems.Clear();
         }
     }

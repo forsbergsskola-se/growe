@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JSON;
@@ -7,6 +8,7 @@ namespace InventoryAndStore
 {
     public class Inventory : MonoBehaviour
     {
+        private static Currency Currency => FindObjectOfType<Currency>();
         public List<ItemSO> items = new List<ItemSO>();
         public ItemSlot itemSlot;
 
@@ -14,11 +16,45 @@ namespace InventoryAndStore
         {
             items.Add(newItemSO);
             itemSlot.UpdateItemSlots();
+            
+            Debug.Log("This got called");
         }
+
+        public void Add(IEnumerable<object> ItemSOList)
+        {
+            if (ItemSOList.GetType() != typeof(List<ItemSO>))
+            {
+                ItemSOList = (from ItemClass itemClass in ItemSOList select ConvertSO.ClassToSO(itemClass)).ToList();
+            }
+            
+            foreach (ItemSO itemSO in ItemSOList) 
+                items.Add(itemSO);
+            
+            itemSlot.UpdateItemSlots();
+        }
+        
         public void Remove(ItemSO removeItem)
         {
             items.Remove(removeItem);
             itemSlot.UpdateItemSlots();
+        }
+        
+        public void Remove(IEnumerable<object> ItemSOList)
+        {
+            if (ItemSOList.GetType() != typeof(List<ItemSO>))
+            {
+                ItemSOList = (from ItemClass itemClass in ItemSOList select ConvertSO.ClassToSO(itemClass)).ToList();
+            }
+            
+            foreach (ItemSO itemSO in ItemSOList) 
+                items.Remove(itemSO);
+            
+            itemSlot.UpdateItemSlots();
+        }
+
+        public void Upload()
+        {
+            Currency.FireBaseSetUserInventory(this);
         }
 
         public static bool CheckIfIdentical(ItemSO compare1, ItemSO compare2)

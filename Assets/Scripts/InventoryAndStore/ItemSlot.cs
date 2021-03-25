@@ -62,6 +62,8 @@ namespace InventoryAndStore
         {
             SortItemsByStackable();
             CreateItemSlot();
+            
+            Inventories.Instance.playerInventory.Upload();
         }
     }
 }

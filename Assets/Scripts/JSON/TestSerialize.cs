@@ -16,7 +16,7 @@ namespace JSON
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                List<ItemClass> test = Inventories.Instance.playerInventory.items.Select(item => ConvertSO.SOToClass(item)).ToList();
+                List<ItemClass> test = Inventories.Instance.playerInventory.items.Select(ConvertSO.SOToClass).ToList();
 
                 str = JsonConvert.SerializeObject(test, Formatting.Indented);
                 var sr = File.CreateText(Application.dataPath + "/testJson.txt");
@@ -29,7 +29,7 @@ namespace JSON
                 string text = File.ReadAllText(Application.dataPath + "/testJson.txt", Encoding.UTF8);
                 List<ItemClass> newtest = new List<ItemClass>(JsonConvert.DeserializeObject<List<ItemClass>>(text));
 
-                foreach (ItemClass itemClass in newtest) Inventories.Instance.playerInventory.Add(ConvertSO.ClassToSO(itemClass));
+                Inventories.Instance.playerInventory.Add(newtest);
             }
 
 

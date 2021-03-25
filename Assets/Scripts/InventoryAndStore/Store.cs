@@ -9,8 +9,7 @@ namespace InventoryAndStore
 
         private void Start()
         {
-            foreach (var item in storeBank) 
-                Inventories.Instance.storeInventory.Add(item);
+            Inventories.Instance.storeInventory.Add(storeBank);
             Destroy(this);
         }
     }

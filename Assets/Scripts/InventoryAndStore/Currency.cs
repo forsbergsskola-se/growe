@@ -31,13 +31,11 @@ namespace InventoryAndStore {
             _hasLoaded = true;
             var data = dataTask.Result;
             if (data.HasValue && dataTaskInventory.Result.HasValue) {
-                Debug.Log(dataTaskInventory.Result.Value.Inventory);
-
-                Inventories.Instance.playerInventory.Add(
-                    ConvertSO.ClassToSO(dataTaskInventory.Result.Value.Inventory[0]));
-
                 _inventoryData = dataTaskInventory.Result.Value;
                 _data = data.Value;
+                
+                Inventories.Instance.playerInventory.Add(_inventoryData.Inventory);
+                
                 MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
                 MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
                 MessageBroker.Instance().Send(new InventoryUpdateMessage(_inventoryData.Inventory));
@@ -71,8 +69,7 @@ namespace InventoryAndStore {
         }
         public void FireBaseSetUserInventory(Inventory inventory) {
             if (!_hasLoaded) return;
-            List<ItemClass> items = inventory.items.Select(item => ConvertSO.SOToClass(item)).ToList();
-            _inventoryData.Inventory = items;
+            _inventoryData.Inventory = inventory.items.Select(ConvertSO.SOToClass).ToList();;
             _saveManager.UploadUserInventory(_inventoryData);
         }
         public void FireBaseGetUserInventory() {

@@ -10,9 +10,8 @@ namespace JSON
     {
         public static ItemClass SOToClass(ItemSO itemSo)
         {
-            ItemClass clone = new ItemClass();
-            
-            clone.SeedBagDropTable = new List<ItemClass>();
+            ItemClass clone = new ItemClass {SeedBagDropTable = new List<ItemClass>()};
+
             if (itemSo.itemType == ItemSO.ItemType.Seedbag)
                 foreach (var droppableItem in itemSo.seedbag.items.droppableItems) 
                     clone.SeedBagDropTable.Add(SOToClass(droppableItem));

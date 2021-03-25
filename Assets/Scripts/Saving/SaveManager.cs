@@ -21,14 +21,13 @@ namespace Saving {
         //TODO: reference keys should be
         private void Start() {
             _database = FirebaseDatabase.GetInstance("https://growe-e7606-default-rtdb.europe-west1.firebasedatabase.app/");
-
         }
 
         public void SaveCurrency(CurrencyData data) {
             _database.GetReference(PLAYER_KEY).Child("Currecny").SetRawJsonValueAsync(JsonUtility.ToJson(data));
         }
         public void UploadToAuction(AuctionData data) {
-            _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonUtility.ToJson(data));
+            _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonConvert.SerializeObject(data));
         }
         public void UploadUserInventory(InventoryData data)
         {
@@ -44,8 +43,7 @@ namespace Saving {
             return JsonUtility.FromJson<CurrencyData>(dataSnapshot.GetRawJsonValue());
         }
 
-        public async Task<InventoryData?> LoadInventory()
-        {
+        public async Task<InventoryData?> LoadInventory() {
             var dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("Inventory").GetValueAsync();
             if (!dataSnapshot.Exists) return null;
             return JsonConvert.DeserializeObject<InventoryData>(dataSnapshot.GetRawJsonValue());
