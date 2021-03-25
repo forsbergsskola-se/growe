@@ -39,7 +39,7 @@ public class PlantSpawner : MonoBehaviour {
         pos.x = (int) (grid.width * 0.5);
         pos.y = (int) (grid.height * 0.5);
         instance.transform.localPosition = pos;
-        instance.GetComponentInChildren<GridPlant>().Init(item);
+        instance.GetComponentInChildren<GridPlant>().Init(item, grid);
     }
 
     private void DestroyAndAddPlantToInventory(Inventory playerInventory) {

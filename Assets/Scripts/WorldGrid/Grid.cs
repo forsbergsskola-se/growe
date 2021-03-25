@@ -100,7 +100,7 @@ public class Grid : MonoBehaviour, IGrid
         }
     }
 
-    void RemoveObject(GridObject gridObject, Vector2Int fromPosition) {
+    public void RemoveObject(GridObject gridObject, Vector2Int fromPosition) {
         foreach (var cell in GetCellsInRect(fromPosition, gridObject.Size)) {
             cell.GridObject = null;
         }

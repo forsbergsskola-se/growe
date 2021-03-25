@@ -160,7 +160,7 @@ MonoBehaviour:
   plant: {fileID: 0}
   soilStageDuration: 2800
   plantSpriteRenderer: {fileID: 1236233958672514567}
-  theSprite: {fileID: 21300000, guid: b0dbf681b4b1dc743b447f935a8ab394, type: 3}
+  gridObject: {fileID: 7919882476770317448}
 --- !u!1 &3934613891321521474
 GameObject:
   m_ObjectHideFlags: 0

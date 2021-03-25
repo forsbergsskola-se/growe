@@ -9,9 +9,10 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     private CameraMovement cameraMovement;
     public bool notMoveable;
     public bool isOnGrid;
+    private Grid grid;
     
     void Start() {
-        var grid = GetComponentInParent<Grid>();
+        grid = GetComponentInParent<Grid>();
 
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
         if (!isOnGrid)
@@ -61,4 +62,11 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnPointerDown(PointerEventData eventData) {
     } // not implemented. Required by OnPointerUp.
+    
+    
+    private void OnDestroy()
+    {
+        if (isOnGrid)
+            grid.RemoveObject(this,  Vector2Int.FloorToInt(transform.position));
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using Broker;
 using Broker.Messages;
 using InventoryAndStore;
@@ -14,10 +15,10 @@ public class GridPlant : MonoBehaviour {
     private float soilStageProgress;
     //references
     public SpriteRenderer plantSpriteRenderer;
-    public Sprite theSprite;
 
-    public void Init(ItemSO plant) {
+    public void Init(ItemSO plant, Grid grid) {
         this.plant = plant;
+        //MessageBroker.Instance().SubscribeTo<UpdateSpriteMessage>(UpdateSprite);
         plant.UpdateSpriteEvent += UpdateSprite;
         switch (this.plant.itemType)
         { 
@@ -90,12 +91,18 @@ public class GridPlant : MonoBehaviour {
             UpdateSprite();
             Debug.Log(currentSoilStage);
         }
-    }
 
+        currentSoilStage = SoilStage.Watered;
+    }
+    //
+    // void UpdateSprite(UpdateSpriteMessage m) 
+    // {
+    //     UpdateSprite();
+    // }
+    
     void UpdateSprite()
     {
         Debug.Log("Update sprite, growth stage is " + plant.CurrentGrowthStage);
-        
         plantSpriteRenderer.sprite = plant.growthStageSprites[(int)plant.CurrentGrowthStage];
     }
 
@@ -107,9 +114,11 @@ public class GridPlant : MonoBehaviour {
             currentSoilStage = SoilStage.OverWatered;
         UpdateSprite();
     }
-    
+
     private void OnDisable()
     {
+        //MessageBroker.Instance().UnSubscribeFrom<UpdateSpriteMessage>(UpdateSprite);
         plant.UpdateSpriteEvent -= UpdateSprite;
+        MessageBroker.Instance().UnSubscribeFrom<TimePassedMessage>(TimePassed);
     }
 }

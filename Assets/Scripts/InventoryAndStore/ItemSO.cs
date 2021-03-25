@@ -41,6 +41,5 @@ namespace InventoryAndStore
 
         [HideInInspector] public int timesCut = 0;
         public Action UpdateSpriteEvent;
-
     }
 }
