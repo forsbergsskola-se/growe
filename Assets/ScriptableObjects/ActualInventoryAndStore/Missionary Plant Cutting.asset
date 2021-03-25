@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
+  m_Name: Chinese Money Plant Cutting
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  growthStageSprites: []
+  tradeState: 0
+  itemType: 0
+  seedbag:
+    items: {fileID: 0}
+  rarity: 0
+  maxAmount: 1
+  compostValue: 0
+  sellValue: 0
+  buyValue: 0
+  isShiny: 0
+  hasLifeTime: 0
+  lifeTimeHoursInInventory: 0
+  survivability: 0
+  dropChance: 0
+  sizeDimensions: {x: 0, y: 0}
+  itemLore: 
+  isNew: 0
+  growthDuration: 0
+  currentGrowthProgress: 0
+  isFertilized: 0
+  timesCut: 0
