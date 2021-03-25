@@ -9,6 +9,7 @@ namespace InventoryAndStore
     {
         public GameObject slotPrefab;
         public Inventory inventory;
+        public List<GameObject> itemSlots = new List<GameObject>();
         public List<ItemSO> sortedItems = new List<ItemSO>();
 
         private void SortItemsByStackable()
@@ -22,11 +23,11 @@ namespace InventoryAndStore
                 
                 else if (itemSO.maxAmount > 1)
                 {
-                    foreach (var stackable in sortedItems.Where(stackable => !ComparingArbitraryObjects.Compare(stackable, itemSO)))
+                    if (!sortedItems.Exists(stackable => stackable.name == itemSO.name && stackable.isShiny == itemSO.isShiny))
                         sortedItems.Add(itemSO);
-
-                    //if (!sortedItems.Exists(stackable => stackable.name == itemSO.name))
-                      //  sortedItems.Add(itemSO);
+                    
+                    if (itemSO.maxAmount < (double)Inventory.CountItem(inventory.items, itemSO)/Inventory.CountItem(sortedItems, itemSO))
+                        sortedItems.Add(itemSO);
                 }
             }
         }
@@ -35,17 +36,35 @@ namespace InventoryAndStore
         
         private void CreateItemSlot()
         {
-            foreach (Transform child in transform) 
-                Destroy(child.gameObject);
-
+            foreach (GameObject itemSlot in itemSlots) 
+                Destroy(itemSlot);
+            itemSlots.Clear();
+            
             foreach (ItemSO itemSO in sortedItems)
             {
                 var newItemSlot = Instantiate(slotPrefab, transform);
-                var itemData = newItemSlot.GetComponent<ItemData>();
-                itemData.ItemSO = itemSO;
+                var newItemSlotData = newItemSlot.GetComponent<ItemData>();
+                newItemSlotData.ItemSO = itemSO;
+                itemSlots.Add(newItemSlot);
                 
-                if (itemSO.maxAmount > 1) 
-                    itemData.amount = inventory.CountItem(itemSO);
+                if (itemSO.maxAmount > 1 )
+                {
+                    int count = Inventory.CountItem(inventory.items, itemSO);
+                    int alreadyAssigned = 0;
+                    
+                    if (count > itemSO.maxAmount)
+                    {
+                        foreach (GameObject go in itemSlots)
+                        {
+                            ItemData itemData = go.GetComponent<ItemData>();
+                            if (itemData.ItemSO.name == itemSO.name && itemData.ItemSO.isShiny == itemSO.isShiny)
+                                alreadyAssigned += itemData.amount;
+                        }
+                        
+                        
+                    }
+                    newItemSlotData.amount = Math.Min(itemSO.maxAmount, count - alreadyAssigned);
+                }
             }
         }
 
