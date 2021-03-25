@@ -11,8 +11,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     private CameraMovement cameraMovement;
     public bool notMoveable;
     public bool isOnGrid;
-    public SpriteRenderer sprite;
-
+    
     void Start() {
         var grid = GetComponentInParent<Grid>();
 
@@ -58,6 +57,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             Debug.Log("Tap! Zooom the thing. Also there are som TODO's here come check 'em out");
             cameraMovement.StartMoveRoutine(transform
                 .position); 
+            var itemSO = GetComponentInChildren<GridPlant>().plant;
             var item = GetComponentInChildren<GridItem>().item;
             MessageBroker.Instance().Send(new PlantCloseUpMessage(item));
         }

@@ -14,6 +14,7 @@ namespace UI {
         public UnityEvent onDisable;
 
         public Text plantName;
+        public Text plantLore;
         public Text plantRarity;
         public Text sellText;
         public Text compostText;
@@ -40,6 +41,7 @@ namespace UI {
 
         void UpdateValues() {
             plantName.text = _item.name;
+            plantLore.text = _item.itemLore;
             plantRarity.text = _item.rarity.ToString();
             sellText.text = _item.sellValue.ToString();
             compostText.text = _item.compostValue.ToString();
