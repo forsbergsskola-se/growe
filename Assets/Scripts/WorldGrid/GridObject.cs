@@ -1,3 +1,5 @@
+using Broker;
+using Broker.Messages;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -55,8 +57,9 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         if (!isDragging && !notMoveable) {
             Debug.Log("Tap! Zooom the thing. Also there are som TODO's here come check 'em out");
             cameraMovement.StartMoveRoutine(transform
-                .position); //TODO change call method. Where is ruben when I need a pub sub?
-            var itemSO = GetComponentInChildren<GridPlant>().plant;
+                .position); 
+            var plant = GetComponentInChildren<GridPlant>().plant;
+            MessageBroker.Instance().Send(new PlantCloseUpMessage(plant));
         }
     }
 

@@ -1,11 +1,9 @@
-using InventoryAndStore;
-
 namespace Broker.Messages {
     public class AuctionUpdateMessage {
-        public readonly string item;
+        private readonly string _item;
 
         public AuctionUpdateMessage(string item) {
-            this.item = item;
+            this._item = item;
         }
     }
 }
