@@ -44,7 +44,7 @@ namespace UI {
             plantRarity.text = _item.rarity.ToString();
             sellText.text = _item.sellValue.ToString();
             compostText.text = _item.compostValue.ToString();
-            growthStage.value = (int) _item.CurrentGrowthStage;
+            growthStage.value = (int) _item.CurrentGrowthStage + 1;
             //TODO soilStatus.value = 
             plantLore.text = _item.itemLore;
         }
