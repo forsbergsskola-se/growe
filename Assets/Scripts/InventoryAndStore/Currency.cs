@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Broker;
 using Broker.Messages;
 using JSON;
@@ -12,19 +14,42 @@ namespace InventoryAndStore {
         public int maxCompostValue = 15;
         public int fertilizerAmountFromFilledCompost = 1;
         private CurrencyData _data;
+        private InventoryData _inventoryData;
         private AuctionData _auctionData;
         private SaveManager _saveManager;
         private bool _hasLoaded;
 
         private IEnumerator Start() {
             _saveManager = FindObjectOfType<SaveManager>();
+
             yield return new WaitForSeconds(1f);
             var dataTask = _saveManager.LoadCurrency();
             yield return new WaitUntil(() => dataTask.IsCompleted);
+            var dataTaskInventory = _saveManager.LoadInventory();
+            yield return new WaitUntil(() => dataTaskInventory.IsCompleted);
+
             _hasLoaded = true;
             var data = dataTask.Result;
-            if (data.HasValue) {
+            if (data.HasValue && dataTaskInventory.Result.HasValue) {
+                Debug.Log(dataTaskInventory.Result.Value.Inventory);
+
+                Inventories.Instance.playerInventory.Add(
+                    ConvertSO.ClassToSO(dataTaskInventory.Result.Value.Inventory[0]));
+
+                _inventoryData = dataTaskInventory.Result.Value;
                 _data = data.Value;
+                MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
+                MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
+                MessageBroker.Instance().Send(new InventoryUpdateMessage(_inventoryData.Inventory));
+                MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
+                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
+                MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
+                MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
+                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
+            }
+            else
+            {
+                Debug.LogWarning("Couldn't load data" + this);
                 MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
                 MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
                 MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
@@ -44,18 +69,29 @@ namespace InventoryAndStore {
             _saveManager.UploadToAuction(_auctionData);
             MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
         }
-        
+        public void FireBaseSetUserInventory(Inventory inventory) {
+            if (!_hasLoaded) return;
+            List<ItemClass> items = inventory.items.Select(item => ConvertSO.SOToClass(item)).ToList();
+            _inventoryData.Inventory = items;
+            _saveManager.UploadUserInventory(_inventoryData);
+        }
+        public void FireBaseGetUserInventory() {
+            if (!_hasLoaded) return;
+            //_saveManager.UploadUserInventory(_inventoryData);
+            MessageBroker.Instance().Send(new InventoryUpdateMessage(_inventoryData.Inventory));
+        }
+
         public void AddFertilizer(int amount) {
             if (!_hasLoaded) return;
             _data.Fertilizer += amount;
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
         }
-        
+
         public void AddCompost(int amount) {
             if (!_hasLoaded) return;
             _data.Compost += amount;
-            
+
             if (_data.Compost >= maxCompostValue) {
                 MessageBroker.Instance().Send(new CompostBarFilledMessage());
                 Debug.Log("Compost filled, adding fertilizer " + this);
@@ -75,7 +111,7 @@ namespace InventoryAndStore {
             MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
             return true;
         }
-        
+
         public bool TryRemoveFertilizer(int amount) {
             if (!_hasLoaded || amount > _data.Fertilizer) return false;
             _data.Fertilizer -= amount;
@@ -83,7 +119,7 @@ namespace InventoryAndStore {
             MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
             return true;
         }
-        
+
         public bool TryRemoveCompost(int amount) {
             if (!_hasLoaded || amount > _data.Compost) return false;
             _data.Compost -= amount;
@@ -91,7 +127,7 @@ namespace InventoryAndStore {
             MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
             return true;
         }
-        
+
         /// <summary>
         /// Method used for testing
         /// </summary>

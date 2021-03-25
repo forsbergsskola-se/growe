@@ -20,10 +20,11 @@ namespace InventoryAndStore
             itemSlot.UpdateItemSlots();
         }
 
-        public int CountItem(ItemSO CountSO)
-        {
-            return items.Count
-                (item => item.name.StartsWith(CountSO.name));
+        public static int CountItem(IEnumerable<ItemSO> list, ItemSO CountSO)
+        { 
+            return list.Count(item => 
+                item.name.StartsWith(CountSO.name) && 
+                item.isShiny == CountSO.isShiny);
         }
     }
 }

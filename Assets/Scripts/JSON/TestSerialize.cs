@@ -28,13 +28,18 @@ namespace JSON
             {
                 string text = File.ReadAllText(Application.dataPath + "/testJson.txt", Encoding.UTF8);
                 List<ItemClass> newtest = new List<ItemClass>(JsonConvert.DeserializeObject<List<ItemClass>>(text));
-                
+
                 foreach (ItemClass itemClass in newtest) Inventories.Instance.playerInventory.Add(ConvertSO.ClassToSO(itemClass));
             }
 
+
             if (Input.GetKeyDown(KeyCode.D)) {
+                Currency.FireBaseSetUserInventory(Inventories.Instance.playerInventory);
+
+                /*
                 if(Inventories.Instance.playerInventory.items[0] != null) 
                     Currency.AddItemForAuction(Inventories.Instance.playerInventory.items[0]);
+                    */
             }
         }
     }
