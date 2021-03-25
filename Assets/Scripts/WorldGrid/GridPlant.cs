@@ -12,6 +12,9 @@ public class GridPlant : MonoBehaviour {
     public float soilStageDuration = 28800f;
     // variable
     private float soilStageProgress;
+    //references
+    public SpriteRenderer plantSpriteRenderer;
+    public Sprite theSprite;
 
     public void Init(ItemSO plant) {
         this.plant = plant;
@@ -89,8 +92,11 @@ public class GridPlant : MonoBehaviour {
         }
     }
 
-    void UpdateSprite() {
-        //TODO Insert Update sprite according to growth and soil stage.
+    void UpdateSprite()
+    {
+        Debug.Log("Update sprite, growth stage is " + plant.CurrentGrowthStage);
+        
+        plantSpriteRenderer.sprite = plant.growthStageSprites[(int)plant.CurrentGrowthStage];
     }
 
     //TODO Hookup Watering mini game.
