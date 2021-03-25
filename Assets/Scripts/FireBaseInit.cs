@@ -1,26 +1,22 @@
 using Firebase;
 using Firebase.Analytics;
 using Firebase.Extensions;
-
 using UnityEngine;
 
-
-
 public class FireBaseInit : MonoBehaviour {
-    FireBaseAuthentication auth;
-
-    void Awake() {
-        auth = GetComponent<FireBaseAuthentication>();
-
-
+    FireBaseAnonymousAuthentication authAnonymous;
+    
+    void Awake() {  // FirebaseAuthentication was initialized
+        authAnonymous = GetComponent<FireBaseAnonymousAuthentication>();
+        
+    }
+    public void AnonymousLogIn()
+    {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
 
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-            StartCoroutine(auth.SigninAnonymously());
+            StartCoroutine(authAnonymous.SigninAnonymously());
         });
     }
-  
-
     //WE CAN NOW LOG FIREBASE EVENTS AFTER THIS START METHOD(or inside after set-analytics-collect(true))^^
- 
 }
