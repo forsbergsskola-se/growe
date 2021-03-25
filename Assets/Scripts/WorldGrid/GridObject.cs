@@ -56,6 +56,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             Debug.Log("Tap! Zooom the thing. Also there are som TODO's here come check 'em out");
             cameraMovement.StartMoveRoutine(transform
                 .position); //TODO change call method. Where is ruben when I need a pub sub?
+            var itemSO = GetComponentInChildren<GridItem>().item;
         }
     }
 
