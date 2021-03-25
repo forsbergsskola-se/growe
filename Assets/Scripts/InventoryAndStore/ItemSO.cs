@@ -40,7 +40,7 @@ namespace InventoryAndStore
                  [HideInInspector] public bool isFertilized;
 
         [HideInInspector] public int timesCut = 0;
-        public UnityAction UpdateSpriteEvent;
+        public Action UpdateSpriteEvent;
 
     }
 }

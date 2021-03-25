@@ -17,7 +17,7 @@ namespace UI {
             plantName.text = _item.name;
             plantLore.text = _item.itemLore;
             plantRarity.text = _item.rarity.ToString();
-            growthSlider.value = _item.growthStage;
+            growthSlider.value = (int) _item.CurrentGrowthStage;
         }
     }
 }

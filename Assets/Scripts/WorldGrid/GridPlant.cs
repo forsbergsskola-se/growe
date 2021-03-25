@@ -15,6 +15,7 @@ public class GridPlant : MonoBehaviour {
 
     public void Init(ItemSO plant) {
         this.plant = plant;
+        plant.UpdateSpriteEvent += UpdateSprite;
         switch (this.plant.itemType)
         { 
             case ItemSO.ItemType.Seed:
@@ -34,11 +35,7 @@ public class GridPlant : MonoBehaviour {
     private void Start() {
         MessageBroker.Instance().SubscribeTo<TimePassedMessage>(TimePassed);
     }
-
-    private void OnEnable()
-    {
-        plant.UpdateSpriteEvent += UpdateSprite;
-    }
+    
     void TimePassed(TimePassedMessage m) {
         Debug.Log("TimePassed Method");
         float deltaTime = m.timePassed;
