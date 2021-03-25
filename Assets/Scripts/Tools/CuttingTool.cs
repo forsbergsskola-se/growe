@@ -19,27 +19,31 @@ public class CuttingTool : MonoBehaviour {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
         if (Physics.Raycast(ray, out var hit)){
-            if (hit.collider.transform.GetChild(2).GetComponent<GridItem>() != null) {
-                var currentPlant = hit.collider.transform.GetChild(2).GetComponent<GridItem>();
-                if (currentPlant.item.growthStage <= 3) return;
+            if (hit.collider.transform.GetChild(2).GetComponent<GridPlant>() != null) {
+                var currentPlant = hit.collider.transform.GetChild(2).GetComponent<GridPlant>();
+                //if (currentPlant.plant.growthStage <= 3) return;
+                if (currentPlant.plant.CurrentGrowthStage != ItemSO.GrowthStage.Growing ||
+                    currentPlant.plant.CurrentGrowthStage != ItemSO.GrowthStage.Mature)
+                    return;
                 
-                var timesCut = currentPlant.item.timesCut;
+                var timesCut = currentPlant.plant.timesCut;
 
                 var shouldDie = Random.Range(0f, 1f);
-                if (shouldDie >= currentPlant.item.survivability || timesCut >= 4) {
+                if (shouldDie >= currentPlant.plant.survivability || timesCut >= 4) {
                     Destroy(currentPlant.transform.parent.gameObject);
                 }
                 else {
-                    currentPlant.item.growthStage = 3;
-                    timesCut += 1;
+                    //currentPlant.plant.growthStage = 3;
+                    currentPlant.plant.CurrentGrowthStage = ItemSO.GrowthStage.Sapling;
+                    currentPlant.plant.timesCut += 1;
                 }
 
                 //TODO: Add cuttings to inventory here.
                 isCutting = false;
-                ItemSO newCutting = Instantiate(currentPlant.item);
+                ItemSO newCutting = Instantiate(currentPlant.plant);
                 newCutting.itemType = ItemSO.ItemType.Cutting;
                 newCutting.timesCut = 0;
-                newCutting.growthStage = 0;
+                newCutting.CurrentGrowthStage = ItemSO.GrowthStage.Cutting;
                 newCutting.survivability = 0;
                 newCutting.hasLifeTime = true;
 
