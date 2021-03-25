@@ -1,19 +1,11 @@
 using System;
+using InventoryAndStore;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 
 public class CuttingTool : MonoBehaviour {
-    [HideInInspector] public bool isCutting;
-    
-    //Temporary values
-    int growthStage = 5, survivability = 50, timesCutten = 0;
+    public static bool isCutting;
 
-    public void Cancel() {
-        //TODO: Add cancel button.
-        //Should only set isCutting to false, should be called from the CancelBtn later.....       
-    }
-    
     void Update() {
         if (Input.touchSupported)
             MobileCut();
@@ -23,28 +15,43 @@ public class CuttingTool : MonoBehaviour {
 
     void PcCut() {
         if (!isCutting) return;
-        //Debug.Log("Started cutting");
         if (!Input.GetMouseButtonDown(0)) return;
-        //Debug.Log("Pressed mouse 0");
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
-        if (Physics.Raycast(ray, out var hit) && growthStage >= 4) {
-            //TODO WHEN ASSET IS DONE: Add a filter so we can only press the plant ALSO replace temp variables with the real ones:
-
-            var shouldDie = Random.Range(0, 100);
-            if (shouldDie >= survivability || timesCutten >= 4) {
-                //Kill Plant
-                Debug.Log($"Plant died : Rolled {shouldDie} out of 100 , Plant was cutten {timesCutten} times.");
-            }
-            else {
-                growthStage = 3;
-                timesCutten += 1;
-                //TODO: Add cuttings to inventory here.
+        if (Physics.Raycast(ray, out var hit)){
+            if (hit.collider.transform.GetChild(2).GetComponent<GridItem>() != null) {
+                var currentPlant = hit.collider.transform.GetChild(2).GetComponent<GridItem>();
+                if (currentPlant.item.growthStage <= 3) return;
                 
-                Debug.Log($"Plant succesfully cutted, current Growth Stage = {growthStage} and Times plant was cutted = {timesCutten}");
+                var timesCut = currentPlant.item.timesCut;
+
+                var shouldDie = Random.Range(0f, 1f);
+                if (shouldDie >= currentPlant.item.survivability || timesCut >= 4) {
+                    Destroy(currentPlant.transform.parent.gameObject);
+                }
+                else {
+                    currentPlant.item.growthStage = 3;
+                    timesCut += 1;
+                }
+
+                //TODO: Add cuttings to inventory here.
+                isCutting = false;
+                ItemSO newCutting = Instantiate(currentPlant.item);
+                newCutting.itemType = ItemSO.ItemType.Cutting;
+                newCutting.timesCut = 0;
+                newCutting.growthStage = 0;
+                newCutting.survivability = 0;
+                newCutting.hasLifeTime = true;
+
+                //newCutting.Icon = cutting icon (?)
+                
+                Inventories.Instance.playerInventory.Add(newCutting);
+                
+                // Debug.Log(timesCut);
+                // Debug.Log(currentPlant.item.growthStage);
+                // currentPlant.item.growthStage = 5;
             }
         }
-        isCutting = false;
     }
 
     void MobileCut() {

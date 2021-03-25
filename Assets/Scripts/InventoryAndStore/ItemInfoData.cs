@@ -20,6 +20,7 @@ namespace InventoryAndStore {
             plantButtonText;
 
         public Button plantButton;
+        public Button CompostButton;
         public ItemData itemData;
 
         public void UpdateItemInfo()

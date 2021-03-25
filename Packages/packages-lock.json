@@ -43,6 +43,15 @@
       },
       "url": "https://unityregistry-pa.googleapis.com"
     },
+    "com.google.firebase.firestore": {
+      "version": "7.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.firebase.app": "7.1.0"
+      },
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
     "com.unity.ads": {
       "version": "3.6.1",
       "depth": 0,
