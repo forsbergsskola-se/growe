@@ -2,10 +2,10 @@ using InventoryAndStore;
 
 namespace Broker.Messages {
     public class PlantCloseUpMessage {
-        public readonly ItemSO item;
+        public readonly ItemSO plant;
 
-        public PlantCloseUpMessage(ItemSO item) {
-            this.item = item;
+        public PlantCloseUpMessage(ItemSO plant) {
+            this.plant = plant;
         }
     }
 }

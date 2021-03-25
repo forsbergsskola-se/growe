@@ -57,9 +57,8 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             Debug.Log("Tap! Zooom the thing. Also there are som TODO's here come check 'em out");
             cameraMovement.StartMoveRoutine(transform
                 .position); 
-            var itemSO = GetComponentInChildren<GridPlant>().plant;
-            var item = GetComponentInChildren<GridItem>().item;
-            MessageBroker.Instance().Send(new PlantCloseUpMessage(item));
+            var plant = GetComponentInChildren<GridPlant>().plant;
+            MessageBroker.Instance().Send(new PlantCloseUpMessage(plant));
         }
     }
 

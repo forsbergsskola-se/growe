@@ -14,7 +14,6 @@ namespace UI {
         public UnityEvent onDisable;
 
         public Text plantName;
-        public Text plantLore;
         public Text plantRarity;
         public Text sellText;
         public Text compostText;
@@ -45,14 +44,14 @@ namespace UI {
             plantRarity.text = _item.rarity.ToString();
             sellText.text = _item.sellValue.ToString();
             compostText.text = _item.compostValue.ToString();
-            growthStage.value = _item.growthStage;
+            growthStage.value = (int) _item.CurrentGrowthStage;
             //TODO soilStatus.value = 
             plantLore.text = _item.itemLore;
         }
 
         void UpdateItem(PlantCloseUpMessage m) {
-            _item = m.item;
-            Debug.Log("Updating _item " + m.item);
+            _item = m.plant;
+            Debug.Log("Updating _item " + m.plant);
             UpdateValues();
         }
     }
