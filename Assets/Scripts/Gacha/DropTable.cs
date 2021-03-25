@@ -11,7 +11,7 @@ namespace Gacha
     public class DropTable : ScriptableObject
     {
         [SerializeField] public List<ItemSO> droppableItems;
-        
+
         public ItemSO GetRandomItem()
         {
             float total = droppableItems.Sum(drop => drop.dropChance);
@@ -19,20 +19,22 @@ namespace Gacha
 
             foreach (var item in droppableItems)
             {
+                ItemSO clone = Instantiate(item);
                 float shinyRoll = Random.Range(0, 100);
-                if (item.dropChance >= roll)
+                if (clone.dropChance >= roll)
                 {
                     if (shinyRoll >= 98)
                     {
-                        item.isShiny = true;
-                        return item;
+                        clone.isShiny = true;
+                        return clone;
                     }
                     else
                     {
-                        return item;
+                        return clone;
                     }
                 }
-                roll -= item.dropChance;
+
+                roll -= clone.dropChance;
             }
 
             throw new SystemException();

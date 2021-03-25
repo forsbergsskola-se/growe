@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using InventoryAndStore;
 using UnityEngine;
 
 public interface IGrid {
@@ -18,7 +20,9 @@ public interface IGrid {
     void MoveObject(GridObject gridObject, Vector3 oldGridPosition, Vector3 gridPosition);
 }
 
-public class Grid : MonoBehaviour, IGrid {
+public class Grid : MonoBehaviour, IGrid
+{
+    //private HashSet<GridObject> gridObjectSet; // TODO save all these objects. 
     public Cell[] cells;
     public int width;
     public int height;
@@ -107,4 +111,18 @@ public class Grid : MonoBehaviour, IGrid {
             cell.GridObject = gridObject;
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        //TODO save the items on the grid
+    }
+}
+
+//TODO the plant things that need to be changed
+class GridSaveInfo
+{
+    public ItemSO item;
+    public Vector2Int loc;
+    public GridPlant.SoilStage soilStage;
+    public float soilStageProgress;
 }
