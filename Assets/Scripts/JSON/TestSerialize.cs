@@ -35,6 +35,7 @@ namespace JSON
 
             if (Input.GetKeyDown(KeyCode.D)) {
                 Currency.FireBaseSetUserInventory(Inventories.Instance.playerInventory);
+                
 
                 /*
                 if(Inventories.Instance.playerInventory.items[0] != null) 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using JSON;
 using UnityEngine;
 
 namespace InventoryAndStore
@@ -20,11 +21,15 @@ namespace InventoryAndStore
             itemSlot.UpdateItemSlots();
         }
 
-        public static int CountItem(IEnumerable<ItemSO> list, ItemSO CountSO)
+        public static bool CheckIfIdentical(ItemSO compare1, ItemSO compare2)
+        {
+            return compare1.name.StartsWith(compare2.name) && 
+                   compare1.isShiny == compare2.isShiny;
+        }
+
+        public static int CountItem(IEnumerable<ItemSO> list, ItemSO countSO)
         { 
-            return list.Count(item => 
-                item.name.StartsWith(CountSO.name) && 
-                item.isShiny == CountSO.isShiny);
+            return list.Count(item => CheckIfIdentical(item, countSO));
         }
     }
 }

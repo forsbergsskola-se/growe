@@ -11,6 +11,7 @@ namespace InventoryAndStore
         {
             foreach (var item in storeBank) 
                 Inventories.Instance.storeInventory.Add(item);
+            Destroy(this);
         }
     }
 }

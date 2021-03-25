@@ -9,10 +9,9 @@ namespace InventoryAndStore
 
         public void TestingButton()
         {
-            foreach (var itemSo in itemSos)
-            {
+            foreach (var itemSo in itemSos) 
                 inventory.Add(itemSo);
-            }
+            
         }
     }
 }
