@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace InventoryAndStore
@@ -16,17 +17,22 @@ namespace InventoryAndStore
 
             foreach (ItemSO itemSO in inventory.items)
             {
-                if (itemSO.maxAmount == 1) 
+                if (itemSO.maxAmount == 1)
                     sortedItems.Add(itemSO);
                 
                 else if (itemSO.maxAmount > 1)
                 {
-                    if (!sortedItems.Exists(stackable => stackable.name == itemSO.name))
+                    foreach (var stackable in sortedItems.Where(stackable => !ComparingArbitraryObjects.Compare(stackable, itemSO)))
                         sortedItems.Add(itemSO);
+
+                    //if (!sortedItems.Exists(stackable => stackable.name == itemSO.name))
+                      //  sortedItems.Add(itemSO);
                 }
             }
         }
 
+        
+        
         private void CreateItemSlot()
         {
             foreach (Transform child in transform) 
