@@ -16,6 +16,9 @@ namespace JSON
                 foreach (var droppableItem in itemSo.seedbag.items.droppableItems) 
                     clone.SeedBagDropTable.Add(SOToClass(droppableItem));
 
+            clone.IsFertilized = itemSo.isFertilized;
+            clone.CurrentGrowthProgress = itemSo.currentGrowthProgress;
+            clone.GrowthStage = itemSo.CurrentGrowthStage;
             clone.TradeState = itemSo.tradeState;
             clone.ItemType = itemSo.itemType;
             clone.Rarity = itemSo.rarity;
@@ -32,6 +35,7 @@ namespace JSON
             clone.ItemLore = itemSo.itemLore;
             clone.Name = itemSo.name;
             clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
+            
             return clone;
         }
         public static ItemSO ClassToSO(ItemClass itemClass)
@@ -45,7 +49,11 @@ namespace JSON
                 foreach (var droppableItem in itemClass.SeedBagDropTable)
                     clone.seedbag.items.droppableItems.Add(ClassToSO(droppableItem));
             }
-                
+            
+            //clone.growthStageSprites
+            clone.isFertilized = itemClass.IsFertilized;
+            clone.currentGrowthProgress = itemClass.CurrentGrowthProgress;
+            clone.CurrentGrowthStage = itemClass.GrowthStage;
             clone.tradeState = itemClass.TradeState;
             clone.itemType = itemClass.ItemType;
             clone.rarity = itemClass.Rarity;
@@ -62,6 +70,7 @@ namespace JSON
             clone.itemLore = itemClass.ItemLore;
             clone.name = itemClass.Name;
             clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
+            
             return clone;
         }
     }
@@ -71,11 +80,14 @@ namespace JSON
         public ItemSO.TradeState TradeState;
         public ItemSO.ItemType ItemType;
         public ItemSO.Rarity Rarity;
+        public ItemSO.GrowthStage GrowthStage;
         public List<ItemClass> SeedBagDropTable;
         public int MAXAmount, CompostValue, SellValue, BuyValue;
-        public bool IsShiny, HasLifeTime;
-        public float LifeTimeHoursInInventory, Survivability, DropChance;
+        public bool IsShiny, HasLifeTime, IsFertilized;
+        public float LifeTimeHoursInInventory, Survivability, DropChance,
+            CurrentGrowthProgress;
         public Vector2 SizeDimensions;
         public string ItemLore, Name, IconPath;
+        public string[] growthStageSprites = new string[5];
     }
 }

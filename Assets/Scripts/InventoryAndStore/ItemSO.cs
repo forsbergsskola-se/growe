@@ -9,7 +9,7 @@ namespace InventoryAndStore
     public class ItemSO : ScriptableObject
     {
         public Sprite icon;
-        public Sprite[] growthStageSprites;
+        public Sprite[] growthStageSprites = new Sprite[5];
         public TradeState tradeState;
         public enum TradeState { Sellable, Buyable, SoulBound }
         public ItemType itemType;

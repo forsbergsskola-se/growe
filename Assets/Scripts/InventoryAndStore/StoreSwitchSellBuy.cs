@@ -27,15 +27,24 @@ namespace InventoryAndStore
 
         private void SwitchToSell()
         {
+            _storeItems = Inventories.Instance.storeInventory.items;
             Inventories.Instance.storeInventory.items.Clear();
             Inventories.Instance.storeInventory.Add(GetSellables());
-            _storeItems = Inventories.Instance.storeInventory.items;
+            foreach (var x in _storeItems)
+            {
+                Debug.Log("sell" + x.name);
+            }
         }
 
         private void SwitchToBuy()
         {
             Inventories.Instance.storeInventory.items.Clear();
             Inventories.Instance.storeInventory.Add(_storeItems);
+            
+            foreach (var x in _storeItems)
+            {
+                Debug.Log("buy" + x.name);
+            }
             _storeItems.Clear();
         }
     }

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 9e8751a013b530a42b5fa8d0811aadd8, type: 3}
   growthStageSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b0dbf681b4b1dc743b447f935a8ab394, type: 3}
+  - {fileID: 21300000, guid: f4ef04a4465cf444eaa383d139af430b, type: 3}
+  - {fileID: 21300000, guid: 9e8751a013b530a42b5fa8d0811aadd8, type: 3}
+  - {fileID: 21300000, guid: dd12865e7e1102a419389d5ce18b8caa, type: 3}
+  - {fileID: 21300000, guid: ade90a310222b0343a880b84d1607511, type: 3}
   tradeState: 0
   itemType: 0
   seedbag:
