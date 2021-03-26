@@ -5,8 +5,8 @@ namespace Broker.Messages {
     public class InventoryUpdateMessage {
         public readonly List<ItemClass> Inventory;
 
-        public InventoryUpdateMessage(List<ItemClass> Inventory) {
-            this.Inventory = Inventory;
+        public InventoryUpdateMessage(List<ItemClass> inventory) {
+            Inventory = inventory;
         }
     }
 }
