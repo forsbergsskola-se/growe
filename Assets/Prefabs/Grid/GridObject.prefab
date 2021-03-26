@@ -157,10 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9254b1e8058e349bc518ac2502325e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plant: {fileID: 0}
   soilStageDuration: 2800
+  plant: {fileID: 0}
   plantSpriteRenderer: {fileID: 1236233958672514567}
-  gridObject: {fileID: 7919882476770317448}
 --- !u!1 &3934613891321521474
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +376,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0.5019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
