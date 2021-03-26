@@ -11,7 +11,7 @@ namespace Saving {
     public class SaveManager : MonoBehaviour {
         private string key;
         private string PLAYER_KEY {
-            get => "TIME_KEY";
+            get => "LIAM_KEY";
         }
 
         private FireBaseAnonymousAuthentication authAnonymous;
