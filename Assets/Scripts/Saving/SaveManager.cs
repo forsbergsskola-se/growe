@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Firebase.Auth;
 using Firebase.Database;
 using InventoryAndStore;
 using JSON;
@@ -11,7 +12,7 @@ namespace Saving {
     public class SaveManager : MonoBehaviour {
         private string key;
         private string PLAYER_KEY {
-            get => "LIAM_KEY";
+            get => FirebaseAuth.DefaultInstance.CurrentUser.UserId;
         }
 
         private FireBaseAnonymousAuthentication authAnonymous;
