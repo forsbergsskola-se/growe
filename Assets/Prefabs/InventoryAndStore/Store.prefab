@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 427391626, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3859227998226078314, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
       propertyPath: m_Text
       value: STORE
@@ -102,10 +106,6 @@ PrefabInstance:
     - target: {fileID: 3859227998855451930, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
       propertyPath: m_Padding.m_Top
       value: -600
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436452345137234795, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6778906075114954008, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
       propertyPath: m_AnchoredPosition.y

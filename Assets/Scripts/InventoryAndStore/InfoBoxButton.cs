@@ -13,7 +13,6 @@ namespace InventoryAndStore
 
         // UI references
         public GameObject inventoryUI;
-        public GameObject testingCanvasUI;
 
         public GameObject gachaPopup;
         public SeedbagPopup seedbagPopup;
@@ -79,7 +78,6 @@ namespace InventoryAndStore
                 ItemInfoData.playerInventory.Remove(itemSO);
 
                 inventoryUI.SetActive(false);
-                testingCanvasUI.SetActive(false);
                 this.gameObject.SetActive(false);
                 // TODO remove item from inventory
                 // TODO place back in inventory if not placed by player
