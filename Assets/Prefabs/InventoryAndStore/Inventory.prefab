@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: -1, y: 24}
   m_SizeDelta: {x: 250, y: 120}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &427391630
@@ -188,10 +188,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 36379cba2fb7c59419bc9a62fb8ebf7f, type: 3}
-    m_FontSize: 50
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 3
     m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -345,7 +345,7 @@ MonoBehaviour:
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 0
     m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -390,7 +390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 50}
+  m_AnchoredPosition: {x: -66, y: 26}
   m_SizeDelta: {x: 250, y: 120}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3859227998317758574
@@ -553,10 +553,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storeBank:
-  - {fileID: 11400000, guid: 28caab3fbce39384aa28a676cf20a1f9, type: 2}
-  - {fileID: 11400000, guid: 8e32f6e82e2299247bea0b58f6b60285, type: 2}
-  - {fileID: 11400000, guid: f88762483f459264f897fe04283230e0, type: 2}
-  - {fileID: 11400000, guid: f88762483f459264f897fe04283230e0, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &3859227998599776820
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +595,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -83}
-  m_SizeDelta: {x: 1029, y: 1460}
+  m_SizeDelta: {x: 1013, y: 1459.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3859227998599776819
 CanvasRenderer:
@@ -745,10 +745,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 36379cba2fb7c59419bc9a62fb8ebf7f, type: 3}
-    m_FontSize: 50
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 0
     m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -791,7 +791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -730}
+  m_AnchoredPosition: {x: 0, y: -729.53485}
   m_SizeDelta: {x: 960, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3859227998855451930
@@ -1076,6 +1076,10 @@ PrefabInstance:
     - target: {fileID: 264346586472254121, guid: 37ae1c7d181b89e46a475ac63ace34e0, type: 3}
       propertyPath: m_Name
       value: SeedbagPopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 264346586472254121, guid: 37ae1c7d181b89e46a475ac63ace34e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1204074892986994615, guid: 37ae1c7d181b89e46a475ac63ace34e0, type: 3}
       propertyPath: m_AnchorMax.y

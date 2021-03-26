@@ -1200,8 +1200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fusionButtom: {fileID: 4323893903492269932}
   inventoryUI: {fileID: 0}
-  testingCanvasUI: {fileID: 0}
-  GachaPopup: {fileID: 0}
+  gachaPopup: {fileID: 0}
   seedbagPopup: {fileID: 0}
 --- !u!1 &2802612281075837635
 GameObject:

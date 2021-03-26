@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 936927787, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 936927787, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3859227998226078314, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
       propertyPath: m_Text
       value: STORE
@@ -103,9 +111,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Store
       objectReference: {fileID: 0}
+    - target: {fileID: 3859227998416068061, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859227998655803591, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859227998655803591, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859227998855451929, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -729.535
+      objectReference: {fileID: 0}
     - target: {fileID: 3859227998855451930, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
       propertyPath: m_Padding.m_Top
       value: -600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778906074391682976, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778906074391682976, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6778906075114954008, guid: 9dbbf1782b8dc8a4094892b433ae5613, type: 3}
       propertyPath: m_AnchoredPosition.y

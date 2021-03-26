@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -262,11 +262,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 36379cba2fb7c59419bc9a62fb8ebf7f, type: 3}
-    m_FontSize: 53
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 71
+    m_MinSize: 3
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -520,7 +520,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 185, y: 0}
-  m_SizeDelta: {x: 114, y: 123}
+  m_SizeDelta: {x: 105, y: 115}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &610739034
 MonoBehaviour:
@@ -642,7 +642,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.000024796, y: -868}
-  m_SizeDelta: {x: 818, y: 136}
+  m_SizeDelta: {x: 500, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &633026971
 MonoBehaviour:
@@ -720,7 +720,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 90e5d67663478574f8fee4c84368a570, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f381b084fcb40ab4bad7d4681f2427b2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1049,11 +1049,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2005825293756335033, guid: 1e070e0e678ab8848b802b3e6a115e91, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 172
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2005825293756335033, guid: 1e070e0e678ab8848b802b3e6a115e91, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 172
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2005825293756335033, guid: 1e070e0e678ab8848b802b3e6a115e91, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1085,11 +1085,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2005825293756335033, guid: 1e070e0e678ab8848b802b3e6a115e91, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -44
+      value: -56
       objectReference: {fileID: 0}
     - target: {fileID: 2005825293756335033, guid: 1e070e0e678ab8848b802b3e6a115e91, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -63
+      value: -275
       objectReference: {fileID: 0}
     - target: {fileID: 2005825293756335033, guid: 1e070e0e678ab8848b802b3e6a115e91, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1230,7 +1230,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.000024795998, y: -1035}
-  m_SizeDelta: {x: 818, y: 136}
+  m_SizeDelta: {x: 500, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269016967
 MonoBehaviour:
@@ -1320,7 +1320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 90e5d67663478574f8fee4c84368a570, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f381b084fcb40ab4bad7d4681f2427b2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1379,8 +1379,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -197.54004, y: 0}
-  m_SizeDelta: {x: 114, y: 123}
+  m_AnchoredPosition: {x: -188, y: 0}
+  m_SizeDelta: {x: 105, y: 115}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1368127805
 MonoBehaviour:
@@ -1929,7 +1929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: 9}
+  m_AnchoredPosition: {x: 1, y: 9}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1829211636
@@ -2122,10 +2122,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 36379cba2fb7c59419bc9a62fb8ebf7f, type: 3}
-    m_FontSize: 53
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 71
     m_Alignment: 4
     m_AlignByGeometry: 0

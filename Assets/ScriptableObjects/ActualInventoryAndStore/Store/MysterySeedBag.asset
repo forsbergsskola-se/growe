@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: MysterySeedBag
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: a892c1c8f4f1df646b421948042c2b49, type: 3}
+  icon: {fileID: 21300000, guid: c0385e68e6dc59b449f959bac41cb8ca, type: 3}
   growthStageSprites: []
   tradeState: 1
   itemType: 3
