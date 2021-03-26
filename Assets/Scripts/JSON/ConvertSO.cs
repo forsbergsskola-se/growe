@@ -34,7 +34,7 @@ namespace JSON
             clone.SizeDimensions = itemSo.sizeDimensions;
             clone.ItemLore = itemSo.itemLore;
             clone.Name = itemSo.name;
-            clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
+            // clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
             
             return clone;
         }
@@ -69,7 +69,7 @@ namespace JSON
             clone.sizeDimensions = itemClass.SizeDimensions;
             clone.itemLore = itemClass.ItemLore;
             clone.name = itemClass.Name;
-            clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
+            // clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
             
             return clone;
         }
