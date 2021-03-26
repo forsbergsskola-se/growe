@@ -26,9 +26,7 @@ namespace InventoryAndStore
                 typeof(T) == typeof(ItemSO) ? 
                     new List<ItemSO>(list.Cast<ItemSO>()) : 
                     (from ItemClass itemClass in list select ConvertSO.ClassToSO(itemClass)).ToList();
-                    
-                    
-
+            
             foreach (ItemSO itemSO in convertList) 
                 items.Add(itemSO);
             
