@@ -13,6 +13,7 @@ namespace InventoryAndStore
 
         // UI references
         public GameObject inventoryUI;
+        public GameObject testingCanvasUI;
 
         public GameObject gachaPopup;
         public SeedbagPopup seedbagPopup;
@@ -70,17 +71,20 @@ namespace InventoryAndStore
         {
             ItemSO itemSO = ItemInfoData.itemData.ItemSO;
 
-            if ((itemSO.itemType == ItemSO.ItemType.Plant && itemSO.tradeState != ItemSO.TradeState.Buyable) ||
-                (itemSO.itemType == ItemSO.ItemType.Seed && itemSO.tradeState != ItemSO.TradeState.Buyable)
-            ) // TODO change to pot with something planted
-            {
-                _plantSpawner.SpawnPlant(itemSO, ItemInfoData.playerInventory);
-                ItemInfoData.playerInventory.Remove(itemSO);
+            if (!ItemInfoData.storeUi.activeSelf) {
+                if (itemSO.itemType == ItemSO.ItemType.Plant && itemSO.tradeState != ItemSO.TradeState.Buyable ||
+                    itemSO.itemType == ItemSO.ItemType.Seed && itemSO.tradeState != ItemSO.TradeState.Buyable)
+                    // TODO change to pot with something planted
+                {
+                    _plantSpawner.SpawnPlant(itemSO, ItemInfoData.playerInventory);
+                    ItemInfoData.playerInventory.Remove(itemSO);
 
-                inventoryUI.SetActive(false);
-                this.gameObject.SetActive(false);
-                // TODO remove item from inventory
-                // TODO place back in inventory if not placed by player
+                    inventoryUI.SetActive(false);
+                    testingCanvasUI.SetActive(false);
+                    this.gameObject.SetActive(false);
+                    // TODO remove item from inventory
+                    // TODO place back in inventory if not placed by player
+                }
             }
 
             if (itemSO.itemType == ItemSO.ItemType.Seedbag && itemSO.tradeState != ItemSO.TradeState.Buyable)

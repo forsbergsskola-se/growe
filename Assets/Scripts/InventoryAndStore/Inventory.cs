@@ -17,7 +17,7 @@ namespace InventoryAndStore
             items.Add(ChangeName(newItemSO));
             itemSlot.UpdateItemSlots();
             
-            Debug.Log("This got called");
+            Debug.Log("Normal Add", this);
         }
 
         public void Add<T>(IEnumerable<T> list)
@@ -29,6 +29,9 @@ namespace InventoryAndStore
             
             foreach (ItemSO itemSO in convertList) 
                 items.Add(ChangeName(itemSO));
+            
+            
+            Debug.Log("This got called", this);
             
             itemSlot.UpdateItemSlots();
         }
