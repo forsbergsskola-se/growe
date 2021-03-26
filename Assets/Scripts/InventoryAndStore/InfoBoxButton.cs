@@ -15,7 +15,7 @@ namespace InventoryAndStore
         public GameObject inventoryUI;
         public GameObject testingCanvasUI;
 
-        public GameObject GachaPopup;
+        public GameObject gachaPopup;
         public SeedbagPopup seedbagPopup;
 
         private void Start()
@@ -91,7 +91,7 @@ namespace InventoryAndStore
                 Inventories.Instance.playerInventory.Remove(itemSO);
                 ItemInfoData.gameObject.SetActive(false);
                 seedbagPopup.UpdateItemDisplay(items);
-                GachaPopup.gameObject.SetActive(true);
+                gachaPopup.gameObject.SetActive(true);
             }
             else
                 switch (itemSO.tradeState)

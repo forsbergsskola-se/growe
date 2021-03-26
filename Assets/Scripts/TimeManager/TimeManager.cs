@@ -20,7 +20,7 @@ namespace TimeManager
         private TimeData time;
     
         //references
-        private IMessageBroker broker;
+        private MessageBroker broker;
         private SaveManager saveManager;
     
         private void OnEnable()

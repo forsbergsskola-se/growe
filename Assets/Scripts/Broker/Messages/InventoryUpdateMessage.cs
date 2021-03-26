@@ -3,10 +3,10 @@ using JSON;
 
 namespace Broker.Messages {
     public class InventoryUpdateMessage {
-        private readonly List<ItemClass> _inventory;
+        public readonly List<ItemClass> Inventory;
 
-        public InventoryUpdateMessage(List<ItemClass> inventory) {
-            _inventory = inventory;
+        public InventoryUpdateMessage(List<ItemClass> Inventory) {
+            this.Inventory = Inventory;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace InventoryAndStore {
         public int maxCompostValue = 15;
         public int fertilizerAmountFromFilledCompost = 1;
         private CurrencyData _data;
-        private InventoryData _inventoryData;
+        public InventoryData InventoryData;
         private AuctionData _auctionData;
         private SaveManager _saveManager;
         private bool _hasLoaded;
@@ -31,19 +31,15 @@ namespace InventoryAndStore {
             _hasLoaded = true;
             var data = dataTask.Result;
             if (data.HasValue && dataTaskInventory.Result.HasValue) {
-                _inventoryData = dataTaskInventory.Result.Value;
+                InventoryData = dataTaskInventory.Result.Value;
                 _data = data.Value;
-                
-                Inventories.Instance.playerInventory.Add(_inventoryData.Inventory);
                 
                 MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
                 MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
-                MessageBroker.Instance().Send(new InventoryUpdateMessage(_inventoryData.Inventory));
+                MessageBroker.Instance().Send(new InventoryUpdateMessage(InventoryData.Inventory));
                 MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
                 MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
-                MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
-                MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
-                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
+                
             }
             else
             {
@@ -69,13 +65,13 @@ namespace InventoryAndStore {
         }
         public void FireBaseSetUserInventory(Inventory inventory) {
             if (!_hasLoaded) return;
-            _inventoryData.Inventory = inventory.items.Select(ConvertSO.SOToClass).ToList();;
-            _saveManager.UploadUserInventory(_inventoryData);
+            InventoryData.Inventory = inventory.items.Select(ConvertSO.SOToClass).ToList();;
+            _saveManager.UploadUserInventory(InventoryData);
         }
         public void FireBaseGetUserInventory() {
             if (!_hasLoaded) return;
             //_saveManager.UploadUserInventory(_inventoryData);
-            MessageBroker.Instance().Send(new InventoryUpdateMessage(_inventoryData.Inventory));
+            MessageBroker.Instance().Send(new InventoryUpdateMessage(InventoryData.Inventory));
         }
 
         public void AddFertilizer(int amount) {

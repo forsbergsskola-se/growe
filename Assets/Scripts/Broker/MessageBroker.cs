@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 
 namespace Broker {
-    public class MessageBroker : IMessageBroker {
+    public class MessageBroker {
         static MessageBroker _instance;
         readonly Dictionary<Type, object> _subscribers = new Dictionary<Type, object>();
     
         public static MessageBroker Instance() {
-            return _instance != null ? _instance : _instance = new MessageBroker();
+            return _instance ??= new MessageBroker();
         }
     
         public void SubscribeTo<TMessage>(Action<TMessage> callBack) {

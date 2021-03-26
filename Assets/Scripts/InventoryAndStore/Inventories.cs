@@ -1,3 +1,5 @@
+using Broker;
+using Broker.Messages;
 using UnityEngine;
 
 namespace InventoryAndStore
@@ -10,7 +12,14 @@ namespace InventoryAndStore
 
         private void Awake()
         {
+            MessageBroker.Instance().SubscribeTo<InventoryUpdateMessage>(UpdateInventory);
             Instance = this;
+        }
+
+        void UpdateInventory(InventoryUpdateMessage firebaseData)
+        {
+            playerInventory.Add(firebaseData.Inventory);
+            MessageBroker.Instance().UnSubscribeFrom<InventoryUpdateMessage>(UpdateInventory);
         }
     }
 }

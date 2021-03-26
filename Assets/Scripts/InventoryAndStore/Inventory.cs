@@ -20,14 +20,16 @@ namespace InventoryAndStore
             Debug.Log("This got called");
         }
 
-        public void Add(IEnumerable<object> ItemSOList)
+        public void Add<T>(IEnumerable<T> list)
         {
-            if (ItemSOList.GetType() != typeof(List<ItemSO>))
-            {
-                ItemSOList = (from ItemClass itemClass in ItemSOList select ConvertSO.ClassToSO(itemClass)).ToList();
-            }
-            
-            foreach (ItemSO itemSO in ItemSOList) 
+            List<ItemSO> convertList = 
+                typeof(T) == typeof(ItemSO) ? 
+                    new List<ItemSO>(list.Cast<ItemSO>()) : 
+                    (from ItemClass itemClass in list select ConvertSO.ClassToSO(itemClass)).ToList();
+                    
+                    
+
+            foreach (ItemSO itemSO in convertList) 
                 items.Add(itemSO);
             
             itemSlot.UpdateItemSlots();
@@ -39,14 +41,14 @@ namespace InventoryAndStore
             itemSlot.UpdateItemSlots();
         }
         
-        public void Remove(IEnumerable<object> ItemSOList)
+        public void Remove<T>(IEnumerable<T> list)
         {
-            if (ItemSOList.GetType() != typeof(List<ItemSO>))
-            {
-                ItemSOList = (from ItemClass itemClass in ItemSOList select ConvertSO.ClassToSO(itemClass)).ToList();
-            }
+            List<ItemSO> convertList = 
+                typeof(T) == typeof(ItemSO) ? 
+                    new List<ItemSO>(list.Cast<ItemSO>()) : 
+                    (from ItemClass itemClass in list select ConvertSO.ClassToSO(itemClass)).ToList();
             
-            foreach (ItemSO itemSO in ItemSOList) 
+            foreach (ItemSO itemSO in convertList) 
                 items.Remove(itemSO);
             
             itemSlot.UpdateItemSlots();

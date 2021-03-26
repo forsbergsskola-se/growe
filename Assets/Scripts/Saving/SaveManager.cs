@@ -24,7 +24,7 @@ namespace Saving {
         }
 
         public void SaveCurrency(CurrencyData data) {
-            _database.GetReference(PLAYER_KEY).Child("Currecny").SetRawJsonValueAsync(JsonUtility.ToJson(data));
+            _database.GetReference(PLAYER_KEY).Child("Currency").SetRawJsonValueAsync(JsonUtility.ToJson(data));
         }
         public void UploadToAuction(AuctionData data) {
             _database.GetReference(AUCTION_KEY).Child("AuctionHouse").Push().SetRawJsonValueAsync(JsonConvert.SerializeObject(data));
@@ -36,7 +36,7 @@ namespace Saving {
 
 
         public async Task<CurrencyData?> LoadCurrency() {
-            var dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("Currecny").GetValueAsync();
+            var dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("Currency").GetValueAsync();
             if (!dataSnapshot.Exists) {
                 return null;
             }
