@@ -16,7 +16,11 @@ namespace Gacha
             for (int i = 0; i < amount; i++)
             {
                 var randomItem = items.GetRandomItem();
-                droppedItem[i] = randomItem;
+                if (randomItem.tradeState == ItemSO.TradeState.Sellable)
+                {
+                    droppedItem[i] = randomItem;
+                }
+                else Debug.LogWarning($"Removed {randomItem} from seed bag due to wrong tradestate");
             }
             inventory.Add(droppedItem);
 
