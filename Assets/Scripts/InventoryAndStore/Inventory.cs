@@ -14,7 +14,7 @@ namespace InventoryAndStore
 
         public void Add(ItemSO newItemSO)
         {
-            items.Add(newItemSO);
+            items.Add(ChangeName(newItemSO));
             itemSlot.UpdateItemSlots();
             
             Debug.Log("This got called");
@@ -28,7 +28,7 @@ namespace InventoryAndStore
                     (from ItemClass itemClass in list select ConvertSO.ClassToSO(itemClass)).ToList();
             
             foreach (ItemSO itemSO in convertList) 
-                items.Add(itemSO);
+                items.Add(ChangeName(itemSO));
             
             itemSlot.UpdateItemSlots();
         }
@@ -66,6 +66,16 @@ namespace InventoryAndStore
         public static int CountItem(IEnumerable<ItemSO> list, ItemSO countSO)
         { 
             return list.Count(item => CheckIfIdentical(item, countSO));
+        }
+
+        public ItemSO ChangeName(ItemSO itemSO)
+        {
+            if (itemSO == null) return null;
+            string input = itemSO.name;
+            int index = input.IndexOf("(");
+            if (index > 0)
+                itemSO.name = input.Substring(0, index);
+            return itemSO;
         }
     }
 }

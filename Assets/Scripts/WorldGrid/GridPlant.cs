@@ -5,16 +5,19 @@ using InventoryAndStore;
 using UnityEngine;
 
 public class GridPlant : MonoBehaviour {
-    public ItemSO plant;
-    public enum SoilStage { Dry = 0, GettingDry = 1, Moist = 2, Watered = 3, OverWatered = 4 }
-    private SoilStage currentSoilStage;
-
-    [Tooltip("Controls how long soil stages last")] 
+    
+    [Header("Settings")]
+    [Tooltip("Controls how long soil stages last")]
     public float soilStageDuration = 28800f;
-    // variable
+    
+    // variables
     private float soilStageProgress;
+    private SoilStage currentSoilStage;
     //references
+    public ItemSO plant;
     public SpriteRenderer plantSpriteRenderer;
+    
+    public enum SoilStage { Dry = 0, GettingDry = 1, Moist = 2, Watered = 3, OverWatered = 4 }
 
     public void Init(ItemSO plant, Grid grid) {
         this.plant = plant;
@@ -72,6 +75,7 @@ public class GridPlant : MonoBehaviour {
             if (plant.CurrentGrowthStage != ItemSO.GrowthStage.Mature)
             {
                 plant.CurrentGrowthStage += 1;
+                plant.isFertilized = false;
                 UpdateSprite();
             }
             plant.currentGrowthProgress = 0;
@@ -92,14 +96,9 @@ public class GridPlant : MonoBehaviour {
             Debug.Log(currentSoilStage);
         }
 
-        currentSoilStage = SoilStage.Watered;
+        currentSoilStage = SoilStage.Watered; //TODO temporary here to show the plant growing during the presentation
     }
-    //
-    // void UpdateSprite(UpdateSpriteMessage m) 
-    // {
-    //     UpdateSprite();
-    // }
-    
+
     void UpdateSprite()
     {
         Debug.Log("Update sprite, growth stage is " + plant.CurrentGrowthStage);
@@ -117,7 +116,6 @@ public class GridPlant : MonoBehaviour {
 
     private void OnDisable()
     {
-        //MessageBroker.Instance().UnSubscribeFrom<UpdateSpriteMessage>(UpdateSprite);
         plant.UpdateSpriteEvent -= UpdateSprite;
         MessageBroker.Instance().UnSubscribeFrom<TimePassedMessage>(TimePassed);
     }

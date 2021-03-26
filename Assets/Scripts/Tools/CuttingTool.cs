@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class CuttingTool : MonoBehaviour {
     public static bool isCutting;
+    [SerializeField] public int chanceOfDeath;
 
     void Update() {
         if (Input.touchSupported)
@@ -17,6 +18,7 @@ public class CuttingTool : MonoBehaviour {
         if (!isCutting) return;
         if (!Input.GetMouseButtonDown(0)) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var chance = chanceOfDeath / 100;
         
         if (Physics.Raycast(ray, out var hit)){
             if (hit.collider.transform.GetChild(2).GetComponent<GridPlant>() != null) {
@@ -27,9 +29,11 @@ public class CuttingTool : MonoBehaviour {
                     return;
                 
                 var timesCut = currentPlant.plant.timesCut;
+                var canDie = currentPlant.plant.survivability * chance;
+                Debug.Log(canDie);
 
-                var shouldDie = Random.Range(0f, 1f);
-                if (shouldDie >= currentPlant.plant.survivability || timesCut >= 4) {
+                var range = Random.Range(0, 100);
+                if (range <= canDie || timesCut >= 4) {
                     Destroy(currentPlant.transform.parent.gameObject);
                 }
                 else {
