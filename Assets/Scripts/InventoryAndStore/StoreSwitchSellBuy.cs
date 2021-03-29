@@ -27,13 +27,10 @@ namespace InventoryAndStore
 
         private void SwitchToSell()
         {
-            _storeItems = Inventories.Instance.storeInventory.items;
+            foreach (var x in Inventories.Instance.storeInventory.items) 
+                _storeItems.Add(x);
             Inventories.Instance.storeInventory.items.Clear();
             Inventories.Instance.storeInventory.Add(GetSellables());
-            foreach (var x in _storeItems)
-            {
-                Debug.Log("sell" + x.name);
-            }
         }
 
         private void SwitchToBuy()
@@ -41,10 +38,6 @@ namespace InventoryAndStore
             Inventories.Instance.storeInventory.items.Clear();
             Inventories.Instance.storeInventory.Add(_storeItems);
             
-            foreach (var x in _storeItems)
-            {
-                Debug.Log("buy" + x.name);
-            }
             _storeItems.Clear();
         }
     }
