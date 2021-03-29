@@ -101,11 +101,11 @@ public class Grid : MonoBehaviour, IGrid {
         if (IsFree(toPosition, gridObject.Size)) {
             gridObject.isOnGrid = true;
             AddObject(gridObject, toPosition);
-            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject, toPosition));
+            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject));
             return true;
         } else {
             AddObject(gridObject, fromPosition);
-            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject, fromPosition));
+            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject));
             return false;
         }
     }
@@ -124,26 +124,8 @@ public class Grid : MonoBehaviour, IGrid {
 
     private void OnApplicationQuit()
     {
-        Debug.Log("on application quit");
-        List<GridSaveInfo> gridSaveInfos = new List<GridSaveInfo>();
-        foreach (var item in itemsOnGrid)
-        {
-            gridSaveInfos.Add(item.Value);
-        }
-        GridSaveWrapper gridSaveWrapper = new GridSaveWrapper();
-        gridSaveWrapper.itemsOnGrid = gridSaveInfos;
-        FindObjectOfType<SaveManager>().SaveGrid(gridSaveWrapper);
+        FindObjectOfType<SaveManager>().SaveGrid(itemsOnGrid);
     }
-
-    public void SaveGrid()
-    {
-        
-    }
-}
-
-public struct GridSaveWrapper
-{
-    public List<GridSaveInfo> itemsOnGrid;
 }
 
 public class GridSaveInfo
@@ -151,14 +133,12 @@ public class GridSaveInfo
     public ItemClass item;
     public GridPlant.SoilStage soilStage;
     public float soilStageProgress;
-    public Vector2Int loc;
 
-    public GridSaveInfo(GridObject gridObject, Vector2Int loc)
+    public GridSaveInfo(GridObject gridObject)
     {
         GridPlant gridPlant = gridObject.GetComponentInChildren<GridPlant>();
         item = ConvertSO.SOToClass(gridPlant.plant);
         soilStage = gridPlant.currentSoilStage;
         soilStageProgress = gridPlant.soilStageProgress;
-        this.loc = loc;
     }
 }
