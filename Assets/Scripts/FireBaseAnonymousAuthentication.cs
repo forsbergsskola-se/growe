@@ -4,20 +4,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class FireBaseAnonymousAuthentication : MonoBehaviour {
-
     // public UnityEvent fetchedUser;
 
     FirebaseAuth _auth;
     FirebaseUser _currentUser;
+
     public string GetAnonymousUserId() {
         return _currentUser.UserId;
     }
+
     public IEnumerator SigninAnonymously() {
         _auth = FirebaseAuth.DefaultInstance;
+        if (_auth.CurrentUser != null) {
+            SceneManager.LoadScene("MainMenu");
+            yield break;
+        }
+
         var registerTask = _auth.SignInAnonymouslyAsync();
-        
-        yield return new WaitUntil(()=>registerTask.IsCompleted);
-        
+
+        yield return new WaitUntil(() => registerTask.IsCompleted);
+
         _currentUser = registerTask.Result;
 
         SceneManager.LoadScene("MainMenu"); // to close initial scene
@@ -26,8 +32,7 @@ public class FireBaseAnonymousAuthentication : MonoBehaviour {
 
     //TODO: sign out button should be created in main menu
     //TODO: this can be created in Email authentication too
-    public void SignOutAnonymousButton()
-    {
+    public void SignOutAnonymousButton() {
         _auth.SignOut();
     }
 }

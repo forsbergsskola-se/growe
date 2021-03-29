@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Broker;
 using Broker.Messages;
+using JSON;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -59,7 +62,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             cameraMovement.StartMoveRoutine(transform
                 .position); 
             var plant = GetComponentInChildren<GridPlant>().plant;
-            MessageBroker.Instance().Send(new PlantCloseUpMessage(plant));
+            MessageBroker.Instance().Send(new PlantCloseUpMessage(plant, gameObject));
         }
     }
 

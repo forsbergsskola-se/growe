@@ -1,4 +1,3 @@
-using System;
 using Broker;
 using Broker.Messages;
 using InventoryAndStore;
@@ -8,7 +7,8 @@ using UnityEngine.UI;
 
 namespace UI {
     public class PlantCloseUp : MonoBehaviour {
-        ItemSO _item;
+        ItemSO _plant;
+        GameObject _plantParentObject;
 
         public UnityEvent onEnable;
         public UnityEvent onDisable;
@@ -20,7 +20,12 @@ namespace UI {
         public Slider growthStage;
         public Slider soilStatus;
         public Text plantLore;
-        
+
+        public void CompostPlant() {
+            FindObjectOfType<Currency>().AddCompost(_plant.compostValue);
+            //TODO Destroy(_plantParentObject);
+        }
+
         void Awake() {
             MessageBroker.Instance().SubscribeTo<PlantCloseUpMessage>(UpdateItem);
             gameObject.SetActive(false);
@@ -39,18 +44,19 @@ namespace UI {
         }
 
         void UpdateValues() {
-            plantName.text = _item.name;
-            plantLore.text = _item.itemLore;
-            plantRarity.text = _item.rarity.ToString();
-            sellText.text = _item.sellValue.ToString();
-            compostText.text = _item.compostValue.ToString();
-            growthStage.value = (int) _item.CurrentGrowthStage + 1;
+            plantName.text = _plant.name;
+            plantLore.text = _plant.itemLore;
+            plantRarity.text = _plant.rarity.ToString();
+            sellText.text = _plant.sellValue.ToString();
+            compostText.text = _plant.compostValue.ToString();
+            growthStage.value = (int) _plant.CurrentGrowthStage + 1;
             //TODO soilStatus.value = 
-            plantLore.text = _item.itemLore;
+            plantLore.text = _plant.itemLore;
         }
 
         void UpdateItem(PlantCloseUpMessage m) {
-            _item = m.plant;
+            _plant = m.plant;
+            _plantParentObject = m.plantParentObject;
             Debug.Log("Updating _item " + m.plant);
             UpdateValues();
         }

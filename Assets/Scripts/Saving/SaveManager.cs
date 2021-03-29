@@ -11,8 +11,10 @@ using UnityEngine;
 namespace Saving {
     public class SaveManager : MonoBehaviour {
         private string key;
-        private string PLAYER_KEY {
-            get => FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+        private string PLAYER_KEY
+        {
+            get => "LIAM_KEY2";
+            //FirebaseAuth.DefaultInstance.CurrentUser.UserId;
         }
 
         private FireBaseAnonymousAuthentication authAnonymous;
@@ -22,6 +24,8 @@ namespace Saving {
         //TODO: reference keys should be
         private void Start() {
             _database = FirebaseDatabase.GetInstance("https://growe-e7606-default-rtdb.europe-west1.firebasedatabase.app/");
+
+            _database.SetPersistenceEnabled(false);
         }
 
         public void SaveCurrency(CurrencyData data) {
