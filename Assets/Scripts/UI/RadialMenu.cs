@@ -94,6 +94,8 @@ namespace UI {
                         toolSelected = false;
                         break;
                 }
+                
+                MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
             }
         }
     }
