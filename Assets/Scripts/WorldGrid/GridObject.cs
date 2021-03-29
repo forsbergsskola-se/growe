@@ -11,6 +11,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public Vector2Int Size;
     Vector3 dragStartPosition;
     private bool isDragging;
+    private bool toolSelected;
     private CameraMovement cameraMovement;
     public bool notMoveable;
     public bool isOnGrid;
@@ -23,6 +24,8 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         if (!isOnGrid)
             return;
         grid.AddObject(this, this.transform.localPosition);
+        
+        MessageBroker.Instance().SubscribeTo<ToolSelectedMessage>(UpdateToolSelected);
     }
 
     public void OnDrag(PointerEventData eventData) {
@@ -57,13 +60,17 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     }
 
     public void OnPointerUp(PointerEventData eventData) {
-        if (!isDragging && !notMoveable) {
+        if (!isDragging && !notMoveable && !toolSelected) {
             Debug.Log("Tap! Zooom the thing. Also there are som TODO's here come check 'em out");
             cameraMovement.StartMoveRoutine(transform
                 .position); 
             var plant = GetComponentInChildren<GridPlant>().plant;
             MessageBroker.Instance().Send(new PlantCloseUpMessage(plant, this));
         }
+    }
+
+    void UpdateToolSelected(ToolSelectedMessage m) {
+        toolSelected = m.toolSelected;
     }
 
     public void DestroyGridObj() {
