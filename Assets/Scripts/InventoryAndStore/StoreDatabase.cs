@@ -34,7 +34,7 @@ namespace InventoryAndStore
             clone.isNew = true;
             
             Inventories.Instance.playerInventory.Add(clone);
-            Inventories.Instance.storeInventory.Remove(itemSo);
+            //Inventories.Instance.storeInventory.Remove(itemSo);
         }
     }
 }
