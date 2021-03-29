@@ -13,8 +13,7 @@ namespace Saving {
         private string key;
         private string PLAYER_KEY
         {
-            get => "LIAM_KEY2";
-            //FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            get => FirebaseAuth.DefaultInstance.CurrentUser.UserId;
         }
 
         private FireBaseAnonymousAuthentication authAnonymous;
