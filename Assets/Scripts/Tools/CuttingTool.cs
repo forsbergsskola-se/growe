@@ -46,8 +46,9 @@ public class CuttingTool : MonoBehaviour {
                         currentPlant.plant.CurrentGrowthStage = ItemSO.GrowthStage.Sapling;
                         currentPlant.plant.timesCut += 1;
                     }
-                    
+
                     isCutting = false;
+                    MessageBroker.Instance().Send(new ToolSelectedMessage(false));
                     ItemSO newCutting = Instantiate(currentPlant.plant);
                     newCutting.itemType = ItemSO.ItemType.Cutting;
                     newCutting.timesCut = 0;
