@@ -40,10 +40,6 @@ namespace JSON
             for (int i = 0; i < itemSo.growthStageSprites.Length; i++) 
                 clone.GrowthStageSprites[i] = AssetDatabase.GetAssetPath(itemSo.growthStageSprites[i]);
             
-            foreach (var x in clone.GrowthStageSprites)
-                Debug.Log(x);
-            
-
             return clone;
         }
         public static ItemSO ClassToSO(ItemClass itemClass)
@@ -58,7 +54,6 @@ namespace JSON
                     clone.seedbag.items.droppableItems.Add(ClassToSO(droppableItem));
             }
             
-            //clone.growthStageSprites
             clone.isFertilized = itemClass.IsFertilized;
             clone.currentGrowthProgress = itemClass.CurrentGrowthProgress;
             clone.CurrentGrowthStage = itemClass.GrowthStage;
@@ -81,10 +76,6 @@ namespace JSON
             clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
             for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) 
                 clone.growthStageSprites[i] = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.GrowthStageSprites[i], typeof(Sprite));
-
-            foreach (var x in clone.growthStageSprites)
-                Debug.Log(AssetDatabase.GetAssetPath(x));
-
             return clone;
         }
     }
