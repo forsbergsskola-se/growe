@@ -42,5 +42,10 @@ namespace InventoryAndStore {
             if (itemSO.tradeState == ItemSO.TradeState.Buyable) plantButtonText.text = "Buy";
             else if (itemSO.tradeState == ItemSO.TradeState.Sellable && storeUi.activeSelf) plantButtonText.text = "Sell";
         }
+
+        public void CompostPlant() {
+            FindObjectOfType<Currency>().AddCompost(itemData.ItemSO.compostValue);
+            //TODO destroy plant from inventory
+        }
     }
 }
