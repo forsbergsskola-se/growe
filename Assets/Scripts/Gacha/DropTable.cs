@@ -24,6 +24,7 @@ namespace Gacha
                 {
                     ItemSO clone = Instantiate(item);
                     clone.isNew = true;
+                    //TODO: the only way to get shiny now is through fusion
                     if (shinyRoll >= 98) clone.isShiny = true;
                     return clone;
                 }
