@@ -47,49 +47,33 @@ public class Grid : MonoBehaviour, IGrid {
         StartCoroutine(LoadGridDataFromDatabase());
     }
 
-    private IEnumerator LoadGridDataFromDatabase()
-    {
+    private IEnumerator LoadGridDataFromDatabase() {
         yield return new WaitForSeconds(2f);
         var dataTask = FindObjectOfType<SaveManager>().LoadGrid();
-        yield return new WaitUntil( ()=> dataTask.IsCompleted);
+        yield return new WaitUntil(() => dataTask.IsCompleted);
         var savedData = dataTask.Result;
-        if (savedData == null || savedData.Count == 0)
-        {
+        if (savedData == null || savedData.Count == 0) {
             Debug.LogWarning("not found", this);
             yield return null;
         }
+
+        if (savedData != null)
+
+            foreach (var gridSaveInfo in savedData) {
+                GridObject gridObjectInstance = Instantiate(gridObjectPrefab, this.transform);
+                GridPlant plantRef = gridObjectInstance.GetComponentInChildren<GridPlant>();
+                plantRef.plant = ConvertSO.ClassToSO(gridSaveInfo.item);
+                plantRef.currentSoilStage = gridSaveInfo.soilStage;
+                plantRef.soilStageProgress = gridSaveInfo.soilStageProgress;
+                Vector2Int loc = new Vector2Int(gridSaveInfo.x, gridSaveInfo.y);
+                gridObjectInstance.transform.localPosition = new Vector3Int(loc.x, loc.y, 0);
+                gridObjectInstance.isOnGrid = true;
+                Vector2Int itemDimensions = Vector2Int.FloorToInt(plantRef.plant.sizeDimensions);
+                gridObjectInstance.Size = itemDimensions;
+                gridObjectInstance.transform.localScale = new Vector3(itemDimensions.x, itemDimensions.y, 1.0f);
+                plantRef.InitFromSave(plantRef.plant, this);
+            }
         
-        foreach (var gridSaveInfo in savedData)
-        {
-            GridObject gridObjectInstance = Instantiate(gridObjectPrefab, this.transform);
-            GridPlant plantRef = gridObjectInstance.GetComponentInChildren<GridPlant>(); 
-            plantRef.plant = ConvertSO.ClassToSO(gridSaveInfo.item);
-            plantRef.currentSoilStage = gridSaveInfo.soilStage;
-            plantRef.soilStageProgress = gridSaveInfo.soilStageProgress;
-            Vector2Int loc = new Vector2Int(gridSaveInfo.x, gridSaveInfo.y);
-            gridObjectInstance.transform.localPosition = new Vector3Int(loc.x,loc.y, 0);
-            gridObjectInstance.isOnGrid = true;
-            Vector2Int itemDimensions = Vector2Int.FloorToInt(plantRef.plant.sizeDimensions);
-            gridObjectInstance.Size = itemDimensions;
-            gridObjectInstance.transform.localScale = new Vector3(itemDimensions.x, itemDimensions.y, 1.0f);
-            plantRef.InitFromSave(plantRef.plant, this);
-        }
-
-        /*
-         *             var dataTaskInventory = _saveManager.LoadInventory();
-            yield return new WaitUntil(() => dataTaskInventory.IsCompleted);
-
-            _hasLoaded = true;
-            var data = dataTask.Result;
-            if (data.HasValue) {
-         */
-
-        /*
-        GridPlant gridPlant = gridObject.GetComponentInChildren<GridPlant>();
-        item = ConvertSO.SOToClass(gridPlant.plant);
-        soilStage = gridPlant.currentSoilStage;
-        soilStageProgress = gridPlant.soilStageProgress;
-         */
     }
 
     void SpawnGridCells() {
@@ -137,7 +121,7 @@ public class Grid : MonoBehaviour, IGrid {
 
         if (gridObject.isOnGrid)
             RemoveObject(gridObject, fromPosition);
-        
+
         if (IsFree(toPosition, gridObject.Size)) {
             gridObject.isOnGrid = true;
             AddObject(gridObject, toPosition);
@@ -163,11 +147,9 @@ public class Grid : MonoBehaviour, IGrid {
         }
     }
 
-    private void OnApplicationQuit()
-    {
+    private void OnApplicationQuit() {
         List<GridSaveInfo> gridSaveInfoList = new List<GridSaveInfo>();
-        foreach (var pair in itemsOnGrid)
-        {
+        foreach (var pair in itemsOnGrid) {
             if (pair.Value.notMoveable)
                 continue;
             GridSaveInfo gridSaveInfo;
@@ -179,12 +161,12 @@ public class Grid : MonoBehaviour, IGrid {
             gridSaveInfo.y = pair.Key.y;
             gridSaveInfoList.Add(gridSaveInfo);
         }
+
         FindObjectOfType<SaveManager>().SaveGrid(gridSaveInfoList);
     }
 }
 
-public struct GridSaveInfo
-{
+public struct GridSaveInfo {
     public ItemClass item;
     public GridPlant.SoilStage soilStage;
     public float soilStageProgress;
