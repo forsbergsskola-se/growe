@@ -1,8 +1,6 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Firebase.Auth;
-using InventoryAndStore;
 using JSON;
 using Saving;
 using UnityEngine;
@@ -24,11 +22,12 @@ public interface IGrid {
 }
 
 public class Grid : MonoBehaviour, IGrid {
-    public Dictionary<Vector2Int, GridSaveInfo> itemsOnGrid = new Dictionary<Vector2Int, GridSaveInfo>();
+    public Dictionary<Vector2Int, GridObject> itemsOnGrid = new Dictionary<Vector2Int, GridObject>();
     public Cell[] cells;
     public int width;
     public int height;
     public Cell cellPrefab;
+    public GridObject gridObjectPrefab;
 
     public void AddObject(GridObject gridObject, Vector3 gridPosition) {
         AddObject(gridObject, Vector2Int.FloorToInt(gridPosition));
@@ -45,7 +44,53 @@ public class Grid : MonoBehaviour, IGrid {
 
     void Awake() {
         SpawnGridCells();
-        Debug.Log(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
+        StartCoroutine(LoadGridDataFromDatabase());
+    }
+
+    private IEnumerator LoadGridDataFromDatabase()
+    {
+        yield return new WaitForSeconds(2f);
+        var dataTask = FindObjectOfType<SaveManager>().LoadGrid();
+        yield return new WaitUntil( ()=> dataTask.IsCompleted);
+        //Dictionary<Vector2Int, GridSaveInfo>? savedData = dataTask.Result;
+        var savedData = dataTask.Result;
+        if (savedData == null || savedData.Count == 0)
+        {
+            Debug.LogWarning("not found", this);
+            yield return null;
+        }
+        
+        foreach (var gridSaveInfo in savedData)
+        {
+            GridObject gridObjectInstance = Instantiate(gridObjectPrefab, this.transform);
+            GridPlant plantRef = gridObjectInstance.GetComponentInChildren<GridPlant>(); 
+            plantRef.plant = ConvertSO.ClassToSO(gridSaveInfo.item);
+            plantRef.currentSoilStage = gridSaveInfo.soilStage;
+            plantRef.soilStageProgress = gridSaveInfo.soilStageProgress;
+            Vector2Int loc = new Vector2Int(gridSaveInfo.x, gridSaveInfo.y);
+            AddObject(gridObjectInstance, loc);
+            itemsOnGrid.Add(loc, gridObjectInstance);
+
+            Vector2Int itemDimensions = Vector2Int.FloorToInt(plantRef.plant.sizeDimensions);
+            gridObjectInstance.transform.localScale = new Vector3(itemDimensions.x, itemDimensions.y, 1.0f);
+            plantRef.InitFromSave(plantRef.plant, this);
+        }
+
+        /*
+         *             var dataTaskInventory = _saveManager.LoadInventory();
+            yield return new WaitUntil(() => dataTaskInventory.IsCompleted);
+
+            _hasLoaded = true;
+            var data = dataTask.Result;
+            if (data.HasValue) {
+         */
+
+        /*
+        GridPlant gridPlant = gridObject.GetComponentInChildren<GridPlant>();
+        item = ConvertSO.SOToClass(gridPlant.plant);
+        soilStage = gridPlant.currentSoilStage;
+        soilStageProgress = gridPlant.soilStageProgress;
+         */
     }
 
     void SpawnGridCells() {
@@ -94,28 +139,30 @@ public class Grid : MonoBehaviour, IGrid {
         if (gridObject.isOnGrid)
         {
             RemoveObject(gridObject, fromPosition);
-            itemsOnGrid.Remove(fromPosition);
+            //itemsOnGrid.Remove(fromPosition);
         }
             
         if (IsFree(toPosition, gridObject.Size)) {
             gridObject.isOnGrid = true;
             AddObject(gridObject, toPosition);
-            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject));
+            //itemsOnGrid.Add(toPosition, gridObject);
             return true;
         } else {
             AddObject(gridObject, fromPosition);
-            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject));
+            //itemsOnGrid.Add(toPosition, gridObject);
             return false;
         }
     }
 
     public void RemoveObject(GridObject gridObject, Vector2Int fromPosition) {
+        itemsOnGrid.Remove(fromPosition);
         foreach (var cell in GetCellsInRect(fromPosition, gridObject.Size)) {
             cell.GridObject = null;
         }
     }
 
     void AddObject(GridObject gridObject, Vector2Int toPosition) {
+        itemsOnGrid.Add(toPosition, gridObject);
         foreach (var cell in GetCellsInRect(toPosition, gridObject.Size)) {
             cell.GridObject = gridObject;
         }
@@ -123,21 +170,27 @@ public class Grid : MonoBehaviour, IGrid {
 
     private void OnApplicationQuit()
     {
-        FindObjectOfType<SaveManager>().SaveGrid(itemsOnGrid);
+        List<GridSaveInfo> gridSaveInfoList = new List<GridSaveInfo>();
+        foreach (var pair in itemsOnGrid)
+        {
+            GridSaveInfo gridSaveInfo;
+            GridPlant gridPlant = pair.Value.GetComponentInChildren<GridPlant>();
+            gridSaveInfo.item = ConvertSO.SOToClass(gridPlant.plant);
+            gridSaveInfo.soilStage = gridPlant.currentSoilStage;
+            gridSaveInfo.soilStageProgress = gridPlant.soilStageProgress;
+            gridSaveInfo.x = pair.Key.x;
+            gridSaveInfo.y = pair.Key.y;
+            gridSaveInfoList.Add(gridSaveInfo);
+        }
+        FindObjectOfType<SaveManager>().SaveGrid(gridSaveInfoList);
     }
 }
 
-public class GridSaveInfo
+public struct GridSaveInfo
 {
     public ItemClass item;
     public GridPlant.SoilStage soilStage;
     public float soilStageProgress;
-
-    public GridSaveInfo(GridObject gridObject)
-    {
-        GridPlant gridPlant = gridObject.GetComponentInChildren<GridPlant>();
-        item = ConvertSO.SOToClass(gridPlant.plant);
-        soilStage = gridPlant.currentSoilStage;
-        soilStageProgress = gridPlant.soilStageProgress;
-    }
+    public int x;
+    public int y;
 }

@@ -43,6 +43,14 @@ public class GridPlant : MonoBehaviour {
         UpdateSprite();
     }
 
+    public void InitFromSave(ItemSO plant, Grid grid)
+    {
+        this.plant = plant;
+        this.grid = grid;
+        plant.UpdateSpriteEvent += UpdateSprite;
+        UpdateSprite();
+    }
+
     private void Start() {
         MessageBroker.Instance().SubscribeTo<TimePassedMessage>(TimePassed);
     }
