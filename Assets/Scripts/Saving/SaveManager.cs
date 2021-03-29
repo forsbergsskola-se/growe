@@ -86,5 +86,10 @@ namespace Saving {
             }
             return JsonUtility.FromJson<AuctionData>(dataSnapshot.GetRawJsonValue());
         }
+        
+        public void SaveGrid(GridSaveWrapper gridwrapper) {
+            _database.GetReference(PLAYER_KEY).Child("grid").SetRawJsonValueAsync(JsonUtility.ToJson(gridwrapper));
+        }
+        
     }
 }

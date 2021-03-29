@@ -4,6 +4,7 @@ using System.Linq;
 using Firebase.Auth;
 using InventoryAndStore;
 using JSON;
+using Saving;
 using UnityEngine;
 
 public interface IGrid {
@@ -23,7 +24,7 @@ public interface IGrid {
 }
 
 public class Grid : MonoBehaviour, IGrid {
-    public Dictionary<Vector2Int, ItemClass> itemsOnGrid = new Dictionary<Vector2Int, ItemClass>();
+    public Dictionary<Vector2Int, GridSaveInfo> itemsOnGrid = new Dictionary<Vector2Int, GridSaveInfo>();
     //private HashSet<GridObject> gridObjectSet; // TODO save all these objects. 
     public Cell[] cells;
     public int width;
@@ -90,15 +91,21 @@ public class Grid : MonoBehaviour, IGrid {
 
     bool TryMoveObject(GridObject gridObject, Vector2Int fromPosition, Vector2Int toPosition) {
         if (toPosition.x < 0 || toPosition.y < 0) return false;
-        
+
         if (gridObject.isOnGrid)
+        {
             RemoveObject(gridObject, fromPosition);
+            itemsOnGrid.Remove(fromPosition);
+        }
+            
         if (IsFree(toPosition, gridObject.Size)) {
             gridObject.isOnGrid = true;
             AddObject(gridObject, toPosition);
+            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject, toPosition));
             return true;
         } else {
             AddObject(gridObject, fromPosition);
+            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject, fromPosition));
             return false;
         }
     }
@@ -117,15 +124,41 @@ public class Grid : MonoBehaviour, IGrid {
 
     private void OnApplicationQuit()
     {
-        //TODO save the items on the grid
+        Debug.Log("on application quit");
+        List<GridSaveInfo> gridSaveInfos = new List<GridSaveInfo>();
+        foreach (var item in itemsOnGrid)
+        {
+            gridSaveInfos.Add(item.Value);
+        }
+        GridSaveWrapper gridSaveWrapper = new GridSaveWrapper();
+        gridSaveWrapper.itemsOnGrid = gridSaveInfos;
+        FindObjectOfType<SaveManager>().SaveGrid(gridSaveWrapper);
+    }
+
+    public void SaveGrid()
+    {
+        
     }
 }
 
-//TODO the plant things that need to be changed
-class GridSaveInfo
+public struct GridSaveWrapper
 {
-    public ItemSO item;
-    public Vector2Int loc;
+    public List<GridSaveInfo> itemsOnGrid;
+}
+
+public class GridSaveInfo
+{
+    public ItemClass item;
     public GridPlant.SoilStage soilStage;
     public float soilStageProgress;
+    public Vector2Int loc;
+
+    public GridSaveInfo(GridObject gridObject, Vector2Int loc)
+    {
+        GridPlant gridPlant = gridObject.GetComponentInChildren<GridPlant>();
+        item = ConvertSO.SOToClass(gridPlant.plant);
+        soilStage = gridPlant.currentSoilStage;
+        soilStageProgress = gridPlant.soilStageProgress;
+        this.loc = loc;
+    }
 }
