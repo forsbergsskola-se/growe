@@ -9,7 +9,6 @@ using Saving;
 using UnityEngine;
 
 namespace InventoryAndStore {
-
     public class Currency : MonoBehaviour {
         public int maxCompostValue = 15;
         public int fertilizerAmountFromFilledCompost = 1;
@@ -30,24 +29,29 @@ namespace InventoryAndStore {
 
             _hasLoaded = true;
             var data = dataTask.Result;
-            if (data.HasValue && dataTaskInventory.Result.HasValue) {
-                InventoryData = dataTaskInventory.Result.Value;
+            if (data.HasValue) {
                 _data = data.Value;
-                
+
                 MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
-                MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
-                MessageBroker.Instance().Send(new InventoryUpdateMessage(InventoryData.Inventory));
+
                 MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
                 MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
-                
-            }
-            else
-            {
+            } else {
+                AddSoftCurrency(20);
                 Debug.LogWarning("Couldn't load data" + this);
                 MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
+
+                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
+            }
+
+            if (dataTaskInventory.Result.HasValue) {
+                InventoryData = dataTaskInventory.Result.Value;
+                MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
+                MessageBroker.Instance().Send(new InventoryUpdateMessage(InventoryData.Inventory));
+            } else {
+                Debug.LogWarning("Couldn't load data" + this);
                 MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
                 MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
-                MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
             }
         }
 
@@ -57,17 +61,22 @@ namespace InventoryAndStore {
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
         }
+
         public void AddItemForAuction(ItemSO item) {
             if (!_hasLoaded) return;
-            _auctionData.Item += JsonConvert.SerializeObject(ConvertSO.SOToClass(item), Formatting.Indented);;
+            _auctionData.Item += JsonConvert.SerializeObject(ConvertSO.SOToClass(item), Formatting.Indented);
+            ;
             _saveManager.UploadToAuction(_auctionData);
             MessageBroker.Instance().Send(new AuctionUpdateMessage(_auctionData.Item));
         }
+
         public void FireBaseSetUserInventory(Inventory inventory) {
             if (!_hasLoaded) return;
-            InventoryData.Inventory = inventory.items.Select(ConvertSO.SOToClass).ToList();;
+            InventoryData.Inventory = inventory.items.Select(ConvertSO.SOToClass).ToList();
+            ;
             _saveManager.UploadUserInventory(InventoryData);
         }
+
         public void FireBaseGetUserInventory() {
             if (!_hasLoaded) return;
             //_saveManager.UploadUserInventory(_inventoryData);

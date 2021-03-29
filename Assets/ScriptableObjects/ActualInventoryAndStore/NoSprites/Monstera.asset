@@ -23,20 +23,22 @@ MonoBehaviour:
   itemType: 0
   seedbag:
     items: {fileID: 0}
-  rarity: 0
-  maxAmount: 1
+  rarity: 1
+  maxAmount: 15
   compostValue: 0
-  sellValue: 0
+  sellValue: 18
   buyValue: 0
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
-  survivability: 0
+  survivability: 0.98
   dropChance: 0
-  sizeDimensions: {x: 0, y: 0}
-  itemLore: 
+  sizeDimensions: {x: 2, y: 2}
+  itemLore: "Monstera Delicosa is a bit tricky. It doesn\u2019t want the afternoon
+    sunlight and it prefers to be put a few meters in from the window. It loves the
+    moisty air, and loves to be showered."
   isNew: 0
-  growthDuration: 0
+  growthDuration: 3
   currentGrowthProgress: 0
   isFertilized: 0
   timesCut: 0
