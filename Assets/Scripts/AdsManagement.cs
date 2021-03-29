@@ -59,7 +59,7 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
         } 
         else
         {
-            noadtext.text = "Ads available every 5 minutes only!";
+            noadtext.text = "Ads only available every 5 minutes.";
             Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
         }
     }
