@@ -52,7 +52,6 @@ public class Grid : MonoBehaviour, IGrid {
         yield return new WaitForSeconds(2f);
         var dataTask = FindObjectOfType<SaveManager>().LoadGrid();
         yield return new WaitUntil( ()=> dataTask.IsCompleted);
-        //Dictionary<Vector2Int, GridSaveInfo>? savedData = dataTask.Result;
         var savedData = dataTask.Result;
         if (savedData == null || savedData.Count == 0)
         {
@@ -68,10 +67,10 @@ public class Grid : MonoBehaviour, IGrid {
             plantRef.currentSoilStage = gridSaveInfo.soilStage;
             plantRef.soilStageProgress = gridSaveInfo.soilStageProgress;
             Vector2Int loc = new Vector2Int(gridSaveInfo.x, gridSaveInfo.y);
-            AddObject(gridObjectInstance, loc);
-            itemsOnGrid.Add(loc, gridObjectInstance);
-
+            gridObjectInstance.transform.localPosition = new Vector3Int(loc.x,loc.y, 0);
+            gridObjectInstance.isOnGrid = true;
             Vector2Int itemDimensions = Vector2Int.FloorToInt(plantRef.plant.sizeDimensions);
+            gridObjectInstance.Size = itemDimensions;
             gridObjectInstance.transform.localScale = new Vector3(itemDimensions.x, itemDimensions.y, 1.0f);
             plantRef.InitFromSave(plantRef.plant, this);
         }
@@ -137,24 +136,20 @@ public class Grid : MonoBehaviour, IGrid {
         if (toPosition.x < 0 || toPosition.y < 0) return false;
 
         if (gridObject.isOnGrid)
-        {
             RemoveObject(gridObject, fromPosition);
-            //itemsOnGrid.Remove(fromPosition);
-        }
-            
+        
         if (IsFree(toPosition, gridObject.Size)) {
             gridObject.isOnGrid = true;
             AddObject(gridObject, toPosition);
-            //itemsOnGrid.Add(toPosition, gridObject);
             return true;
         } else {
             AddObject(gridObject, fromPosition);
-            //itemsOnGrid.Add(toPosition, gridObject);
             return false;
         }
     }
 
     public void RemoveObject(GridObject gridObject, Vector2Int fromPosition) {
+        Debug.Log("remove obj at" + fromPosition);
         itemsOnGrid.Remove(fromPosition);
         foreach (var cell in GetCellsInRect(fromPosition, gridObject.Size)) {
             cell.GridObject = null;
@@ -173,6 +168,8 @@ public class Grid : MonoBehaviour, IGrid {
         List<GridSaveInfo> gridSaveInfoList = new List<GridSaveInfo>();
         foreach (var pair in itemsOnGrid)
         {
+            if (pair.Value.notMoveable)
+                continue;
             GridSaveInfo gridSaveInfo;
             GridPlant gridPlant = pair.Value.GetComponentInChildren<GridPlant>();
             gridSaveInfo.item = ConvertSO.SOToClass(gridPlant.plant);
