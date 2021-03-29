@@ -1,7 +1,9 @@
 using System;
 using Broker;
 using Broker.Messages;
+using Firebase.Auth;
 using InventoryAndStore;
+using JSON;
 using UnityEngine;
 
 public class GridPlant : MonoBehaviour {
@@ -16,11 +18,13 @@ public class GridPlant : MonoBehaviour {
     //references
     public ItemSO plant;
     public SpriteRenderer plantSpriteRenderer;
+    private Grid grid;
     
     public enum SoilStage { Dry = 0, GettingDry = 1, Moist = 2, Watered = 3, OverWatered = 4 }
 
     public void Init(ItemSO plant, Grid grid) {
         this.plant = plant;
+        this.grid = grid;
         //MessageBroker.Instance().SubscribeTo<UpdateSpriteMessage>(UpdateSprite);
         plant.UpdateSpriteEvent += UpdateSprite;
         switch (this.plant.itemType)
@@ -41,6 +45,7 @@ public class GridPlant : MonoBehaviour {
 
     private void Start() {
         MessageBroker.Instance().SubscribeTo<TimePassedMessage>(TimePassed);
+        grid.itemsOnGrid.Add(Vector2Int.FloorToInt(transform.position),ConvertSO.SOToClass(plant));
     }
     
     void TimePassed(TimePassedMessage m) {

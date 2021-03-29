@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Firebase.Auth;
 using InventoryAndStore;
+using JSON;
 using UnityEngine;
 
 public interface IGrid {
@@ -20,8 +22,8 @@ public interface IGrid {
     void MoveObject(GridObject gridObject, Vector3 oldGridPosition, Vector3 gridPosition);
 }
 
-public class Grid : MonoBehaviour, IGrid
-{
+public class Grid : MonoBehaviour, IGrid {
+    public Dictionary<Vector2Int, ItemClass> itemsOnGrid = new Dictionary<Vector2Int, ItemClass>();
     //private HashSet<GridObject> gridObjectSet; // TODO save all these objects. 
     public Cell[] cells;
     public int width;
@@ -43,6 +45,7 @@ public class Grid : MonoBehaviour, IGrid
 
     void Awake() {
         SpawnGridCells();
+        Debug.Log(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
     }
 
     void SpawnGridCells() {

@@ -34,8 +34,15 @@ namespace JSON
             clone.SizeDimensions = itemSo.sizeDimensions;
             clone.ItemLore = itemSo.itemLore;
             clone.Name = itemSo.name;
-            // clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
+            clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
+
+            for (int i = 0; i < itemSo.growthStageSprites.Length; i++) 
+                clone.GrowthStageSprites[i] = AssetDatabase.GetAssetPath(itemSo.growthStageSprites[i]);
             
+            foreach (var x in clone.GrowthStageSprites)
+                Debug.Log(x);
+            
+
             return clone;
         }
         public static ItemSO ClassToSO(ItemClass itemClass)
@@ -69,8 +76,13 @@ namespace JSON
             clone.sizeDimensions = itemClass.SizeDimensions;
             clone.itemLore = itemClass.ItemLore;
             clone.name = itemClass.Name;
-            // clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
-            
+            clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
+            for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) 
+                clone.growthStageSprites[i] = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.GrowthStageSprites[i], typeof(Sprite));
+
+            foreach (var x in clone.growthStageSprites)
+                Debug.Log(AssetDatabase.GetAssetPath(x));
+
             return clone;
         }
     }
@@ -88,6 +100,6 @@ namespace JSON
             CurrentGrowthProgress;
         public Vector2 SizeDimensions;
         public string ItemLore, Name, IconPath;
-        public string[] growthStageSprites = new string[5];
+        public string[] GrowthStageSprites = new string[5];
     }
 }
