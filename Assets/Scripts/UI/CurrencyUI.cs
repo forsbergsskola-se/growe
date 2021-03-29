@@ -8,7 +8,7 @@ namespace UI {
         public Text softCurrencyText;
         public Text fertilizerText;
 
-        private void Start() {
+        private void OnEnable() {
             MessageBroker.Instance().SubscribeTo<SoftCurrencyUpdateMessage>(UpdateSoftCurrencyText);
             MessageBroker.Instance().SubscribeTo<FertilizerUpdateMessage>(UpdateFertilizerText);
         }
