@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
-  m_Name: MysterySeedBag
+  m_Name: CommonMysterySeedBag
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: c0385e68e6dc59b449f959bac41cb8ca, type: 3}
   growthStageSprites: []
@@ -22,7 +22,7 @@ MonoBehaviour:
   maxAmount: 1
   compostValue: 0
   sellValue: 0
-  buyValue: 20
+  buyValue: -20
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0

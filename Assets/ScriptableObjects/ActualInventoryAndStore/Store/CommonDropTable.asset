@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77711372ec970ce4e8e87af7723d5559, type: 3}
-  m_Name: DropTable
+  m_Name: CommonDropTable
   m_EditorClassIdentifier: 
   droppableItems:
   - {fileID: 11400000, guid: c1ac70761cf3bd7469eb7aa96ecbd924, type: 2}

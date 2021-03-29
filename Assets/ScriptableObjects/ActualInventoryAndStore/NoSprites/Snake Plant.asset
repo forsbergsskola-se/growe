@@ -24,19 +24,21 @@ MonoBehaviour:
   seedbag:
     items: {fileID: 0}
   rarity: 0
-  maxAmount: 1
+  maxAmount: 15
   compostValue: 0
-  sellValue: 0
+  sellValue: 12
   buyValue: 0
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
-  survivability: 0
+  survivability: 0.98
   dropChance: 0
-  sizeDimensions: {x: 0, y: 0}
-  itemLore: 
+  sizeDimensions: {x: 1, y: 1}
+  itemLore: This plant originates from South Africa, Tanzania, and Congo. Not enough
+    light will eventually make the leaves lose their green colorful appearance, so
+    keep it in a pretty light spot and water when the soil is dry.
   isNew: 0
-  growthDuration: 0
+  growthDuration: 3
   currentGrowthProgress: 0
   isFertilized: 0
   timesCut: 0

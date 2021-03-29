@@ -10,33 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
-  m_Name: Persimmon
+  m_Name: VerdantMysterySeedBag
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  growthStageSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  tradeState: 0
-  itemType: 0
+  icon: {fileID: 21300000, guid: c0385e68e6dc59b449f959bac41cb8ca, type: 3}
+  growthStageSprites: []
+  tradeState: 1
+  itemType: 3
   seedbag:
-    items: {fileID: 0}
-  rarity: 2
-  maxAmount: 15
+    items: {fileID: 11400000, guid: 5467387f2b4886f47b3e6507499a6882, type: 2}
+  rarity: 0
+  maxAmount: 1
   compostValue: 0
-  sellValue: 72
-  buyValue: 0
+  sellValue: 0
+  buyValue: -20
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
-  survivability: 0.98
+  survivability: 0
   dropChance: 0
-  sizeDimensions: {x: 3, y: 3}
+  sizeDimensions: {x: 0, y: 0}
   itemLore: 
   isNew: 0
-  growthDuration: 3
+  growthDuration: 0
   currentGrowthProgress: 0
   isFertilized: 0
   timesCut: 0
