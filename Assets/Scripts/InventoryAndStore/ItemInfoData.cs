@@ -45,7 +45,7 @@ namespace InventoryAndStore {
 
         public void CompostPlant() {
             FindObjectOfType<Currency>().AddCompost(itemData.ItemSO.compostValue);
-            //TODO destroy plant from inventory
+            Inventories.Instance.playerInventory.Remove(itemData.ItemSO);
         }
     }
 }
