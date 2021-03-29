@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 445531670732082398}
   - component: {fileID: 445531670732082399}
   - component: {fileID: 445531670732082396}
+  - component: {fileID: 1492844816836837042}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -58,3 +59,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCompostValue: 15
   fertilizerAmountFromFilledCompost: 1
+--- !u!114 &1492844816836837042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445531670732082397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6860ac1fc7ab786448477662b104ee81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCutting: 0
+  chanceOfDeath: 10
