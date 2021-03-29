@@ -24,6 +24,8 @@ namespace Saving {
         //TODO: reference keys should be
         private void Start() {
             _database = FirebaseDatabase.GetInstance("https://growe-e7606-default-rtdb.europe-west1.firebasedatabase.app/");
+
+            _database.SetPersistenceEnabled(false);
         }
 
         public void SaveCurrency(CurrencyData data) {
