@@ -62,7 +62,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             cameraMovement.StartMoveRoutine(transform
                 .position); 
             var plant = GetComponentInChildren<GridPlant>().plant;
-            MessageBroker.Instance().Send(new PlantCloseUpMessage(plant));
+            MessageBroker.Instance().Send(new PlantCloseUpMessage(plant, gameObject));
         }
     }
 
