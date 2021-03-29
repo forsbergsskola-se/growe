@@ -25,7 +25,6 @@ public interface IGrid {
 
 public class Grid : MonoBehaviour, IGrid {
     public Dictionary<Vector2Int, GridSaveInfo> itemsOnGrid = new Dictionary<Vector2Int, GridSaveInfo>();
-    //private HashSet<GridObject> gridObjectSet; // TODO save all these objects. 
     public Cell[] cells;
     public int width;
     public int height;

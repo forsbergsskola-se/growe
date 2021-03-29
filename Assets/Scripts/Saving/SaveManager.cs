@@ -86,8 +86,8 @@ namespace Saving {
             return JsonUtility.FromJson<AuctionData>(dataSnapshot.GetRawJsonValue());
         }
         
-        public void SaveGrid(Dictionary<Vector2Int, GridSaveInfo> gridwrapper) {
-            _database.GetReference(PLAYER_KEY).Child("grid").SetRawJsonValueAsync(JsonConvert.SerializeObject(gridwrapper));
+        public void SaveGrid(Dictionary<Vector2Int, GridSaveInfo> gridItems) {
+            _database.GetReference(PLAYER_KEY).Child("grid").SetRawJsonValueAsync(JsonConvert.SerializeObject(gridItems));
         }
         
     }
