@@ -8,6 +8,21 @@ namespace InventoryAndStore
     [CreateAssetMenu(fileName = "New item", menuName = "Inventory/item")]
     public class ItemSO : ScriptableObject
     {
+        
+        /*
+         
+         
+         
+         
+         
+                    TODO VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+                    Hello fellow programmer. If you ad a new field for the scriptable object could you mark it with TODO ADD TO ConvertSO
+        
+        
+        
+        
+        
+        */
         public Sprite icon;
         public Sprite[] growthStageSprites = new Sprite[5];
         public TradeState tradeState;
