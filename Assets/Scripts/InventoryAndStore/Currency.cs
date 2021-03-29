@@ -89,9 +89,10 @@ namespace InventoryAndStore {
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
         }
-
+        
         public void AddCompost(int amount) {
             if (!_hasLoaded) return;
+            
             _data.Compost += amount;
 
             if (_data.Compost >= maxCompostValue) {

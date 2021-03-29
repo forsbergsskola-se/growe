@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Gacha;
 using InventoryAndStore;
@@ -35,10 +36,9 @@ namespace JSON
             clone.ItemLore = itemSo.itemLore;
             clone.Name = itemSo.name;
             clone.TimesCut = itemSo.timesCut;
-            clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
-
-            for (int i = 0; i < itemSo.growthStageSprites.Length; i++) 
-                clone.GrowthStageSprites[i] = AssetDatabase.GetAssetPath(itemSo.growthStageSprites[i]);
+            clone.IconPath = itemSo.icon.name;
+            for (int i = 0; i < itemSo.growthStageSprites.Length; i++)
+                clone.GrowthStageSprites[i] = itemSo.growthStageSprites[i].name;
             
             return clone;
         }
@@ -73,9 +73,12 @@ namespace JSON
             clone.itemLore = itemClass.ItemLore;
             clone.name = itemClass.Name;
             clone.timesCut = itemClass.TimesCut;
-            clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
-            for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) 
-                clone.growthStageSprites[i] = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.GrowthStageSprites[i], typeof(Sprite));
+            clone.icon = Resources.Load<Sprite>(itemClass.IconPath);
+            Debug.Log(Resources.Load<Sprite>(itemClass.IconPath));
+            for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) {
+                clone.growthStageSprites[i] = Resources.Load<Sprite>(itemClass.GrowthStageSprites[i]);
+            }
+
             return clone;
         }
     }
