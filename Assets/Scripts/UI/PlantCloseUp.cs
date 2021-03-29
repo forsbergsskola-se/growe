@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace UI {
     public class PlantCloseUp : MonoBehaviour {
         ItemSO _plant;
-        GameObject _plantParentObject;
+        GridObject _plantParentObject;
 
         public UnityEvent onEnable;
         public UnityEvent onDisable;
@@ -23,7 +23,7 @@ namespace UI {
 
         public void CompostPlant() {
             FindObjectOfType<Currency>().AddCompost(_plant.compostValue);
-            //TODO Destroy(_plantParentObject);
+            _plantParentObject.DestroyGridObj();
         }
 
         void Awake() {

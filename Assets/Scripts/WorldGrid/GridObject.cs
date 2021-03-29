@@ -62,8 +62,12 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             cameraMovement.StartMoveRoutine(transform
                 .position); 
             var plant = GetComponentInChildren<GridPlant>().plant;
-            MessageBroker.Instance().Send(new PlantCloseUpMessage(plant, gameObject));
+            MessageBroker.Instance().Send(new PlantCloseUpMessage(plant, this));
         }
+    }
+
+    public void DestroyGridObj() {
+        Destroy(gameObject);
     }
 
     public void OnPointerDown(PointerEventData eventData) {
@@ -72,7 +76,8 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     
     private void OnDestroy()
     {
-        if (isOnGrid)
-            grid.RemoveObject(this,  Vector2Int.FloorToInt(transform.position));
+        if (isOnGrid) {
+            grid.RemoveObject(this, Vector2Int.FloorToInt(transform.localPosition));
+        }
     }
 }
