@@ -1,3 +1,4 @@
+using System;
 using InventoryAndStore;
 using UnityEngine;
 
@@ -47,5 +48,10 @@ public class PlantSpawner : MonoBehaviour {
         Destroy(heldObject.gameObject);
         heldObject = null;
         playerInventory.Add(gridItem.plant);
+    }
+
+    private void OnDestroy()
+    {
+        //TODO handle held object on quit.
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using Firebase.Auth;
 using InventoryAndStore;
 using JSON;
+using Saving;
 using UnityEngine;
 
 public interface IGrid {
@@ -23,8 +24,7 @@ public interface IGrid {
 }
 
 public class Grid : MonoBehaviour, IGrid {
-    public Dictionary<Vector2Int, ItemClass> itemsOnGrid = new Dictionary<Vector2Int, ItemClass>();
-    //private HashSet<GridObject> gridObjectSet; // TODO save all these objects. 
+    public Dictionary<Vector2Int, GridSaveInfo> itemsOnGrid = new Dictionary<Vector2Int, GridSaveInfo>();
     public Cell[] cells;
     public int width;
     public int height;
@@ -90,15 +90,21 @@ public class Grid : MonoBehaviour, IGrid {
 
     bool TryMoveObject(GridObject gridObject, Vector2Int fromPosition, Vector2Int toPosition) {
         if (toPosition.x < 0 || toPosition.y < 0) return false;
-        
+
         if (gridObject.isOnGrid)
+        {
             RemoveObject(gridObject, fromPosition);
+            itemsOnGrid.Remove(fromPosition);
+        }
+            
         if (IsFree(toPosition, gridObject.Size)) {
             gridObject.isOnGrid = true;
             AddObject(gridObject, toPosition);
+            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject));
             return true;
         } else {
             AddObject(gridObject, fromPosition);
+            itemsOnGrid.Add(toPosition, new GridSaveInfo(gridObject));
             return false;
         }
     }
@@ -117,15 +123,21 @@ public class Grid : MonoBehaviour, IGrid {
 
     private void OnApplicationQuit()
     {
-        //TODO save the items on the grid
+        FindObjectOfType<SaveManager>().SaveGrid(itemsOnGrid);
     }
 }
 
-//TODO the plant things that need to be changed
-class GridSaveInfo
+public class GridSaveInfo
 {
-    public ItemSO item;
-    public Vector2Int loc;
+    public ItemClass item;
     public GridPlant.SoilStage soilStage;
     public float soilStageProgress;
+
+    public GridSaveInfo(GridObject gridObject)
+    {
+        GridPlant gridPlant = gridObject.GetComponentInChildren<GridPlant>();
+        item = ConvertSO.SOToClass(gridPlant.plant);
+        soilStage = gridPlant.currentSoilStage;
+        soilStageProgress = gridPlant.soilStageProgress;
+    }
 }
