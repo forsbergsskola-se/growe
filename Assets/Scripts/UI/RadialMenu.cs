@@ -81,9 +81,8 @@ namespace UI {
                 
                 switch (result.gameObject.name) {
                     case "CuttingTool":
-                        MessageBroker.Instance().Send(new CuttingToolSelectedMessage());
-                        CuttingTool.isCutting = true;
-                        break;
+                        MessageBroker.Instance().Send(new CuttingToolSelectedMessage(true));
+                        return;
                     case "WateringTool":
                         MessageBroker.Instance().Send(new WateringToolSelectedMessage());
                         break;

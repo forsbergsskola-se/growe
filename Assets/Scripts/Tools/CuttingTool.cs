@@ -1,26 +1,40 @@
 using System;
+using Broker;
+using Broker.Messages;
 using InventoryAndStore;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class CuttingTool : MonoBehaviour {
-    public static bool isCutting;
+    public bool isCutting;
     [SerializeField] public int chanceOfDeath;
 
+    private void Start()
+    {
+        MessageBroker.Instance().SubscribeTo<CuttingToolSelectedMessage>(SetBool);
+    }
+
+    void SetBool(CuttingToolSelectedMessage message)
+    {
+        isCutting = message.setBool;
+        Debug.Log((isCutting));
+    }
+
     void Update() {
-        if (Input.touchSupported)
-            MobileCut();
-        else
+        //if (Input.touchSupported)
+          //  MobileCut();
+        //else
             PcCut();
     }
 
     void PcCut() {
         if (!isCutting) return;
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (!Input.GetMouseButton(0)) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         var chance = chanceOfDeath / 100;
         
         if (Physics.Raycast(ray, out var hit)){
+            //loop currently gets here
             if (hit.collider.transform.GetChild(2).GetComponent<GridPlant>() != null) {
                 var currentPlant = hit.collider.transform.GetChild(2).GetComponent<GridPlant>();
                 //if (currentPlant.plant.growthStage <= 3) return;
