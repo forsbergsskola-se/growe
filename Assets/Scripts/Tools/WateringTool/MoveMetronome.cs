@@ -1,37 +1,63 @@
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Tools.WateringTool
 {
     public class MoveMetronome : MonoBehaviour
     {
         public Transform rotateAroundPoint;
-        public GameObject metronome;
-        public Quaternion angle;
-        public int speed;
-        public int reward;
-        public bool direction;
-        
+        public float speed = 1;
+        public int result, rotateAt;
+        public List<int[]> ranges = new List<int[]> 
+        {
+            new int[]{ 50, 85, 3},
+            new int[]{ 17, 50, 2},
+            new int[]{ -17, 17, 1},
+            new int[]{ -50, -17, 2},
+            new int[]{ -85, -50, 3},
 
-        public Vector3 RotatePointAroundPivot(Vector3 point , Vector3 pivot, Quaternion angles){
-            return angles * (point - pivot) + pivot;
-        }
+        };
+        private float _currentAngle = 0;
+
+        public enum Direction { Right = -1, Left = 1 };
+
+        public Direction direction = Direction.Left;
 
         private void Start()
         {
-            //transform.position = _finalPosition.position; 
+            transform.GetChild(0).GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;
         }
 
-        public void Update()
+        private void Update()
         {
-            
-            var test = RotatePointAroundPivot(metronome.transform.position,rotateAroundPoint.position, 
-                angle);
+            _currentAngle += speed * (int)GetDirection(_currentAngle, rotateAt) * Time.deltaTime;
+            rotateAroundPoint.rotation = Quaternion.Euler(new Vector3(0, 0, _currentAngle));
+        }
 
-            metronome.transform.rotation *= Quaternion.AngleAxis(speed, test);
 
-            Debug.Log(test);
+        private Direction GetDirection(float currentAngle, int rotateAt)
+        {
+            if (currentAngle + rotateAt > rotateAt * 2) return direction = Direction.Right;
+            if (currentAngle + rotateAt < 0) return direction = Direction.Left;
+            return direction = direction;
+        }
+
+        public void StopMetronome()
+        {
+            foreach (var range in ranges)
+            {
+                speed = 0;
+                if (_currentAngle >= range[0] && _currentAngle <= range[1])
+                {
+                    result = range[2];
+                    break;
+                }
+            }
         }
     }
 }
