@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class CuttingTool : MonoBehaviour {
     public bool isCutting;
+    LayerMask layerToHit;
 
-    private void Start()
-    {
+    private void Start() {
+        layerToHit = LayerMask.GetMask("IsometricGrid");
         MessageBroker.Instance().SubscribeTo<CuttingToolSelectedMessage>(SetBool);
     }
 
@@ -29,7 +30,7 @@ public class CuttingTool : MonoBehaviour {
         if (!isCutting) return;
         if (!Input.GetMouseButtonUp(0)) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit)){
+        if (Physics.Raycast(ray, out var hit)) {
             if (hit.collider.transform.GetChild(2).GetComponent<GridPlant>() != null) {
                 var currentPlant = hit.collider.transform.GetChild(2).GetComponent<GridPlant>();
                 if (currentPlant.plant.CurrentGrowthStage == ItemSO.GrowthStage.Growing || 
