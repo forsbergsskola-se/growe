@@ -53,6 +53,7 @@ public class CuttingTool : MonoBehaviour {
                     newCutting.itemType = ItemSO.ItemType.Cutting;
                     newCutting.timesCut = 0;
                     newCutting.CurrentGrowthStage = ItemSO.GrowthStage.Cutting;
+                    newCutting.icon = newCutting.cuttingIcon;
                     newCutting.survivability = 0;
                     newCutting.hasLifeTime = true;
 
