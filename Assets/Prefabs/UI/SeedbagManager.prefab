@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 264346586472254120}
   - component: {fileID: 9220715581538487157}
   m_Layer: 5
-  m_Name: SeedbagPopup
+  m_Name: SeedbagManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
