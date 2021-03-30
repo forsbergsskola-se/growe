@@ -47,7 +47,7 @@ public class CameraMovement : MonoBehaviour
     void OnEnable() {
         cam = Camera.main;
         cameraZ = cam.transform.position.z;
-        eventSystem = GetComponent<EventSystem>();
+        eventSystem = EventSystem.current;
         if (eventSystem == null)
             Debug.LogWarning("eventSystem not found on CameraMovement");
     }
