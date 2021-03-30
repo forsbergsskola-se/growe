@@ -19,7 +19,7 @@ MonoBehaviour:
   itemType: 3
   seedbag:
     items: {fileID: 11400000, guid: 5467387f2b4886f47b3e6507499a6882, type: 2}
-  rarity: 0
+  rarity: 85
   maxAmount: 1
   compostValue: 0
   sellValue: 0

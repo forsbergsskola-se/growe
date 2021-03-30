@@ -1,14 +1,16 @@
+using System;
 using Broker;
 using Broker.Messages;
 using InventoryAndStore;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using WorldGrid;
 
 namespace UI {
     public class PlantCloseUp : MonoBehaviour {
         ItemSO _plant;
-        GridObject _plantParentObject;
+        GridMoveObject _gridMoveObject;
 
         public UnityEvent onEnable;
         public UnityEvent onDisable;
@@ -23,7 +25,7 @@ namespace UI {
 
         public void CompostPlant() {
             FindObjectOfType<Currency>().AddCompost(_plant.compostValue);
-            _plantParentObject.DestroyGridObj();
+            _gridMoveObject.DestroyGridObj();
         }
 
         void Awake() {
@@ -46,17 +48,17 @@ namespace UI {
         void UpdateValues() {
             plantName.text = _plant.name;
             plantLore.text = _plant.itemLore;
-            plantRarity.value = (int)_plant.rarity + 1;
+            plantRarity.value = Array.IndexOf(Enum.GetValues(_plant.rarity.GetType()), _plant.rarity) + 1;
             sellText.text = _plant.sellValue.ToString();
             compostText.text = _plant.compostValue.ToString();
             growthStage.value = (int) _plant.CurrentGrowthStage + 1;
-            //TODO soilStatus.value = 
+            soilStatus.value = (int) _gridMoveObject.GetComponent<GridPlant>().currentSoilStage + 1;
             plantLore.text = _plant.itemLore;
         }
 
         void UpdateItem(PlantCloseUpMessage m) {
             _plant = m.plant;
-            _plantParentObject = m.plantParentObject;
+            _gridMoveObject = m.plantParentObject;
             UpdateValues();
         }
     }

@@ -1,13 +1,15 @@
 using System;
 using InventoryAndStore;
 using UnityEngine;
+using WorldGrid;
+using Grid = WorldGrid.Grid;
 
 public class PlantSpawner : MonoBehaviour {
     //references 
     public GameObject pottedPlantPlaceholder; // replace with a gridobject of type potted plant
     private Grid grid;
     private Transform gridTransform;
-    private GridObject heldObject;
+    private GridMoveObject heldObject;
 
     private void OnEnable() {
         grid = FindObjectOfType<Grid>();
@@ -30,7 +32,7 @@ public class PlantSpawner : MonoBehaviour {
     private void InstantiatePlant(ItemSO item) {
         GameObject instance = Instantiate(pottedPlantPlaceholder, grid.transform.position, gridTransform.rotation,
             gridTransform);
-        heldObject = instance.GetComponent<GridObject>();
+        heldObject = instance.GetComponent<GridMoveObject>();
 
         Vector2Int itemDimensions = Vector2Int.FloorToInt(item.sizeDimensions);
         heldObject.Size = itemDimensions;
@@ -40,11 +42,11 @@ public class PlantSpawner : MonoBehaviour {
         pos.x = (int) (grid.width * 0.5);
         pos.y = (int) (grid.height * 0.5);
         instance.transform.localPosition = pos;
-        instance.GetComponentInChildren<GridPlant>().Init(item, grid);
+        instance.GetComponent<GridPlant>().Init(item, grid);
     }
 
     private void DestroyAndAddPlantToInventory(Inventory playerInventory) {
-        var gridItem = heldObject.GetComponentInChildren<GridPlant>();
+        var gridItem = heldObject.GetComponent<GridPlant>();
         Destroy(heldObject.gameObject);
         heldObject = null;
         playerInventory.Add(gridItem.plant);

@@ -3,6 +3,7 @@ using Broker;
 using Broker.Messages;
 using InventoryAndStore;
 using UnityEngine;
+using WorldGrid;
 
 public class CuttingTool : MonoBehaviour {
     public bool isCutting;
@@ -31,8 +32,8 @@ public class CuttingTool : MonoBehaviour {
         if (!Input.GetMouseButtonUp(0)) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit)) {
-            if (hit.collider.transform.GetChild(2).GetComponent<GridPlant>() != null) {
-                var currentPlant = hit.collider.transform.GetChild(2).GetComponent<GridPlant>();
+            var currentPlant = hit.collider.transform.GetComponent<GridPlant>();
+            if (currentPlant != null) {
                 if (currentPlant.plant.CurrentGrowthStage == ItemSO.GrowthStage.Growing || 
                     currentPlant.plant.CurrentGrowthStage == ItemSO.GrowthStage.Mature)
                 {

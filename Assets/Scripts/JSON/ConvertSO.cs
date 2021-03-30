@@ -22,7 +22,6 @@ namespace JSON
             clone.GrowthStage = itemSo.CurrentGrowthStage;
             clone.TradeState = itemSo.tradeState;
             clone.ItemType = itemSo.itemType;
-            Debug.Log("rarity test SOToClass: " + (int)itemSo.rarity);
             clone.Rarity = itemSo.rarity;
             clone.MAXAmount = itemSo.maxAmount;
             clone.CompostValue = itemSo.compostValue;
@@ -62,7 +61,6 @@ namespace JSON
             clone.CurrentGrowthStage = itemClass.GrowthStage;
             clone.tradeState = itemClass.TradeState;
             clone.itemType = itemClass.ItemType;
-            Debug.Log("rarity test ClassToSO: " + (int)itemClass.Rarity);
             clone.rarity = itemClass.Rarity;
             clone.maxAmount = itemClass.MAXAmount;
             clone.compostValue = itemClass.CompostValue;

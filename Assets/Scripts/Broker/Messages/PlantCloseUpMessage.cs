@@ -1,12 +1,13 @@
 using InventoryAndStore;
 using UnityEngine;
+using WorldGrid;
 
 namespace Broker.Messages {
     public class PlantCloseUpMessage {
         public readonly ItemSO plant;
-        public readonly GridObject plantParentObject;
+        public readonly GridMoveObject plantParentObject;
 
-        public PlantCloseUpMessage(ItemSO plant, GridObject plantParentObject) {
+        public PlantCloseUpMessage(ItemSO plant, GridMoveObject plantParentObject) {
             this.plant = plant;
             this.plantParentObject = plantParentObject;
         }

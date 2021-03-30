@@ -3,6 +3,7 @@ using Broker;
 using Broker.Messages;
 using InventoryAndStore;
 using UnityEngine;
+using WorldGrid;
 
 namespace Tools.WateringTool
 {
@@ -27,10 +28,11 @@ namespace Tools.WateringTool
                 
                 if (Physics.Raycast(ray, out var hit) && Input.GetMouseButtonDown(0))
                 {
-                    var currentPlant = hit.collider.transform.GetChild(2).GetComponent<GridPlant>();
+                    var currentPlant = hit.collider.transform.GetComponent<GridPlant>();
                     if (currentPlant != null)
                     {
                         MoveMetronome.UISetActive(true);
+                        MoveMetronome.selectedPlant = currentPlant;
                         MoveMetronome.currentAngle = Random.Range(MoveMetronome.rotateAt - MoveMetronome.rotateAt * 2, MoveMetronome.rotateAt);
                         MoveMetronome.speed = (int)currentPlant.plant.rarity;
                         MoveMetronome.StartCoroutine(MoveMetronome.Rotate());

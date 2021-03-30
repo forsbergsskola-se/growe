@@ -33,7 +33,7 @@ namespace InventoryAndStore
         public enum ItemType { Seed, Plant, Cutting, Seedbag }
         public Rarity rarity = Rarity.Survivor;
         
-        // 170 = one second from left to right(metronome)
+        // 85 degrees per sec = 2 sec from left to right(metronome)
         public enum Rarity { Survivor = 85, Mediocre = 170, Diva = 340 }
         public int maxAmount = 1;
         public int compostValue, sellValue, buyValue;
