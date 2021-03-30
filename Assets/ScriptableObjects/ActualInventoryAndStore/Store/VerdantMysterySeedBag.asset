@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: VerdantMysterySeedBag
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: a3b06c48bff7afe438124c4801988704, type: 3}
+  cuttingIcon: {fileID: 21300000, guid: a3b06c48bff7afe438124c4801988704, type: 3}
   growthStageSprites: []
   tradeState: 1
   itemType: 3
