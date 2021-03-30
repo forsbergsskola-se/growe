@@ -229,7 +229,7 @@ public class CameraMovement : MonoBehaviour
     }
     
     IEnumerator ZoomOutRoutine(float targetSize) {
-        while (cam.orthographicSize + 0.0001f <= targetSize && !moveRoutineActive) {
+        while (cam.orthographicSize + 0.001f <= targetSize && !moveRoutineActive) {
             yield return cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, targetSize,
                 ref moveCamSizeVelocity, zoomOutDuration, float.MaxValue, Time.fixedDeltaTime);
         }
