@@ -37,6 +37,7 @@ namespace JSON
             clone.Name = itemSo.name;
             clone.TimesCut = itemSo.timesCut;
             clone.IconPath = itemSo.icon.name;
+            if (itemSo.itemType == ItemSO.ItemType.Seedbag) return clone;
             for (int i = 0; i < itemSo.growthStageSprites.Length; i++)
                 clone.GrowthStageSprites[i] = itemSo.growthStageSprites[i].name;
             
