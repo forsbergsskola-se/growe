@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -292,6 +292,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -250
       objectReference: {fileID: 0}
+    - target: {fileID: 3367779205381632433, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3367779206936285303, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
       propertyPath: m_Spacing.y
       value: 140
@@ -455,6 +459,10 @@ PrefabInstance:
     - target: {fileID: 8107011708045809326, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
       propertyPath: m_Spacing.y
       value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107011709351933800, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8691435732736082143, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
       propertyPath: m_IsActive
@@ -1733,6 +1741,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  MouseZoomSpeed: 15
+  TouchZoomSpeed: 0.1
+  ZoomMinBound: 0.1
+  ZoomMaxBound: 179.9
+  minXPos: -4.5
+  maxXPos: 8.5
+  minYPos: -4
+  maxYPos: 6
   moveDuration: 0.3
   targetCamSize: 3.65
 --- !u!1001 &1478152616
