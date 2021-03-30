@@ -53,27 +53,24 @@ public class Grid : MonoBehaviour, IGrid {
         yield return new WaitUntil(() => dataTask.IsCompleted);
         var savedData = dataTask.Result;
         if (savedData == null || savedData.Count == 0) {
-            Debug.LogWarning("not found", this);
-            yield return null;
+            Debug.Log("grid data not found on server. If no plant has ever been planted on the grid then this is expected", this);
+            yield break;
         }
 
-        if (savedData != null)
-
-            foreach (var gridSaveInfo in savedData) {
-                GridObject gridObjectInstance = Instantiate(gridObjectPrefab, this.transform);
-                GridPlant plantRef = gridObjectInstance.GetComponentInChildren<GridPlant>();
-                plantRef.plant = ConvertSO.ClassToSO(gridSaveInfo.item);
-                plantRef.currentSoilStage = gridSaveInfo.soilStage;
-                plantRef.soilStageProgress = gridSaveInfo.soilStageProgress;
-                Vector2Int loc = new Vector2Int(gridSaveInfo.x, gridSaveInfo.y);
-                gridObjectInstance.transform.localPosition = new Vector3Int(loc.x, loc.y, 0);
-                gridObjectInstance.isOnGrid = true;
-                Vector2Int itemDimensions = Vector2Int.FloorToInt(plantRef.plant.sizeDimensions);
-                gridObjectInstance.Size = itemDimensions;
-                gridObjectInstance.transform.localScale = new Vector3(itemDimensions.x, itemDimensions.y, 1.0f);
-                plantRef.InitFromSave(plantRef.plant, this);
-            }
-        
+        foreach (var gridSaveInfo in savedData) {
+            GridObject gridObjectInstance = Instantiate(gridObjectPrefab, this.transform);
+            GridPlant plantRef = gridObjectInstance.GetComponentInChildren<GridPlant>();
+            plantRef.plant = ConvertSO.ClassToSO(gridSaveInfo.item);
+            plantRef.currentSoilStage = gridSaveInfo.soilStage;
+            plantRef.soilStageProgress = gridSaveInfo.soilStageProgress;
+            Vector2Int loc = new Vector2Int(gridSaveInfo.x, gridSaveInfo.y);
+            gridObjectInstance.transform.localPosition = new Vector3Int(loc.x, loc.y, 0);
+            gridObjectInstance.isOnGrid = true;
+            Vector2Int itemDimensions = Vector2Int.FloorToInt(plantRef.plant.sizeDimensions);
+            gridObjectInstance.Size = itemDimensions;
+            gridObjectInstance.transform.localScale = new Vector3(itemDimensions.x, itemDimensions.y, 1.0f);
+            plantRef.InitFromSave(plantRef.plant, this);
+        }
     }
 
     void SpawnGridCells() {
