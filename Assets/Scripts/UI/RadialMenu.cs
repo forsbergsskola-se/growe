@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Broker;
 using Broker.Messages;
 using UnityEngine;
@@ -17,8 +18,8 @@ namespace UI {
         private bool menuButtonHeldDown = false;
         private float endTime;
         private bool RadialWheelActive => radialWheel.activeSelf;
-        bool toolSelected;
-        Image buttonImage;
+        private bool toolSelected;
+        private Image buttonImage;
 
         void FixedUpdate() {
             buttonImage.color = toolSelected ? Color.red : Color.white;
@@ -87,32 +88,26 @@ namespace UI {
             GraphicRaycaster graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
             List<RaycastResult> results = new List<RaycastResult>();
             graphicRaycaster.Raycast(eventData, results);
-        
-            foreach (RaycastResult result in results)
-            {
-                Debug.Log("Hit " + result.gameObject.name);
-                toolSelected = true;
+
+            if (results.Count == 0) return;
+            var result = results[0];
+            toolSelected = true;
                 
-                switch (result.gameObject.name) {
-                    case "CuttingTool":
-                        MessageBroker.Instance().Send(new CuttingToolSelectedMessage());
-                        MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
-                        return;
-                    case "WateringTool":
-                        MessageBroker.Instance().Send(new WateringToolSelectedMessage());
-                        MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
-                        return;
-                    case "FertilizerTool":
-                        MessageBroker.Instance().Send(new FertilizerToolSelectedMessage());
-                        MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
-                        return;
-                    default :
-                        toolSelected = false;
-                        MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
-                        return;
-                }
+            switch (result.gameObject.name) {
+                case "CuttingTool":
+                    MessageBroker.Instance().Send(new CuttingToolSelectedMessage());
+                    break;
+                case "WateringTool":
+                    MessageBroker.Instance().Send(new WateringToolSelectedMessage());
+                    break;
+                case "FertilizerTool":
+                    MessageBroker.Instance().Send(new FertilizerToolSelectedMessage());
+                    break;
+                default :
+                    toolSelected = false;
+                    break;
             }
-            //TODO WHY DOES CODE NOT EXECUTE HERE??
+            MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
         }
     }
 }
