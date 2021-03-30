@@ -48,7 +48,6 @@ public class Grid : MonoBehaviour, IGrid {
     void Awake() {
         SpawnGridCells();
         StartCoroutine(LoadGridDataFromDatabase());
-        MessageBroker.Instance().SubscribeTo<ToolSelectedMessage>(UpdateLayer);
     }
 
     private IEnumerator LoadGridDataFromDatabase() {
@@ -163,18 +162,6 @@ public class Grid : MonoBehaviour, IGrid {
         }
 
         FindObjectOfType<SaveManager>().SaveGrid(gridSaveInfoList);
-    }
-
-    /// <summary>
-    /// IT WORKS
-    /// Appreciate the creativity >:)
-    /// </summary>
-    /// <param name="m"></param>
-    void UpdateLayer(ToolSelectedMessage m) {
-        gameObject.layer = m.toolSelected ? 2 : 3;
-    }
-    void OnDisable() {
-        MessageBroker.Instance().UnSubscribeFrom<ToolSelectedMessage>(UpdateLayer);
     }
 }
 
