@@ -15,7 +15,8 @@ namespace WorldGrid
         public bool notMoveable;
         public bool isOnGrid;
         private Grid grid;
-    
+        private Vector3 _previousCameraPosition;
+        
         void Start() {
             grid = GetComponentInParent<Grid>();
 
@@ -23,7 +24,7 @@ namespace WorldGrid
             if (!isOnGrid)
                 return;
             grid.AddObject(this, this.transform.localPosition);
-        
+            
             MessageBroker.Instance().SubscribeTo<ToolSelectedMessage>(UpdateToolSelected);
         }
 
@@ -61,8 +62,9 @@ namespace WorldGrid
         public void OnPointerUp(PointerEventData eventData) {
             if (!isDragging && !notMoveable && !toolSelected) {
                 cameraMovement.StartMoveRoutine(transform
-                    .position); 
+                    .position);
                 var plant = GetComponent<GridPlant>().plant;
+                MessageBroker.Instance().Send(new PreviousCameraSizeMessage(Camera.main.orthographicSize));
                 MessageBroker.Instance().Send(new PlantCloseUpMessage(plant, this));
             }
         }
@@ -77,8 +79,7 @@ namespace WorldGrid
 
         public void OnPointerDown(PointerEventData eventData) {
         } // not implemented. Required by OnPointerUp.
-    
-    
+
         private void OnDestroy()
         {
             if (isOnGrid) {
