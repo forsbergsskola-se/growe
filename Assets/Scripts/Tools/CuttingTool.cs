@@ -29,7 +29,6 @@ public class CuttingTool : MonoBehaviour {
         if (!isCutting) return;
         if (!Input.GetMouseButton(0)) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
         if (Physics.Raycast(ray, out var hit)){
             if (hit.collider.transform.GetChild(2).GetComponent<GridPlant>() != null) {
                 var currentPlant = hit.collider.transform.GetChild(2).GetComponent<GridPlant>();
@@ -48,7 +47,6 @@ public class CuttingTool : MonoBehaviour {
                     }
 
                     isCutting = false;
-                    MessageBroker.Instance().Send(new ToolSelectedMessage(false));
                     ItemSO newCutting = Instantiate(currentPlant.plant);
                     newCutting.itemType = ItemSO.ItemType.Cutting;
                     newCutting.timesCut = 0;
@@ -64,6 +62,7 @@ public class CuttingTool : MonoBehaviour {
                     // Debug.Log(timesCut);
                     // Debug.Log(currentPlant.item.growthStage);
                     // currentPlant.item.growthStage = 5;
+                    MessageBroker.Instance().Send(new ToolSelectedMessage(false));
                 }
             }
         }

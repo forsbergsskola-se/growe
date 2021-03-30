@@ -61,7 +61,6 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnPointerUp(PointerEventData eventData) {
         if (!isDragging && !notMoveable && !toolSelected) {
-            Debug.Log("Tap! Zooom the thing. Also there are som TODO's here come check 'em out");
             cameraMovement.StartMoveRoutine(transform
                 .position); 
             var plant = GetComponentInChildren<GridPlant>().plant;

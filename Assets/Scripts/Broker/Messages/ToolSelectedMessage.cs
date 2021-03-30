@@ -6,7 +6,6 @@ namespace Broker.Messages {
 
         public ToolSelectedMessage(bool toolSelected) {
             this.toolSelected = toolSelected;
-            Debug.Log("toolSelected: " + this.toolSelected + " " + this);
         }
     }
 }

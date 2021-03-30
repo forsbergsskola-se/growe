@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Broker;
@@ -16,15 +17,25 @@ namespace UI {
         private bool menuButtonHeldDown = false;
         private float endTime;
         private bool RadialWheelActive => radialWheel.activeSelf;
-        bool toolSelected; 
-    
+        bool toolSelected;
+        Image buttonImage;
+
+        void FixedUpdate() {
+            buttonImage.color = toolSelected ? Color.red : Color.white;
+        }
+
         //references
         public GameObject radialWheel;
         private EventSystem eventSystem;
     
-        private void OnEnable()
-        {
+        private void OnEnable() {
+            buttonImage = GetComponent<Image>();
             eventSystem = GetComponent<EventSystem>();
+            MessageBroker.Instance().SubscribeTo<ToolSelectedMessage>(UpdateToolSelected);
+        }
+
+        void OnDisable() {
+            MessageBroker.Instance().UnSubscribeFrom<ToolSelectedMessage>(UpdateToolSelected);
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -62,6 +73,10 @@ namespace UI {
                 yield return null;
             }
             radialWheel.SetActive(true);
+        }
+        
+        void UpdateToolSelected(ToolSelectedMessage m) {
+            toolSelected = m.toolSelected;
         }
 
         private void CheckIfToolIsHovered()

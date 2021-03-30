@@ -16,8 +16,6 @@ namespace InventoryAndStore
         {
             items.Add(ChangeName(newItemSO));
             itemSlot.UpdateItemSlots();
-            
-            Debug.Log("Normal Add", this);
         }
 
         public void Add<T>(IEnumerable<T> list)

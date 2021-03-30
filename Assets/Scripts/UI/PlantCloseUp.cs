@@ -57,7 +57,6 @@ namespace UI {
         void UpdateItem(PlantCloseUpMessage m) {
             _plant = m.plant;
             _plantParentObject = m.plantParentObject;
-            Debug.Log("Updating _item " + m.plant);
             UpdateValues();
         }
     }
