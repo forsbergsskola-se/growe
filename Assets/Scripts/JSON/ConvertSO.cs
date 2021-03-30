@@ -22,7 +22,7 @@ namespace JSON
             clone.GrowthStage = itemSo.CurrentGrowthStage;
             clone.TradeState = itemSo.tradeState;
             clone.ItemType = itemSo.itemType;
-            Debug.Log("rarity test sotoclass: " + (int)itemSo.rarity);
+            Debug.Log("rarity test SOToClass: " + (int)itemSo.rarity);
             clone.Rarity = itemSo.rarity;
             clone.MAXAmount = itemSo.maxAmount;
             clone.CompostValue = itemSo.compostValue;
@@ -37,13 +37,8 @@ namespace JSON
             clone.ItemLore = itemSo.itemLore;
             clone.Name = itemSo.name;
             clone.TimesCut = itemSo.timesCut;
-<<<<<<< Updated upstream
-            clone.IconPath = itemSo.icon.name;
-            clone.CuttingIconPath = itemSo.cuttingIcon.name;
-=======
+            clone.CuttingIconPath = AssetDatabase.GetAssetPath(itemSo.cuttingIcon);
             clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
-            Debug.Log("Icon path " + AssetDatabase.GetAssetPath(itemSo.icon));
->>>>>>> Stashed changes
             if (itemSo.itemType == ItemSO.ItemType.Seedbag) return clone;
             for (int i = 0; i < itemSo.growthStageSprites.Length; i++)
                 clone.GrowthStageSprites[i] = AssetDatabase.GetAssetPath(itemSo.growthStageSprites[i]);
@@ -67,7 +62,7 @@ namespace JSON
             clone.CurrentGrowthStage = itemClass.GrowthStage;
             clone.tradeState = itemClass.TradeState;
             clone.itemType = itemClass.ItemType;
-            Debug.Log("rarity test sotoclass: " + (int)itemClass.Rarity);
+            Debug.Log("rarity test ClassToSO: " + (int)itemClass.Rarity);
             clone.rarity = itemClass.Rarity;
             clone.maxAmount = itemClass.MAXAmount;
             clone.compostValue = itemClass.CompostValue;
@@ -82,15 +77,11 @@ namespace JSON
             clone.itemLore = itemClass.ItemLore;
             clone.name = itemClass.Name;
             clone.timesCut = itemClass.TimesCut;
-<<<<<<< Updated upstream
-            clone.icon = Resources.Load<Sprite>(itemClass.IconPath);
-            clone.cuttingIcon = Resources.Load<Sprite>(itemClass.CuttingIconPath);
-=======
+            clone.cuttingIcon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.CuttingIconPath, typeof(Sprite));
             clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
->>>>>>> Stashed changes
-            for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) {
+            for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) 
                 clone.growthStageSprites[i] = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.GrowthStageSprites[i], typeof(Sprite));
-            }
+            
 
             return clone;
         }
