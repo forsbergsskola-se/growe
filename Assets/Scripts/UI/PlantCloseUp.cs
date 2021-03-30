@@ -11,6 +11,7 @@ namespace UI {
     public class PlantCloseUp : MonoBehaviour {
         ItemSO _plant;
         GridMoveObject _gridMoveObject;
+        float _previousCameraSize;
 
         public UnityEvent onEnable;
         public UnityEvent onDisable;
@@ -28,8 +29,17 @@ namespace UI {
             _gridMoveObject.DestroyGridObj();
         }
 
+        public void ZoomOut() {
+            FindObjectOfType<CameraMovement>().ZoomOut(_previousCameraSize);
+        }
+
+        void UpdatePreviousCameraPosition(PreviousCameraSizeMessage m) {
+            _previousCameraSize = m.size;
+        }
+
         void Awake() {
             MessageBroker.Instance().SubscribeTo<PlantCloseUpMessage>(UpdateItem);
+            MessageBroker.Instance().SubscribeTo<PreviousCameraSizeMessage>(UpdatePreviousCameraPosition);
             gameObject.SetActive(false);
         }
 
@@ -42,6 +52,7 @@ namespace UI {
         }
 
         void OnDestroy() {
+            MessageBroker.Instance().UnSubscribeFrom<PreviousCameraSizeMessage>(UpdatePreviousCameraPosition);
             MessageBroker.Instance().UnSubscribeFrom<PlantCloseUpMessage>(UpdateItem);
         }
 

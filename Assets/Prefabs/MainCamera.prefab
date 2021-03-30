@@ -139,3 +139,4 @@ MonoBehaviour:
   moveDuration: 0.3
   targetCamSize: 2
   plantCloseupOffset: {x: 0.7, y: 0.4}
+  zoomOutDuration: 0.6
