@@ -20,7 +20,7 @@ public class GridPlant : MonoBehaviour {
     public SpriteRenderer plantSpriteRenderer;
     private Grid grid;
     
-    public enum SoilStage { Dry = 0, GettingDry = 1, Moist = 2, Watered = 3, OverWatered = 4 }
+    public enum SoilStage { Dry, GettingDry, Moist, Watered, OverWatered }
 
     public void Init(ItemSO plant, Grid grid) {
         this.plant = plant;
