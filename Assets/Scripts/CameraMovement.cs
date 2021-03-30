@@ -14,6 +14,12 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float TouchZoomSpeed = 0.1f;
     [SerializeField, Range(0f, 179.9f)] private float ZoomMinBound = 0.1f;
     [SerializeField, Range(0f, 179.9f)] private float ZoomMaxBound = 179.9f;
+
+    [Header("Panning settings")] 
+    [SerializeField] private float minXPos = -4.5f;
+    [SerializeField] private float maxXPos = 8.5f;
+    [SerializeField] private float minYPos = -4.0f;
+    [SerializeField] private float maxYPos = 6.0f;
     
     [Header("Tap zoom settings")]
     [SerializeField, Tooltip("How long it takes for move to to reach its target position. For some reason this value is not exact but should at least affect how long it takes"), Range(0.001f, 2f)] 
@@ -41,7 +47,7 @@ public class CameraMovement : MonoBehaviour
     void OnEnable() {
         cam = Camera.main;
         cameraZ = cam.transform.position.z;
-        eventSystem = GetComponent<EventSystem>();
+        eventSystem = EventSystem.current;
         if (eventSystem == null)
             Debug.LogWarning("eventSystem not found on CameraMovement");
     }
@@ -54,7 +60,9 @@ public class CameraMovement : MonoBehaviour
             HandlePcInput();
 
         ConstrainOrthographicSize();
+        ConstrainCameraPosition();
     }
+
 
     private void FixedUpdate()
     {
@@ -146,6 +154,21 @@ public class CameraMovement : MonoBehaviour
             cam.orthographicSize = 0.1f;
         else if (cam.fieldOfView > ZoomMaxBound)
             cam.orthographicSize = 179.9f;
+    }
+    
+    private void ConstrainCameraPosition()
+    {
+        Vector3 pos = transform.position;
+        if (pos.x > maxXPos)
+            pos.x = maxXPos;
+        else if (pos.x < minXPos)
+            pos.x = minXPos;
+        if (pos.y > maxYPos)
+            pos.y = maxYPos;
+        else if (pos.y < minYPos)
+            pos.y = minYPos;
+        
+        transform.position = pos;
     }
 
     void Zoom(float deltaMagnitudeDiff, float speed)
