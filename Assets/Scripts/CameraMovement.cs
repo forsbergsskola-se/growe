@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class CameraMovement : MonoBehaviour
 {
     public UnityEvent OnMoveToRoutineFinished;
-    private const int UILayer = 5;
+    private const int UILayer = 5; //the layer that blocks raycasts for camera movement
     
     // Settings
     [Header("Pinch zoom settings")]
@@ -24,7 +24,10 @@ public class CameraMovement : MonoBehaviour
     [Header("Tap zoom settings")]
     [SerializeField, Tooltip("How long it takes for move to to reach its target position. For some reason this value is not exact but should at least affect how long it takes"), Range(0.001f, 2f)] 
     private float moveDuration = 0.6f; 
-    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] private float targetCamSize = 3.65f;
+    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] 
+    private float targetCamSize = 3.65f;
+    [SerializeField, Tooltip("The x offset from center for the plant close up")]
+    public Vector2 plantCloseupOffset = new Vector2(1f, 0); 
 
     //references
     private Camera cam;
@@ -196,7 +199,7 @@ public class CameraMovement : MonoBehaviour
         
         // camera is orthogonal. Better not move the z to ensure everything stays view.
         // instead the zoom level is represented by orthographicSize. target is set in targetCamSize 
-        this.moveXYTarget = (Vector2) targetWorldPos; 
+        this.moveXYTarget = (Vector2) targetWorldPos + plantCloseupOffset; 
         moveRoutineActive = true;
     }
 
@@ -206,7 +209,8 @@ public class CameraMovement : MonoBehaviour
         transform.position = new Vector3(result.x, result.y, this.cameraZ); 
         cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, ref moveCamSizeVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
         
-        if (Mathf.Abs(cam.orthographicSize - targetCamSize) < 0.1f ) 
+        if (Mathf.Abs(cam.orthographicSize - targetCamSize) < 0.1f 
+            && Vector2.Distance((Vector2) transform.position, moveXYTarget) < .1f) 
         {
             moveRoutineActive = false;
             OnMoveToRoutineFinished.Invoke();
