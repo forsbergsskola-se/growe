@@ -130,8 +130,8 @@ MonoBehaviour:
         m_CallState: 2
   MouseZoomSpeed: 15
   TouchZoomSpeed: 0.1
-  ZoomMinBound: 0.1
-  ZoomMaxBound: 179.9
+  ZoomMinBound: 4
+  ZoomMaxBound: 60
   minXPos: -4.5
   maxXPos: 8.5
   minYPos: -4
