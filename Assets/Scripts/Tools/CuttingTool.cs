@@ -27,7 +27,7 @@ public class CuttingTool : MonoBehaviour {
 
     void PcCut() {
         if (!isCutting) return;
-        if (!Input.GetMouseButton(0)) return;
+        if (!Input.GetMouseButtonUp(0)) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit)){
             if (hit.collider.transform.GetChild(2).GetComponent<GridPlant>() != null) {
