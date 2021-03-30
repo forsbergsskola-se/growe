@@ -37,6 +37,7 @@ namespace JSON
             clone.Name = itemSo.name;
             clone.TimesCut = itemSo.timesCut;
             clone.IconPath = itemSo.icon.name;
+            clone.CuttingIconPath = itemSo.cuttingIcon.name;
             if (itemSo.itemType == ItemSO.ItemType.Seedbag) return clone;
             for (int i = 0; i < itemSo.growthStageSprites.Length; i++)
                 clone.GrowthStageSprites[i] = itemSo.growthStageSprites[i].name;
@@ -75,7 +76,7 @@ namespace JSON
             clone.name = itemClass.Name;
             clone.timesCut = itemClass.TimesCut;
             clone.icon = Resources.Load<Sprite>(itemClass.IconPath);
-            Debug.Log(Resources.Load<Sprite>(itemClass.IconPath));
+            clone.cuttingIcon = Resources.Load<Sprite>(itemClass.CuttingIconPath);
             for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) {
                 clone.growthStageSprites[i] = Resources.Load<Sprite>(itemClass.GrowthStageSprites[i]);
             }
@@ -96,7 +97,7 @@ namespace JSON
         public float LifeTimeHoursInInventory, Survivability, DropChance,
             CurrentGrowthProgress;
         public Vector2 SizeDimensions;
-        public string ItemLore, Name, IconPath;
+        public string ItemLore, Name, IconPath, CuttingIconPath;
         public string[] GrowthStageSprites = new string[5];
     }
 }

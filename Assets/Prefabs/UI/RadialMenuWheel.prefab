@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6944344284480852756}
   - component: {fileID: 6350514220699471191}
   m_Layer: 5
-  m_Name: CuttingToolBackground
+  m_Name: CuttingTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 1759221774797156487}
   - component: {fileID: 49428034588546547}
   m_Layer: 5
-  m_Name: WateringToolBackground
+  m_Name: WateringTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 6405853247674868402}
   - component: {fileID: 8992759665426603583}
   m_Layer: 5
-  m_Name: FertilizerToolBackground
+  m_Name: FertilizerTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 8903179358576816965}
   - component: {fileID: 8903179358576816962}
   m_Layer: 5
-  m_Name: FertilizerTool
+  m_Name: FertilizerTool_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 8903179359304707195}
   - component: {fileID: 8903179359304707192}
   m_Layer: 5
-  m_Name: WateringTool
+  m_Name: WateringTool_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 8903179360157777528}
   - component: {fileID: 8903179360157777529}
   m_Layer: 5
-  m_Name: CuttingTool
+  m_Name: CuttingTool_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

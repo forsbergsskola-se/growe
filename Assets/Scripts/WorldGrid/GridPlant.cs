@@ -56,7 +56,6 @@ public class GridPlant : MonoBehaviour {
     }
     
     void TimePassed(TimePassedMessage m) {
-        Debug.Log("TimePassed Method");
         float deltaTime = m.timePassed;
         UpdateSoilStage(deltaTime);
         UpdateGrowthStage(deltaTime);
@@ -113,7 +112,6 @@ public class GridPlant : MonoBehaviour {
 
     void UpdateSprite()
     {
-        Debug.Log("Update sprite, growth stage is " + plant.CurrentGrowthStage);
         plantSpriteRenderer.sprite = plant.growthStageSprites[(int)plant.CurrentGrowthStage];
     }
 

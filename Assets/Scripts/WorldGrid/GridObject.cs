@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Broker;
 using Broker.Messages;
-using JSON;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -32,7 +29,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         if (notMoveable) return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 previousPos = transform.position;
-        if (Physics.Raycast(ray, out var hitInfo)) {
+        if (Physics.Raycast(ray, out var hitInfo, 100f, LayerMask.GetMask("IsometricGrid"))) {
             this.transform.position = hitInfo.point;
             this.transform.localPosition = Vector3Int.FloorToInt(this.transform.localPosition);
             if (transform.localPosition.x + Size.x > transform.parent.transform.GetComponent<Grid>().width || transform.localPosition.x < 0) {
@@ -61,7 +58,6 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnPointerUp(PointerEventData eventData) {
         if (!isDragging && !notMoveable && !toolSelected) {
-            Debug.Log("Tap! Zooom the thing. Also there are som TODO's here come check 'em out");
             cameraMovement.StartMoveRoutine(transform
                 .position); 
             var plant = GetComponentInChildren<GridPlant>().plant;

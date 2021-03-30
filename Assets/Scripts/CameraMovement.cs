@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class CameraMovement : MonoBehaviour
 {
     public UnityEvent OnMoveToRoutineFinished;
-    private const int UILayer = 5;
+    private const int UILayer = 5; //the layer that blocks raycasts for camera movement
     
     // Settings
     [Header("Pinch zoom settings")]
@@ -14,11 +14,20 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float TouchZoomSpeed = 0.1f;
     [SerializeField, Range(0f, 179.9f)] private float ZoomMinBound = 0.1f;
     [SerializeField, Range(0f, 179.9f)] private float ZoomMaxBound = 179.9f;
+
+    [Header("Panning settings")] 
+    [SerializeField] private float minXPos = -4.5f;
+    [SerializeField] private float maxXPos = 8.5f;
+    [SerializeField] private float minYPos = -4.0f;
+    [SerializeField] private float maxYPos = 6.0f;
     
     [Header("Tap zoom settings")]
     [SerializeField, Tooltip("How long it takes for move to to reach its target position. For some reason this value is not exact but should at least affect how long it takes"), Range(0.001f, 2f)] 
     private float moveDuration = 0.6f; 
-    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] private float targetCamSize = 3.65f;
+    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] 
+    private float targetCamSize = 3.65f;
+    [SerializeField, Tooltip("The x offset from center for the plant close up")]
+    public Vector2 plantCloseupOffset = new Vector2(1f, 0); 
 
     //references
     private Camera cam;
@@ -41,7 +50,7 @@ public class CameraMovement : MonoBehaviour
     void OnEnable() {
         cam = Camera.main;
         cameraZ = cam.transform.position.z;
-        eventSystem = GetComponent<EventSystem>();
+        eventSystem = EventSystem.current;
         if (eventSystem == null)
             Debug.LogWarning("eventSystem not found on CameraMovement");
     }
@@ -54,7 +63,9 @@ public class CameraMovement : MonoBehaviour
             HandlePcInput();
 
         ConstrainOrthographicSize();
+        ConstrainCameraPosition();
     }
+
 
     private void FixedUpdate()
     {
@@ -147,6 +158,21 @@ public class CameraMovement : MonoBehaviour
         else if (cam.fieldOfView > ZoomMaxBound)
             cam.orthographicSize = 179.9f;
     }
+    
+    private void ConstrainCameraPosition()
+    {
+        Vector3 pos = transform.position;
+        if (pos.x > maxXPos)
+            pos.x = maxXPos;
+        else if (pos.x < minXPos)
+            pos.x = minXPos;
+        if (pos.y > maxYPos)
+            pos.y = maxYPos;
+        else if (pos.y < minYPos)
+            pos.y = minYPos;
+        
+        transform.position = pos;
+    }
 
     void Zoom(float deltaMagnitudeDiff, float speed)
     {
@@ -173,7 +199,7 @@ public class CameraMovement : MonoBehaviour
         
         // camera is orthogonal. Better not move the z to ensure everything stays view.
         // instead the zoom level is represented by orthographicSize. target is set in targetCamSize 
-        this.moveXYTarget = (Vector2) targetWorldPos; 
+        this.moveXYTarget = (Vector2) targetWorldPos + plantCloseupOffset; 
         moveRoutineActive = true;
     }
 
@@ -183,7 +209,8 @@ public class CameraMovement : MonoBehaviour
         transform.position = new Vector3(result.x, result.y, this.cameraZ); 
         cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, ref moveCamSizeVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
         
-        if (Mathf.Abs(cam.orthographicSize - targetCamSize) < 0.1f ) 
+        if (Mathf.Abs(cam.orthographicSize - targetCamSize) < 0.1f 
+            && Vector2.Distance((Vector2) transform.position, moveXYTarget) < .1f) 
         {
             moveRoutineActive = false;
             OnMoveToRoutineFinished.Invoke();

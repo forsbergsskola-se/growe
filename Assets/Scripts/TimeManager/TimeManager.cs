@@ -72,7 +72,6 @@ namespace TimeManager
         private void CalculateAndSendDeltaTime(long timestampOld, long timestampCurrent)
         {
             float deltaTime = (timestampCurrent - timestampOld) * timeMultiplier;
-            Debug.Log($"{(timestampCurrent - timestampOld) * timeMultiplier} seconds passed.");
             broker.Send(new TimePassedMessage(deltaTime));
         }
     }

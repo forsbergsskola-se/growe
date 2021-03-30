@@ -24,6 +24,7 @@ namespace InventoryAndStore
         
         */
         public Sprite icon;
+        public Sprite cuttingIcon;
         public Sprite[] growthStageSprites = new Sprite[5];
         public TradeState tradeState;
         public enum TradeState { Sellable, Buyable, SoulBound }

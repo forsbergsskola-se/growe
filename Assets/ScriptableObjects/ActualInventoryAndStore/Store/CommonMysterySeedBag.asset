@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CommonMysterySeedBag
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 21bdf231e2cce324ea1c99d9e5e9eddc, type: 3}
+  cuttingIcon: {fileID: 21300000, guid: 21bdf231e2cce324ea1c99d9e5e9eddc, type: 3}
   growthStageSprites: []
   tradeState: 1
   itemType: 3

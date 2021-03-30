@@ -14,7 +14,7 @@ namespace UI {
         public UnityEvent onDisable;
 
         public Text plantName;
-        public Text plantRarity;
+        public Slider plantRarity;
         public Text sellText;
         public Text compostText;
         public Slider growthStage;
@@ -46,7 +46,7 @@ namespace UI {
         void UpdateValues() {
             plantName.text = _plant.name;
             plantLore.text = _plant.itemLore;
-            plantRarity.text = _plant.rarity.ToString();
+            plantRarity.value = (int)_plant.rarity + 1;
             sellText.text = _plant.sellValue.ToString();
             compostText.text = _plant.compostValue.ToString();
             growthStage.value = (int) _plant.CurrentGrowthStage + 1;
@@ -57,7 +57,6 @@ namespace UI {
         void UpdateItem(PlantCloseUpMessage m) {
             _plant = m.plant;
             _plantParentObject = m.plantParentObject;
-            Debug.Log("Updating _item " + m.plant);
             UpdateValues();
         }
     }

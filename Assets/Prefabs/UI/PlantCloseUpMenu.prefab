@@ -275,15 +275,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8384077994108715641}
-  - {fileID: 7139815751172617890}
-  m_Father: {fileID: 7139815750631596949}
-  m_RootOrder: 0
+  m_Father: {fileID: 7139815751172617890}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -132}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 385, y: 120}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8375834420020500707
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -468,7 +467,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 0
 --- !u!1 &3802177715362349129
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +578,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 872, y: 3302.6}
+  m_SizeDelta: {x: 872, y: 3601}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &2557476845064639864
 CanvasRenderer:
@@ -609,7 +608,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6b3aa1a32f1b50740bee761354f7e390, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9879d6f289422104eb7784deba9e288a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -697,7 +696,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 43
+  m_Text: 0
 --- !u!1 &3992992515880830244
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,16 +859,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 55
-    m_Alignment: 7
+    m_MaxSize: 300
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '67
-
-'
+  m_Text: 0
 --- !u!1 &4245012863924888002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,7 +1643,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7139815749799995684}
-  - component: {fileID: 7139815749799995685}
   m_Layer: 5
   m_Name: PlantData
   m_TagString: Untagged
@@ -1666,6 +1662,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7139815750456211244}
+  - {fileID: 7139815751172617890}
   m_Father: {fileID: 7139815750906607354}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1674,32 +1671,6 @@ RectTransform:
   m_AnchoredPosition: {x: 349, y: -80}
   m_SizeDelta: {x: 872, y: 2720}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7139815749799995685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139815749799995683}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 305
-    m_Bottom: 315
-  m_ChildAlignment: 1
-  m_Spacing: 100
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &7139815750207991113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,15 +1934,14 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4867361418956601112}
+  m_Children: []
   m_Father: {fileID: 1713807734326229025}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: 600, y: 800}
+  m_SizeDelta: {x: 600, y: 750}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7139815750631596951
 CanvasRenderer:
@@ -2007,7 +1977,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 30
+    m_MaxSize: 45
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2163,7 +2133,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   plantName: {fileID: 7139815750456211245}
-  plantRarity: {fileID: 0}
+  plantRarity: {fileID: 2302233817333238729}
   sellText: {fileID: 8323472361564087343}
   compostText: {fileID: 6426990795445897125}
   growthStage: {fileID: 5181275364801219651}
@@ -2200,12 +2170,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7139815750476403473}
-  m_Father: {fileID: 4867361418956601112}
+  - {fileID: 4867361418956601112}
+  m_Father: {fileID: 7139815749799995684}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -62}
+  m_AnchoredPosition: {x: 0, y: 381}
   m_SizeDelta: {x: 250, y: 120}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7139815751172617893
@@ -2463,7 +2434,7 @@ GameObject:
   - component: {fileID: 3308263663944325815}
   - component: {fileID: 7447004834253862618}
   - component: {fileID: 5823207322055928178}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: RaycastBlockFilter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

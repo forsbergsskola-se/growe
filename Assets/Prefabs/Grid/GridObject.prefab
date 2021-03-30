@@ -158,6 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soilStageDuration: 2800
+  soilStageProgress: 0
+  currentSoilStage: 0
   plant: {fileID: 0}
   plantSpriteRenderer: {fileID: 1236233958672514567}
 --- !u!1 &3934613891321521474
@@ -287,7 +289,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.1}
+  m_Size: {x: 1, y: 1, z: 0.11}
   m_Center: {x: 0.5, y: 0.5, z: 0.051}
 --- !u!114 &7919882476770317448
 MonoBehaviour:

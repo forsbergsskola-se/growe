@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Broker;
 using Broker.Messages;
 using UnityEngine;
@@ -16,15 +18,25 @@ namespace UI {
         private bool menuButtonHeldDown = false;
         private float endTime;
         private bool RadialWheelActive => radialWheel.activeSelf;
-        bool toolSelected; 
-    
+        private bool toolSelected;
+        private Image buttonImage;
+
+        void FixedUpdate() {
+            buttonImage.color = toolSelected ? Color.red : Color.white;
+        }
+
         //references
         public GameObject radialWheel;
         private EventSystem eventSystem;
     
-        private void OnEnable()
-        {
+        private void OnEnable() {
+            buttonImage = GetComponent<Image>();
             eventSystem = GetComponent<EventSystem>();
+            MessageBroker.Instance().SubscribeTo<ToolSelectedMessage>(UpdateToolSelected);
+        }
+
+        void OnDisable() {
+            MessageBroker.Instance().UnSubscribeFrom<ToolSelectedMessage>(UpdateToolSelected);
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -34,7 +46,6 @@ namespace UI {
 
             menuButtonHeldDown = true;
             endTime = Time.time + waitTime;
-            Debug.Log("pointer down on radial menu");
             StartCoroutine(ButtonHeldRoutine());
         }
         public void OnPointerUp(PointerEventData eventData)
@@ -64,6 +75,10 @@ namespace UI {
             }
             radialWheel.SetActive(true);
         }
+        
+        void UpdateToolSelected(ToolSelectedMessage m) {
+            toolSelected = m.toolSelected;
+        }
 
         private void CheckIfToolIsHovered()
         {
@@ -73,30 +88,26 @@ namespace UI {
             GraphicRaycaster graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
             List<RaycastResult> results = new List<RaycastResult>();
             graphicRaycaster.Raycast(eventData, results);
-        
-            foreach (RaycastResult result in results)
-            {
-                Debug.Log("Hit " + result.gameObject.name);
-                toolSelected = true;
+
+            if (results.Count == 0) return;
+            var result = results[0];
+            toolSelected = true;
                 
-                switch (result.gameObject.name) {
-                    case "CuttingTool":
-                        MessageBroker.Instance().Send(new CuttingToolSelectedMessage(true));
-                        return;
-                    case "WateringTool":
-                        MessageBroker.Instance().Send(new WateringToolSelectedMessage());
-                        break;
-                    case "FertilizerTool":
-                        MessageBroker.Instance().Send(new FertilizerToolSelectedMessage());
-                        break;
-                    default :
-                        Debug.Log("No tool selected " + this);
-                        toolSelected = false;
-                        break;
-                }
-                
-                MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
+            switch (result.gameObject.name) {
+                case "CuttingTool":
+                    MessageBroker.Instance().Send(new CuttingToolSelectedMessage());
+                    break;
+                case "WateringTool":
+                    MessageBroker.Instance().Send(new WateringToolSelectedMessage());
+                    break;
+                case "FertilizerTool":
+                    MessageBroker.Instance().Send(new FertilizerToolSelectedMessage());
+                    break;
+                default :
+                    toolSelected = false;
+                    break;
             }
+            MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
         }
     }
 }
