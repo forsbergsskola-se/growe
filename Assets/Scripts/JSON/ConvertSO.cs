@@ -77,7 +77,6 @@ namespace JSON
             clone.timesCut = itemClass.TimesCut;
             clone.icon = Resources.Load<Sprite>(itemClass.IconPath);
             clone.cuttingIcon = Resources.Load<Sprite>(itemClass.CuttingIconPath);
-            Debug.Log(Resources.Load<Sprite>(itemClass.IconPath));
             for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) {
                 clone.growthStageSprites[i] = Resources.Load<Sprite>(itemClass.GrowthStageSprites[i]);
             }

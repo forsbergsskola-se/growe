@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: Hibiscus
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9e8751a013b530a42b5fa8d0811aadd8, type: 3}
+  icon: {fileID: 21300000, guid: 15e87db2cc9b013428d2d930b01f5132, type: 3}
+  cuttingIcon: {fileID: 21300000, guid: ed0c330325770b2468d08e0fd3fb4a3d, type: 3}
   growthStageSprites:
   - {fileID: 21300000, guid: b0dbf681b4b1dc743b447f935a8ab394, type: 3}
   - {fileID: 21300000, guid: f4ef04a4465cf444eaa383d139af430b, type: 3}

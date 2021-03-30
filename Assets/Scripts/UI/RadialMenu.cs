@@ -34,7 +34,6 @@ namespace UI {
 
             menuButtonHeldDown = true;
             endTime = Time.time + waitTime;
-            Debug.Log("pointer down on radial menu");
             StartCoroutine(ButtonHeldRoutine());
         }
         public void OnPointerUp(PointerEventData eventData)
@@ -81,22 +80,24 @@ namespace UI {
                 
                 switch (result.gameObject.name) {
                     case "CuttingTool":
-                        MessageBroker.Instance().Send(new CuttingToolSelectedMessage(true));
+                        MessageBroker.Instance().Send(new CuttingToolSelectedMessage());
+                        MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
                         return;
                     case "WateringTool":
                         MessageBroker.Instance().Send(new WateringToolSelectedMessage());
-                        break;
+                        MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
+                        return;
                     case "FertilizerTool":
                         MessageBroker.Instance().Send(new FertilizerToolSelectedMessage());
-                        break;
+                        MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
+                        return;
                     default :
-                        Debug.Log("No tool selected " + this);
                         toolSelected = false;
-                        break;
+                        MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
+                        return;
                 }
-                
-                MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
             }
+            //TODO WHY DOES CODE NOT EXECUTE HERE??
         }
     }
 }

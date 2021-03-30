@@ -130,7 +130,6 @@ public class Grid : MonoBehaviour, IGrid {
     }
 
     public void RemoveObject(GridObject gridObject, Vector2Int fromPosition) {
-        Debug.Log("remove obj at" + fromPosition);
         itemsOnGrid.Remove(fromPosition);
         foreach (var cell in GetCellsInRect(fromPosition, gridObject.Size)) {
             cell.GridObject = null;

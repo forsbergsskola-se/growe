@@ -14,7 +14,7 @@ public class CuttingTool : MonoBehaviour {
 
     void SetBool(CuttingToolSelectedMessage message)
     {
-        isCutting = message.setBool;
+        isCutting = true;
         //Debug.Log((isCutting));
     }
 
