@@ -104,7 +104,6 @@ public class GridPlant : MonoBehaviour {
             
             currentSoilStage -= 1;
             UpdateSprite();
-            Debug.Log(currentSoilStage);
         }
 
         currentSoilStage = SoilStage.Watered; //TODO temporary here to show the plant growing during the presentation

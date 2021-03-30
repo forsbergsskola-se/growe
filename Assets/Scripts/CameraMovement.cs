@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,11 +24,15 @@ public class CameraMovement : MonoBehaviour
     
     [Header("Tap zoom settings")]
     [SerializeField, Tooltip("How long it takes for move to to reach its target position. For some reason this value is not exact but should at least affect how long it takes"), Range(0.001f, 2f)] 
-    private float moveDuration = 0.6f; 
+    private float moveDuration = 0.6f;
     [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] 
     private float targetCamSize = 3.65f;
     [SerializeField, Tooltip("The x offset from center for the plant close up")]
     public Vector2 plantCloseupOffset = new Vector2(1f, 0); 
+    
+    [Header("Zoom out settings")]
+    [SerializeField]
+    private float zoomOutDuration = 0.8f;
 
     //references
     private Camera cam;
@@ -69,7 +74,7 @@ public class CameraMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (moveRoutineActive)
+        if (moveRoutineActive) 
             MoveRoutine();
     }
 
@@ -205,15 +210,28 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveRoutine()
     {
-        Vector2 result = Vector2.SmoothDamp(transform.position, moveXYTarget, ref moveXYVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
+        Vector2 result = Vector2.SmoothDamp(transform.position, moveXYTarget, 
+            ref moveXYVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
         transform.position = new Vector3(result.x, result.y, this.cameraZ); 
-        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, ref moveCamSizeVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
+        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, 
+            ref moveCamSizeVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
         
         if (Mathf.Abs(cam.orthographicSize - targetCamSize) < 0.1f 
             && Vector2.Distance((Vector2) transform.position, moveXYTarget) < .1f) 
         {
             moveRoutineActive = false;
             OnMoveToRoutineFinished.Invoke();
+        }
+    }
+
+    public void ZoomOut(float targetSize) {
+        StartCoroutine(ZoomOutRoutine(targetSize));
+    }
+    
+    IEnumerator ZoomOutRoutine(float targetSize) {
+        while (cam.orthographicSize + 0.0001f <= targetSize && !moveRoutineActive) {
+            yield return cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, targetSize,
+                ref moveCamSizeVelocity, zoomOutDuration, float.MaxValue, Time.fixedDeltaTime);
         }
     }
 

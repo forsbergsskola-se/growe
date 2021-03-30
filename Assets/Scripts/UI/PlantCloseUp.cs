@@ -9,6 +9,8 @@ namespace UI {
     public class PlantCloseUp : MonoBehaviour {
         ItemSO _plant;
         GridObject _plantParentObject;
+        GridPlant _gridPlant;
+        float _previousCameraSize;
 
         public UnityEvent onEnable;
         public UnityEvent onDisable;
@@ -25,9 +27,18 @@ namespace UI {
             FindObjectOfType<Currency>().AddCompost(_plant.compostValue);
             _plantParentObject.DestroyGridObj();
         }
+        
+        public void ZoomOut() {
+            FindObjectOfType<CameraMovement>().ZoomOut(_previousCameraSize);
+        }
+
+        void UpdatePreviousCameraPosition(PreviousCameraSizeMessage m) {
+            _previousCameraSize = m.size;
+        }
 
         void Awake() {
             MessageBroker.Instance().SubscribeTo<PlantCloseUpMessage>(UpdateItem);
+            MessageBroker.Instance().SubscribeTo<PreviousCameraSizeMessage>(UpdatePreviousCameraPosition);
             gameObject.SetActive(false);
         }
 
@@ -40,17 +51,19 @@ namespace UI {
         }
 
         void OnDestroy() {
+            MessageBroker.Instance().UnSubscribeFrom<PreviousCameraSizeMessage>(UpdatePreviousCameraPosition);
             MessageBroker.Instance().UnSubscribeFrom<PlantCloseUpMessage>(UpdateItem);
         }
 
         void UpdateValues() {
+            _gridPlant = _plantParentObject.GetComponentInChildren<GridPlant>();
             plantName.text = _plant.name;
             plantLore.text = _plant.itemLore;
-            plantRarity.value = (int)_plant.rarity + 1;
+            plantRarity.value = (int) _plant.rarity + 1;
             sellText.text = _plant.sellValue.ToString();
             compostText.text = _plant.compostValue.ToString();
             growthStage.value = (int) _plant.CurrentGrowthStage + 1;
-            //TODO soilStatus.value = 
+            soilStatus.value = (int) _gridPlant.currentSoilStage + 1;
             plantLore.text = _plant.itemLore;
         }
 

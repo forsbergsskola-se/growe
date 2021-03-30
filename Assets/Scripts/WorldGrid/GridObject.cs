@@ -13,6 +13,7 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public bool notMoveable;
     public bool isOnGrid;
     private Grid grid;
+    private Vector3 _previousCameraPosition;
     
     void Start() {
         grid = GetComponentInParent<Grid>();
@@ -59,8 +60,9 @@ public class GridObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public void OnPointerUp(PointerEventData eventData) {
         if (!isDragging && !notMoveable && !toolSelected) {
             cameraMovement.StartMoveRoutine(transform
-                .position); 
+                .position);
             var plant = GetComponentInChildren<GridPlant>().plant;
+            MessageBroker.Instance().Send(new PreviousCameraSizeMessage(Camera.main.orthographicSize));
             MessageBroker.Instance().Send(new PlantCloseUpMessage(plant, this));
         }
     }
