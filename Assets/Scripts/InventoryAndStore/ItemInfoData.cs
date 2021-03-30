@@ -11,7 +11,6 @@ namespace InventoryAndStore {
 
         public Text itemName,
             itemAmount,
-            itemRarity,
             itemSize,
             itemSurvivability,
             itemCompostValue,
@@ -19,8 +18,10 @@ namespace InventoryAndStore {
             itemLore,
             plantButtonText;
 
+        public Slider itemRarity;
         public Button plantButton;
         public Button CompostButton;
+        [HideInInspector]
         public ItemData itemData;
 
         public void UpdateItemInfo()
@@ -28,7 +29,7 @@ namespace InventoryAndStore {
             ItemSO itemSO = itemData.ItemSO;
             itemName.text = itemSO.name;
             itemIcon.sprite = itemSO.icon;
-            itemRarity.text = itemSO.rarity.ToString();
+            itemRarity.value = (int) itemSO.rarity + 1;
             itemAmount.text = itemData.amount.ToString();
             itemSize.text = $"{itemSO.sizeDimensions.x} x {itemSO.sizeDimensions.y}";
             itemSurvivability.text = itemSO.survivability.ToString();
