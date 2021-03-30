@@ -1157,14 +1157,14 @@ MonoBehaviour:
   storeUi: {fileID: 0}
   itemName: {fileID: 2802612281075837629}
   itemAmount: {fileID: 2788142280476805854}
-  itemRarity: {fileID: 0}
   itemSize: {fileID: 554871325123077593}
   itemSurvivability: {fileID: 1206745602614272668}
   itemCompostValue: {fileID: 2688311703582770735}
   itemSellValue: {fileID: 6881675515031066594}
   itemLore: {fileID: 2802612279855059993}
   plantButtonText: {fileID: 2802612280741634784}
-  plantButton: {fileID: 0}
+  itemRarity: {fileID: 1308386661413806830}
+  plantButton: {fileID: 2802612281730707400}
   CompostButton: {fileID: 2802612279756463507}
   itemData: {fileID: 0}
 --- !u!114 &6664737061215364249
@@ -1726,7 +1726,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 3
   m_WholeNumbers: 1
-  m_Value: 2
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1955,7 +1955,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.6666667
+  m_FillAmount: 0.33333334
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

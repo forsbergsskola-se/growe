@@ -1,23 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class CameraMovement : MonoBehaviour
 {
     public UnityEvent OnMoveToRoutineFinished;
+    private const int UILayer = 5;
     
     // Settings
-    float MouseZoomSpeed = 15.0f;
-    float TouchZoomSpeed = 0.1f;
-    float ZoomMinBound = 0.1f;
-    float ZoomMaxBound = 179.9f;
-    [Header("MoveRoutine Settings")]
+    [Header("Pinch zoom settings")]
+    [SerializeField] private float MouseZoomSpeed = 15.0f;
+    [SerializeField] private float TouchZoomSpeed = 0.1f;
+    [SerializeField, Range(0f, 179.9f)] private float ZoomMinBound = 0.1f;
+    [SerializeField, Range(0f, 179.9f)] private float ZoomMaxBound = 179.9f;
+    
+    [Header("Tap zoom settings")]
     [SerializeField, Tooltip("How long it takes for move to to reach its target position. For some reason this value is not exact but should at least affect how long it takes"), Range(0.001f, 2f)] 
     private float moveDuration = 0.6f; 
-    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] private float targetCamSize = 3.65f; 
-    
+    [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] private float targetCamSize = 3.65f;
+
     //references
-    Camera cam;
-    
+    private Camera cam;
+    private EventSystem eventSystem;
+
     //variables 
     Vector3 mouseOnScrollOriginPosition = Vector3.zero;
     Vector3 cameraOnScrollOriginPosition = Vector3.zero;
@@ -28,9 +34,16 @@ public class CameraMovement : MonoBehaviour
     private float moveCamSizeVelocity = 0.0f;     // variable used by Mathf.Smoothdamp
     private Vector2 moveXYVelocity = Vector2.zero; // variable used by Vector3.Smoothdamp
 
+    private bool touchDragActive = false;
+    
+    List<RaycastResult> cachedList = new List<RaycastResult>();
+
     void OnEnable() {
         cam = Camera.main;
         cameraZ = cam.transform.position.z;
+        eventSystem = GetComponent<EventSystem>();
+        if (eventSystem == null)
+            Debug.LogWarning("eventSystem not found on CameraMovement");
     }
     
     void Update()
@@ -51,16 +64,22 @@ public class CameraMovement : MonoBehaviour
 
     private void HandlePcInput()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
-            moveRoutineActive = false;
-            mouseOnScrollOriginPosition = Input.mousePosition;
-            cameraOnScrollOriginPosition = transform.position;
+            if (!IsPointerOverUIObject())
+            {
+                moveRoutineActive = false;
+                touchDragActive = true;
+                mouseOnScrollOriginPosition = Input.mousePosition;
+                cameraOnScrollOriginPosition = transform.position;                
+            }
         }
 
         if (Input.GetMouseButton(0))
         {
-            TouchDrag(Input.mousePosition);
+            if (touchDragActive && !IsPointerOverUIObject())
+                TouchDrag(Input.mousePosition);
         }
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -69,31 +88,26 @@ public class CameraMovement : MonoBehaviour
             moveRoutineActive = false;
             Zoom(scroll, MouseZoomSpeed);
         }
+
+        if (Input.GetMouseButtonUp(0))
+            touchDragActive = false;
     }
 
     private void HandleMobileInput()
     {
-        //TODO make grid not interactible through other UI pop ups -> 
-        //Add UI check
-            // Sol 1 - Create events on menu open / close. Deactivate activate this script on event trigger
-            // Sol 2 - 
-            
-            // static bool IsPointerOverUIObject(Vector2 touchPosition, System.Collections.Generic.List<RaycastResult> cachedList) {
-            //     if(EventSystem.current == null)
-            //         return false;
-            //     var eventDataCurrentPosition = new PointerEventData(EventSystem.current) {position = touchPosition};
-            //     EventSystem.current.RaycastAll(eventDataCurrentPosition, cachedList);
-            //     return cachedList.Count > 0;
-            // }
-            
         if (moveRoutineActive && Input.touchCount > 0)
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began)
-                moveRoutineActive = false;
+            if (!IsPointerOverUIObject())
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                    moveRoutineActive = false;                
+            }
         }
 
         if (Input.touchCount == 2)
         {
+            if (IsPointerOverUIObject())
+                return;
             Touch tZero = Input.GetTouch(0);
             Touch tOne = Input.GetTouch(1);
 
@@ -106,6 +120,7 @@ public class CameraMovement : MonoBehaviour
             bool fingersMoveSameDir = 0.4 < Vector2.Dot(tZero.deltaPosition.normalized, tOne.deltaPosition.normalized);
             if (fingersMoveSameDir)
             {
+                touchDragActive = true;
                 Vector2 averagePos = (tZero.position + tOne.position) * 0.5f;
                 TouchDrag((Vector3) averagePos);
             }
@@ -173,6 +188,32 @@ public class CameraMovement : MonoBehaviour
             moveRoutineActive = false;
             OnMoveToRoutineFinished.Invoke();
         }
-            
     }
+
+    private bool IsPointerOverUIObject()
+    {
+        Vector2 touchPos = Input.mousePosition;
+        var eventDataCurrentPosition = new PointerEventData(EventSystem.current) {position = touchPos};
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, cachedList);
+        foreach (var hit in cachedList)
+        {
+            if (hit.gameObject.layer == UILayer)
+                return true;
+        }
+        return false;
+    }
+    
+    // Marcs suggested method
+    //         //Add UI check
+    // Sol 1 - Create events on menu open / close. Deactivate activate this script on event trigger
+    // Sol 2 - 
+            
+    // static bool IsPointerOverUIObject(Vector2 touchPosition, System.Collections.Generic.List<RaycastResult> cachedList) {
+    //     if(EventSystem.current == null)
+    //         return false;
+    //     var eventDataCurrentPosition = new PointerEventData(EventSystem.current) {position = touchPosition};
+    //     EventSystem.current.RaycastAll(eventDataCurrentPosition, cachedList);
+    //     return cachedList.Count > 0;
+    // }
+    
 }
