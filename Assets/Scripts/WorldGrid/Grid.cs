@@ -1,9 +1,8 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Firebase.Auth;
-using InventoryAndStore;
 using JSON;
+using Saving;
 using UnityEngine;
 
 public interface IGrid {
@@ -23,12 +22,12 @@ public interface IGrid {
 }
 
 public class Grid : MonoBehaviour, IGrid {
-    public Dictionary<Vector2Int, ItemClass> itemsOnGrid = new Dictionary<Vector2Int, ItemClass>();
-    //private HashSet<GridObject> gridObjectSet; // TODO save all these objects. 
+    public Dictionary<Vector2Int, GridObject> itemsOnGrid = new Dictionary<Vector2Int, GridObject>();
     public Cell[] cells;
     public int width;
     public int height;
     public Cell cellPrefab;
+    public GridObject gridObjectPrefab;
 
     public void AddObject(GridObject gridObject, Vector3 gridPosition) {
         AddObject(gridObject, Vector2Int.FloorToInt(gridPosition));
@@ -45,7 +44,33 @@ public class Grid : MonoBehaviour, IGrid {
 
     void Awake() {
         SpawnGridCells();
-        Debug.Log(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
+        StartCoroutine(LoadGridDataFromDatabase());
+    }
+
+    private IEnumerator LoadGridDataFromDatabase() {
+        yield return new WaitForSeconds(2f);
+        var dataTask = FindObjectOfType<SaveManager>().LoadGrid();
+        yield return new WaitUntil(() => dataTask.IsCompleted);
+        var savedData = dataTask.Result;
+        if (savedData == null || savedData.Count == 0) {
+            Debug.Log("grid data not found on server. If no plant has ever been planted on the grid then this is expected", this);
+            yield break;
+        }
+
+        foreach (var gridSaveInfo in savedData) {
+            GridObject gridObjectInstance = Instantiate(gridObjectPrefab, this.transform);
+            GridPlant plantRef = gridObjectInstance.GetComponentInChildren<GridPlant>();
+            plantRef.plant = ConvertSO.ClassToSO(gridSaveInfo.item);
+            plantRef.currentSoilStage = gridSaveInfo.soilStage;
+            plantRef.soilStageProgress = gridSaveInfo.soilStageProgress;
+            Vector2Int loc = new Vector2Int(gridSaveInfo.x, gridSaveInfo.y);
+            gridObjectInstance.transform.localPosition = new Vector3Int(loc.x, loc.y, 0);
+            gridObjectInstance.isOnGrid = true;
+            Vector2Int itemDimensions = Vector2Int.FloorToInt(plantRef.plant.sizeDimensions);
+            gridObjectInstance.Size = itemDimensions;
+            gridObjectInstance.transform.localScale = new Vector3(itemDimensions.x, itemDimensions.y, 1.0f);
+            plantRef.InitFromSave(plantRef.plant, this);
+        }
     }
 
     void SpawnGridCells() {
@@ -90,9 +115,10 @@ public class Grid : MonoBehaviour, IGrid {
 
     bool TryMoveObject(GridObject gridObject, Vector2Int fromPosition, Vector2Int toPosition) {
         if (toPosition.x < 0 || toPosition.y < 0) return false;
-        
+
         if (gridObject.isOnGrid)
             RemoveObject(gridObject, fromPosition);
+
         if (IsFree(toPosition, gridObject.Size)) {
             gridObject.isOnGrid = true;
             AddObject(gridObject, toPosition);
@@ -104,28 +130,43 @@ public class Grid : MonoBehaviour, IGrid {
     }
 
     public void RemoveObject(GridObject gridObject, Vector2Int fromPosition) {
+        Debug.Log("remove obj at" + fromPosition);
+        itemsOnGrid.Remove(fromPosition);
         foreach (var cell in GetCellsInRect(fromPosition, gridObject.Size)) {
             cell.GridObject = null;
         }
     }
 
     void AddObject(GridObject gridObject, Vector2Int toPosition) {
+        itemsOnGrid.Add(toPosition, gridObject);
         foreach (var cell in GetCellsInRect(toPosition, gridObject.Size)) {
             cell.GridObject = gridObject;
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        //TODO save the items on the grid
+    private void OnApplicationQuit() {
+        List<GridSaveInfo> gridSaveInfoList = new List<GridSaveInfo>();
+        foreach (var pair in itemsOnGrid) {
+            if (pair.Value.notMoveable)
+                continue;
+            GridSaveInfo gridSaveInfo;
+            GridPlant gridPlant = pair.Value.GetComponentInChildren<GridPlant>();
+            gridSaveInfo.item = ConvertSO.SOToClass(gridPlant.plant);
+            gridSaveInfo.soilStage = gridPlant.currentSoilStage;
+            gridSaveInfo.soilStageProgress = gridPlant.soilStageProgress;
+            gridSaveInfo.x = pair.Key.x;
+            gridSaveInfo.y = pair.Key.y;
+            gridSaveInfoList.Add(gridSaveInfo);
+        }
+
+        FindObjectOfType<SaveManager>().SaveGrid(gridSaveInfoList);
     }
 }
 
-//TODO the plant things that need to be changed
-class GridSaveInfo
-{
-    public ItemSO item;
-    public Vector2Int loc;
+public struct GridSaveInfo {
+    public ItemClass item;
     public GridPlant.SoilStage soilStage;
     public float soilStageProgress;
+    public int x;
+    public int y;
 }

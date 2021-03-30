@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
 using InventoryAndStore;
-using JSON;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using TimeManager;
 using UnityEngine;
@@ -86,5 +87,17 @@ namespace Saving {
             }
             return JsonUtility.FromJson<AuctionData>(dataSnapshot.GetRawJsonValue());
         }
+        
+        public void SaveGrid(List<GridSaveInfo> gridItems) {
+            _database.GetReference(PLAYER_KEY).Child("grid").SetRawJsonValueAsync(JsonConvert.SerializeObject(gridItems));
+        }
+        
+        public async Task<List<GridSaveInfo>?> LoadGrid() 
+        {
+            var dataSnapshot = await _database.GetReference(PLAYER_KEY).Child("grid").GetValueAsync();
+            if (!dataSnapshot.Exists) return null;
+            return JsonConvert.DeserializeObject<List<GridSaveInfo>>(dataSnapshot.GetRawJsonValue());
+        }
+        
     }
 }

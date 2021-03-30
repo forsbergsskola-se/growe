@@ -13,8 +13,8 @@ public class GridPlant : MonoBehaviour {
     public float soilStageDuration = 28800f;
     
     // variables
-    private float soilStageProgress;
-    private SoilStage currentSoilStage;
+    public float soilStageProgress;
+    public SoilStage currentSoilStage;
     //references
     public ItemSO plant;
     public SpriteRenderer plantSpriteRenderer;
@@ -43,9 +43,16 @@ public class GridPlant : MonoBehaviour {
         UpdateSprite();
     }
 
+    public void InitFromSave(ItemSO plant, Grid grid)
+    {
+        this.plant = plant;
+        this.grid = grid;
+        plant.UpdateSpriteEvent += UpdateSprite;
+        UpdateSprite();
+    }
+
     private void Start() {
         MessageBroker.Instance().SubscribeTo<TimePassedMessage>(TimePassed);
-        grid.itemsOnGrid.Add(Vector2Int.FloorToInt(transform.position),ConvertSO.SOToClass(plant));
     }
     
     void TimePassed(TimePassedMessage m) {
