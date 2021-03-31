@@ -183,7 +183,7 @@ namespace WorldGrid
             SaveGridDataToDatabase();
         }
 
-        private void SaveGridDataToDatabase()
+        public void SaveGridDataToDatabase()
         {
             Debug.Log("Save method called");
             // wait for min delay between each save. 
