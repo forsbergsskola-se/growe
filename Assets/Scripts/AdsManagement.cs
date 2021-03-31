@@ -59,7 +59,6 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     }
     
     public void ShowRewardedVideo() {
-        Debug.Log("seconds: " + seconds);
         if (seconds >= adWaitTime && Advertisement.IsReady(mySurfacingId_Reward)) {
             Debug.Log("Showing ad");
             noAdText.text = "";
@@ -113,6 +112,6 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
 
     void TimePassed(TimePassedMessage m) {
         this.seconds += m.timePassed;
-        myButton.interactable = Advertisement.IsReady(mySurfacingId_Reward);
+        myButton.interactable = Advertisement.IsReady(mySurfacingId_Reward) && seconds >= adWaitTime;
     }
 }
