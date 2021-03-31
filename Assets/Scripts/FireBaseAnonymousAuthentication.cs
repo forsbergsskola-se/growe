@@ -17,7 +17,6 @@ public class FireBaseAnonymousAuthentication : MonoBehaviour {
         Debug.Log("SignInAnon");
         _auth = FirebaseAuth.DefaultInstance;
         if (_auth.CurrentUser != null) {
-            SceneManager.LoadScene("MainMenu");
             yield break;
         }
 
@@ -27,7 +26,7 @@ public class FireBaseAnonymousAuthentication : MonoBehaviour {
 
         _currentUser = registerTask.Result;
         
-        SceneManager.LoadScene("MainMenu");
+      
         
     }
 

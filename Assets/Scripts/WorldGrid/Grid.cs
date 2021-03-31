@@ -38,7 +38,7 @@ namespace WorldGrid
         private float minDelayBetweenSaves = .5f;
         private float lastSaveTime = 1.5f;
 
-        private float lastAutoSave = 0f; 
+        private float lastAutoSave = 60f; 
         private float autoSaveDuration = 60f; 
 
         public void AddObject(GridMoveObject gridObject, Vector3 gridPosition) {
@@ -65,6 +65,10 @@ namespace WorldGrid
         {
             lastSaveTime = waitForDatabaseDelay - minDelayBetweenSaves +.5f;
             SpawnGridCells();
+            
+        }
+
+        private void Start() {
             StartCoroutine(LoadGridDataFromDatabase());
         }
 
