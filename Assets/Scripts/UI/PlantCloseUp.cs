@@ -20,6 +20,7 @@ namespace UI {
         public Slider plantRarity;
         public Text sellText;
         public Text compostText;
+        public Text survivabilityText;
         public Slider growthStage;
         public Slider soilStatus;
         public Text plantLore;
@@ -67,6 +68,7 @@ namespace UI {
             plantRarity.value = Array.IndexOf(Enum.GetValues(_plant.rarity.GetType()), _plant.rarity) + 1;
             sellText.text = _plant.sellValue.ToString();
             compostText.text = _plant.compostValue.ToString();
+            survivabilityText.text = _plant.timesCut.ToString();
             growthStage.value = (int) _plant.CurrentGrowthStage + 1;
             soilStatus.value = (int) _gridMoveObject.GetComponent<GridPlant>().currentSoilStage + 1;
             plantLore.text = _plant.itemLore;

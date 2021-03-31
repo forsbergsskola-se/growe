@@ -2306,6 +2306,7 @@ MonoBehaviour:
   plantRarity: {fileID: 2302233817333238729}
   sellText: {fileID: 8323472361564087343}
   compostText: {fileID: 6426990795445897125}
+  survivabilityText: {fileID: 4897474046518036851}
   growthStage: {fileID: 5181275364801219651}
   soilStatus: {fileID: 55903240941428635}
   plantLore: {fileID: 7139815750631596950}
