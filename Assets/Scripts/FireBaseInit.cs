@@ -10,6 +10,7 @@ public class FireBaseInit : MonoBehaviour {
     
     void Awake() {  // FirebaseAuthentication was initialized
         authAnonymous = GetComponent<FireBaseAnonymousAuthentication>();
+        Debug.Log("Init");
         AnonymousLogIn();
 
     }

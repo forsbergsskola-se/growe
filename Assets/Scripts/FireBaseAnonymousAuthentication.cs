@@ -14,10 +14,11 @@ public class FireBaseAnonymousAuthentication : MonoBehaviour {
     }
 
     public IEnumerator SigninAnonymously() {
+        Debug.Log("SignInAnon");
         _auth = FirebaseAuth.DefaultInstance;
-        if (_auth.CurrentUser != null) {
+         if (_auth.CurrentUser != null) {
             SceneManager.LoadScene("MainMenu");
-            yield break;
+             yield break;
         }
 
         var registerTask = _auth.SignInAnonymouslyAsync();
@@ -26,7 +27,7 @@ public class FireBaseAnonymousAuthentication : MonoBehaviour {
 
         _currentUser = registerTask.Result;
 
-        SceneManager.LoadScene("MainMenu"); // to close initial scene
+       
         // fetchedUser?.Invoke();
     }
 
