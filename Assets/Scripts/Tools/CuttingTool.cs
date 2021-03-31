@@ -48,7 +48,7 @@ public class CuttingTool : MonoBehaviour {
                     var timesCut = currentPlant.plant.timesCut;
                     
                     if (timesCut >= 4) {
-                        Destroy(currentPlant.transform.parent.gameObject);
+                        Destroy(currentPlant.transform.gameObject);
                     }
                     else {
                         currentPlant.plant.CurrentGrowthStage = ItemSO.GrowthStage.Sapling;
