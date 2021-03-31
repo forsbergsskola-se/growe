@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Broker;
+using Broker.Messages;
 using JSON;
 using Saving;
 using UnityEngine;
@@ -32,8 +34,22 @@ namespace WorldGrid
         public Cell cellPrefab;
         public GridMoveObject gridObjectPrefab;
 
+        private float waitForDatabaseDelay = 2f; //TODO shorten this value to make plants populate on grid faster. Test to ensure enough time has passed to connect to db.
+        private float minDelayBetweenSaves = .5f;
+        private float lastSaveTime = 1.5f;
+
+        private float lastAutoSave = 0f; 
+        private float autoSaveDuration = 60f; 
+
         public void AddObject(GridMoveObject gridObject, Vector3 gridPosition) {
             AddObject(gridObject, Vector2Int.FloorToInt(gridPosition));
+            SaveGridDataToDatabase();
+        }
+        
+        public void RemoveObject(GridMoveObject gridObject, Vector2Int fromPosition)
+        {
+            RemoveObjectInternal(gridObject, fromPosition);
+            SaveGridDataToDatabase();
         }
 
         public bool TryMoveObject(GridMoveObject gridObject, Vector3 fromGridPosition, Vector3 toGridPosition) {
@@ -45,13 +61,25 @@ namespace WorldGrid
             MoveObject(gridObject, Vector2Int.FloorToInt(oldGridPosition), Vector2Int.FloorToInt(gridPosition));
         }
 
-        void Awake() {
+        void Awake()
+        {
+            lastSaveTime = waitForDatabaseDelay - minDelayBetweenSaves +.5f;
             SpawnGridCells();
             StartCoroutine(LoadGridDataFromDatabase());
         }
 
+        private void FixedUpdate()
+        {
+            if (Time.time > lastAutoSave + autoSaveDuration)
+            {
+                lastAutoSave = Time.time;
+                Debug.Log("auto save calling save method");
+                SaveGridDataToDatabase();
+            }
+        }
+
         private IEnumerator LoadGridDataFromDatabase() {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(waitForDatabaseDelay); 
             var dataTask = FindObjectOfType<SaveManager>().LoadGrid();
             yield return new WaitUntil(() => dataTask.IsCompleted);
             var savedData = dataTask.Result;
@@ -92,8 +120,7 @@ namespace WorldGrid
         Cell GetCell(int x, int y) {
             return this.cells[y * this.width + x];
         }
-
-
+        
         void SetCell(int x, int y, Cell cell) {
             this.cells[y * this.width + x] = cell;
         }
@@ -107,7 +134,7 @@ namespace WorldGrid
         }
 
         void MoveObject(GridMoveObject gridObject, Vector2Int fromPosition, Vector2Int toPosition) {
-            RemoveObject(gridObject, fromPosition);
+            RemoveObjectInternal(gridObject, fromPosition);
             AddObject(gridObject, toPosition);
         }
 
@@ -120,11 +147,12 @@ namespace WorldGrid
             if (toPosition.x < 0 || toPosition.y < 0) return false;
 
             if (gridObject.isOnGrid)
-                RemoveObject(gridObject, fromPosition);
+                RemoveObjectInternal(gridObject, fromPosition);
 
             if (IsFree(toPosition, gridObject.Size)) {
                 gridObject.isOnGrid = true;
                 AddObject(gridObject, toPosition);
+                SaveGridDataToDatabase();
                 return true;
             } else {
                 AddObject(gridObject, fromPosition);
@@ -132,23 +160,38 @@ namespace WorldGrid
             }
         }
 
-        public void RemoveObject(GridMoveObject gridObject, Vector2Int fromPosition) {
+        private void RemoveObjectInternal(GridMoveObject gridObject, Vector2Int fromPosition) {
             itemsOnGrid.Remove(fromPosition);
             foreach (var cell in GetCellsInRect(fromPosition, gridObject.Size)) {
                 cell.GridObject = null;
             }
         }
 
-        void AddObject(GridMoveObject gridObject, Vector2Int toPosition) {
+        private void AddObject(GridMoveObject gridObject, Vector2Int toPosition) {
             itemsOnGrid.Add(toPosition, gridObject);
             foreach (var cell in GetCellsInRect(toPosition, gridObject.Size)) {
                 cell.GridObject = gridObject;
             }
         }
 
-        private void OnApplicationQuit() {
+        private void OnApplicationQuit()
+        {
+            SaveGridDataToDatabase();
+        }
+
+        private void SaveGridDataToDatabase()
+        {
+            Debug.Log("Save method called");
+            // wait for min delay between each save. 
+            if (lastSaveTime + minDelayBetweenSaves > Time.time)
+                return;
+            
+            Debug.Log("Saving to database");
+            lastSaveTime = Time.time;
+
             List<GridSaveInfo> gridSaveInfoList = new List<GridSaveInfo>();
-            foreach (var pair in itemsOnGrid) {
+            foreach (var pair in itemsOnGrid)
+            {
                 if (pair.Value.notMoveable)
                     continue;
                 GridSaveInfo gridSaveInfo;
