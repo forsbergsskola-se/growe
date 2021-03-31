@@ -33,7 +33,7 @@ namespace InventoryAndStore {
             itemRarity.value = Array.IndexOf(Enum.GetValues(itemSO.rarity.GetType()), itemSO.rarity) + 1;
             itemAmount.text = itemData.amount.ToString();
             itemSize.text = $"{itemSO.sizeDimensions.x} x {itemSO.sizeDimensions.y}";
-            itemSurvivability.text = itemSO.survivability.ToString();
+            itemSurvivability.text = itemSO.timesCut.ToString();
             itemCompostValue.text = itemSO.compostValue.ToString();
             itemSellValue.text = itemSO.sellValue.ToString();
             itemLore.text = itemSO.itemLore;
