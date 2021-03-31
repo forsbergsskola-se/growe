@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0515a9ffb7626ff45b85209b83834a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fusionButtom: {fileID: 4323893903492269932}
+  fusionButton: {fileID: 4323893903492269932}
   inventoryUI: {fileID: 0}
   gachaPopup: {fileID: 0}
   seedbagPopup: {fileID: 0}
@@ -2544,7 +2544,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3353151984751922740}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InventoryAndStore.InfoBoxButton, Assembly-CSharp
+        m_MethodName: FusionButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4004872746083540901
 PrefabInstance:
   m_ObjectHideFlags: 0

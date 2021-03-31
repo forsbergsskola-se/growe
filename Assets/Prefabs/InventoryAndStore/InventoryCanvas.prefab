@@ -438,10 +438,6 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4323893903492269932, guid: bec2fe0ccce7ed24789a8deb0253c956, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: fusionButtomFunction
-      objectReference: {fileID: 0}
-    - target: {fileID: 4323893903492269932, guid: bec2fe0ccce7ed24789a8deb0253c956, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: InventoryAndStore.InfoBoxButton, Assembly-CSharp
       objectReference: {fileID: 0}

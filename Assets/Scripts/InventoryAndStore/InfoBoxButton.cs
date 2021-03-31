@@ -9,7 +9,7 @@ namespace InventoryAndStore
         private ItemInfoData ItemInfoData => GetComponent<ItemInfoData>();
         private PlantSpawner _plantSpawner;
 
-        public Button fusionButtom;
+        public Button fusionButton;
 
         // UI references
         public GameObject inventoryUI;
@@ -30,19 +30,21 @@ namespace InventoryAndStore
 
             if (ItemInfoData.itemData.amount >= 3 && ItemInfoData.itemData.ItemSO.itemType == ItemSO.ItemType.Seed)
             {
-                fusionButtom.interactable = true;
+                fusionButton.interactable = true;
             }
             else
             {
-                fusionButtom.interactable = false;
+                fusionButton.interactable = false;
             }
         }
 
-        public void fusionButtomFunction()
+        public void FusionButton()
         {
             ItemSO clone = Instantiate(ItemInfoData.itemData.ItemSO);
             clone.name = "Shiny " + clone.name;
             clone.isShiny = true;
+            clone.sellValue *= 4;
+            clone.compostValue *= 2;
             ItemInfoData.gameObject.SetActive(false);
 
             int removeCount = 0;
@@ -65,12 +67,12 @@ namespace InventoryAndStore
         {
             if (ItemInfoData.itemData.ItemSO.itemType == ItemSO.ItemType.Seedbag)
             {
-                fusionButtom.gameObject.SetActive(false);
+                fusionButton.gameObject.SetActive(false);
                 ItemInfoData.CompostButton.gameObject.SetActive(false);
             }
             else
             {
-                fusionButtom.gameObject.SetActive(true);
+                fusionButton.gameObject.SetActive(true);
                 ItemInfoData.CompostButton.gameObject.SetActive(true);
             }
         }
