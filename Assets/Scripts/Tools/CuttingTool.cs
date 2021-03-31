@@ -67,6 +67,7 @@ public class CuttingTool : MonoBehaviour {
                     //newCutting.Icon = cutting icon (?)
                 
                     Inventories.Instance.playerInventory.Add(newCutting);
+                    ValueChangedFeedback.instance.ValueFeedbackAdd(1);
                 
                     // Debug.Log(timesCut);
                     // Debug.Log(currentPlant.item.growthStage);

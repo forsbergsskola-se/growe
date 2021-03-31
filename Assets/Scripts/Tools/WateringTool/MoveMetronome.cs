@@ -70,6 +70,7 @@ namespace Tools.WateringTool
             foreach (var range in _ranges.Where(range => currentAngle >= range[0] && currentAngle <= range[1]))
             {
                 selectedPlant.ChangeSoilStage(range[2]);
+                ValueChangedFeedback.instance.ValueFeedbackAdd(range[2]);
                 selectedPlant = null;
                 break;
             }
