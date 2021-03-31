@@ -88,6 +88,7 @@ namespace WorldGrid
                     plant.CurrentGrowthStage += 1;
                     plant.isFertilized = false;
                     UpdateSprite();
+                    SaveGrid();
                 }
                 plant.currentGrowthProgress = 0;
             }
@@ -104,6 +105,7 @@ namespace WorldGrid
             
                 currentSoilStage -= 1;
                 UpdateSprite();
+                SaveGrid();
             }
         }
 
@@ -125,6 +127,11 @@ namespace WorldGrid
         {
             plant.UpdateSpriteEvent -= UpdateSprite;
             MessageBroker.Instance().UnSubscribeFrom<TimePassedMessage>(TimePassed);
+        }
+
+        private void SaveGrid()
+        {
+            grid.SaveGridDataToDatabase();
         }
     }
 }
