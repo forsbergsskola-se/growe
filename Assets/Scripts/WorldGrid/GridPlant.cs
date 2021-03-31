@@ -121,6 +121,7 @@ namespace WorldGrid
         
             soilStageProgress = soilStageDuration;
             UpdateSprite();
+            SaveGrid();
         }
 
         private void OnDisable()
