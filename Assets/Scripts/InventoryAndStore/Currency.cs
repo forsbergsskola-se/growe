@@ -58,6 +58,7 @@ namespace InventoryAndStore {
         public void AddSoftCurrency(float amount) {
             if (!_hasLoaded) return;
             _data.SoftCurrency += amount;
+            ValueChangedFeedback.instance.ValueFeedbackAdd(amount);
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
         }
@@ -86,6 +87,7 @@ namespace InventoryAndStore {
         public void AddFertilizer(int amount) {
             if (!_hasLoaded) return;
             _data.Fertilizer += amount;
+            ValueChangedFeedback.instance.ValueFeedbackAdd(amount);
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
         }
@@ -102,6 +104,7 @@ namespace InventoryAndStore {
                 var overflow = _data.Compost - maxCompostValue;
                 _data.Compost = overflow;
             }
+            ValueChangedFeedback.instance.ValueFeedbackAdd(amount);
 
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
@@ -110,6 +113,7 @@ namespace InventoryAndStore {
         public bool TryRemoveSoftCurrency(float amount) {
             if (!_hasLoaded || amount > _data.SoftCurrency) return false;
             _data.SoftCurrency -= amount;
+            ValueChangedFeedback.instance.ValueFeedbackDecrease(amount);
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new SoftCurrencyUpdateMessage(_data.SoftCurrency));
             return true;
@@ -118,6 +122,7 @@ namespace InventoryAndStore {
         public bool TryRemoveFertilizer(int amount) {
             if (!_hasLoaded || amount > _data.Fertilizer) return false;
             _data.Fertilizer -= amount;
+            ValueChangedFeedback.instance.ValueFeedbackDecrease(amount);
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new FertilizerUpdateMessage(_data.Fertilizer));
             return true;
@@ -126,6 +131,7 @@ namespace InventoryAndStore {
         public bool TryRemoveCompost(int amount) {
             if (!_hasLoaded || amount > _data.Compost) return false;
             _data.Compost -= amount;
+            ValueChangedFeedback.instance.ValueFeedbackDecrease(amount);
             _saveManager.SaveCurrency(_data);
             MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
             return true;
