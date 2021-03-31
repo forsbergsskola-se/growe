@@ -2,6 +2,7 @@ using System;
 using Broker;
 using Broker.Messages;
 using InventoryAndStore;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using WorldGrid;
 
@@ -12,12 +13,17 @@ public class CuttingTool : MonoBehaviour {
     private void Start() {
         layerToHit = LayerMask.GetMask("IsometricGrid");
         MessageBroker.Instance().SubscribeTo<CuttingToolSelectedMessage>(SetBool);
+        MessageBroker.Instance().SubscribeTo<CancelSelectedToolMessage>(SetBool);
     }
 
     void SetBool(CuttingToolSelectedMessage message)
     {
         isCutting = true;
         //Debug.Log((isCutting));
+    }
+    void SetBool(CancelSelectedToolMessage message) {
+        isCutting = false;
+  
     }
 
     void Update() {
@@ -26,6 +32,8 @@ public class CuttingTool : MonoBehaviour {
         //else
             PcCut();
     }
+    
+    
 
     void PcCut() {
         if (!isCutting) return;
