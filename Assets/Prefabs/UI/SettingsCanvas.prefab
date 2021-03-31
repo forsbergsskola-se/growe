@@ -402,7 +402,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 130371874730598383}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7173136985196026412}
+        m_TargetAssemblyTypeName: UI.OpenURL, Assembly-CSharp
+        m_MethodName: Open
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: https://pastebin.com/ZfhrBqNP
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7173136985196026412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c02076ac3eea56947a821a88dddf31a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Url: 
 --- !u!1 &3905312120006515686
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +762,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3905312120579913771}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8412546247031958682}
+        m_TargetAssemblyTypeName: UI.OpenURL, Assembly-CSharp
+        m_MethodName: Open
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: https://pastebin.com/kEbkAHU2
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8412546247031958682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,7 +787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c02076ac3eea56947a821a88dddf31a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Url: 
 --- !u!1 &3905312120613663206
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2304,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6395978283229166874}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 300189004381361597}
+        m_TargetAssemblyTypeName: UI.OpenURL, Assembly-CSharp
+        m_MethodName: Open
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: https://pastebin.com/vJaDpfeE
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &300189004381361597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,7 +2329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c02076ac3eea56947a821a88dddf31a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Url: 
 --- !u!1 &8852981442947657520
 GameObject:
   m_ObjectHideFlags: 0

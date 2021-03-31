@@ -1,15 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenURL : MonoBehaviour
-{
-
-
-    public void Open()
+namespace UI {
+    public class OpenURL : MonoBehaviour
     {
-        Debug.Log("Open");
-        Application.OpenURL(Application.persistentDataPath+ "/index.html");
+
+
+        public void Open(string url)
+        {
+            Application.OpenURL(url);
+        }
     }
 }
