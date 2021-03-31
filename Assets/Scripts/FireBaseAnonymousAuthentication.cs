@@ -16,9 +16,9 @@ public class FireBaseAnonymousAuthentication : MonoBehaviour {
     public IEnumerator SigninAnonymously() {
         Debug.Log("SignInAnon");
         _auth = FirebaseAuth.DefaultInstance;
-         if (_auth.CurrentUser != null) {
+        if (_auth.CurrentUser != null) {
             SceneManager.LoadScene("MainMenu");
-             yield break;
+            yield break;
         }
 
         var registerTask = _auth.SignInAnonymouslyAsync();
@@ -26,9 +26,9 @@ public class FireBaseAnonymousAuthentication : MonoBehaviour {
         yield return new WaitUntil(() => registerTask.IsCompleted);
 
         _currentUser = registerTask.Result;
-
-       
-        // fetchedUser?.Invoke();
+        
+        SceneManager.LoadScene("MainMenu");
+        
     }
 
     //TODO: sign out button should be created in main menu

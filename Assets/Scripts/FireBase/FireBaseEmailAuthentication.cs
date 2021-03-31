@@ -1,13 +1,9 @@
-using System;
 using System.Collections;
-using System.Diagnostics.Eventing.Reader;
 using Firebase;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Firebase.Auth;   
-using Firebase.Extensions;
-using UnityEngine.PlayerLoop;
 
 public class FireBaseEmailAuthentication : MonoBehaviour
 {

@@ -5,11 +5,10 @@ using Firebase.Extensions;
 using UnityEngine;
 
 public class FireBaseInit : MonoBehaviour {
-    FireBaseAnonymousAuthentication authAnonymous;
-    FirebaseAuth _auth;
-    
-    void Awake() {  // FirebaseAuthentication was initialized
-        authAnonymous = GetComponent<FireBaseAnonymousAuthentication>();
+    FireBaseAnonymousAuthentication _authAnonymous;
+
+    void Start() {  
+        _authAnonymous = GetComponent<FireBaseAnonymousAuthentication>();
         Debug.Log("Init");
         AnonymousLogIn();
 
@@ -19,8 +18,7 @@ public class FireBaseInit : MonoBehaviour {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
 
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-            if (_auth.CurrentUser != null) return;
-            StartCoroutine(authAnonymous.SigninAnonymously());
+            StartCoroutine(_authAnonymous.SigninAnonymously());
         });
     }
     
