@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77711372ec970ce4e8e87af7723d5559, type: 3}
   m_Name: FloristsDropTable
   m_EditorClassIdentifier: 
-  droppableItems: []
+  droppableItems:
+  - {fileID: 11400000, guid: c1ac70761cf3bd7469eb7aa96ecbd924, type: 2}
+  - {fileID: 11400000, guid: 376699338a7c94642bf166abb317d882, type: 2}
+  - {fileID: 11400000, guid: 37e5f08408fe2254ba5e169894cf2c73, type: 2}
+  - {fileID: 11400000, guid: eb9ac1fe8d97f5148ab5aef550e30c84, type: 2}

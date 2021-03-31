@@ -12,29 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0694ecb27a7f34eb3539804fd61225, type: 3}
   m_Name: Persimmon
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 733c274948ea30f4c82a106a66a741dd, type: 3}
+  cuttingIcon: {fileID: 21300000, guid: 72c792d55555fb246a6400610ce4a5b9, type: 3}
   growthStageSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: d7b6a0300b243fe49a821fb15669c7fb, type: 3}
+  - {fileID: 21300000, guid: b0c4b08b240d90141a5d4b52e7647cfb, type: 3}
+  - {fileID: 21300000, guid: 86d0d7fca43cad84e9005eaf4374357d, type: 3}
+  - {fileID: 21300000, guid: 3ffec58ec9532e24c8b8f3322d342978, type: 3}
+  - {fileID: 21300000, guid: f76a18bd91e292e4a81043a1ae768c9c, type: 3}
   tradeState: 0
   itemType: 0
   seedbag:
     items: {fileID: 0}
-  rarity: 2
+  rarity: 340
   maxAmount: 15
-  compostValue: 0
+  compostValue: 1
   sellValue: 72
   buyValue: 0
   isShiny: 0
   hasLifeTime: 0
   lifeTimeHoursInInventory: 0
   survivability: 0.98
-  dropChance: 0
+  dropChance: 5
   sizeDimensions: {x: 3, y: 3}
-  itemLore: 
+  itemLore: This tree likes well drained soil and bears fruit with the tree is 6
+    years old. The fruit has a very astringent bitterness to it.
   isNew: 0
   growthDuration: 3
   currentGrowthProgress: 0

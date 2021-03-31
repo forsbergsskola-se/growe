@@ -275,6 +275,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8384077994108715641}
+  - {fileID: 2027860092361608776}
   m_Father: {fileID: 7139815751172617890}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1523,12 +1524,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6832591095921461082}
-  m_Father: {fileID: 7139815751172617890}
-  m_RootOrder: 2
+  m_Father: {fileID: 4867361418956601112}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 199}
+  m_AnchoredPosition: {x: 0, y: 39}
   m_SizeDelta: {x: 385, y: 120}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &371083246804792120
@@ -1627,7 +1628,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 4229938490963823044}
         m_TargetAssemblyTypeName: UI.PlantCloseUp, Assembly-CSharp
-        m_MethodName: CompostPlant
+        m_MethodName: SellPlant
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2340,7 +2341,6 @@ RectTransform:
   m_Children:
   - {fileID: 7139815750476403473}
   - {fileID: 4867361418956601112}
-  - {fileID: 2027860092361608776}
   m_Father: {fileID: 7139815749799995684}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2377,7 +2377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55c2702c5632f3d478714d9f0358387f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f561000dfbac894790b1af1ed6bfa8b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

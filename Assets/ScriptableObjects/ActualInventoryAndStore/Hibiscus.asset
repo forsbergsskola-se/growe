@@ -24,7 +24,7 @@ MonoBehaviour:
   itemType: 0
   seedbag:
     items: {fileID: 0}
-  rarity: 85
+  rarity: 170
   maxAmount: 15
   compostValue: 2
   sellValue: 18
