@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Broker;
+using Broker.Messages;
 using InventoryAndStore;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +36,7 @@ namespace Tools.WateringTool
         private void Start()
         {
             transform.GetChild(0).GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;
+            
         }
 
         public void UISetActive(bool setActive) {
@@ -74,6 +77,7 @@ namespace Tools.WateringTool
         
         public void ExitMetronome()
         {
+            MessageBroker.Instance().Send(new ToolSelectedMessage(false));
             UISetActive(false);
         }
     }

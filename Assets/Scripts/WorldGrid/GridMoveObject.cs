@@ -26,6 +26,7 @@ namespace WorldGrid
             grid.AddObject(this, this.transform.localPosition);
             
             MessageBroker.Instance().SubscribeTo<ToolSelectedMessage>(UpdateToolSelected);
+            MessageBroker.Instance().SubscribeTo<CancelSelectedToolMessage>(UpdateToolSelected);
         }
 
         public void OnDrag(PointerEventData eventData) {
@@ -71,6 +72,9 @@ namespace WorldGrid
 
         void UpdateToolSelected(ToolSelectedMessage m) {
             toolSelected = m.toolSelected;
+        }
+        void UpdateToolSelected(CancelSelectedToolMessage m) {
+            toolSelected = false;
         }
 
         public void DestroyGridObj() {

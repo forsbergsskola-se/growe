@@ -7,23 +7,32 @@ using WorldGrid;
 
 namespace Tools.WateringTool
 {
-    public class WateringToolSelected : MonoBehaviour
-    {
+    public class WateringToolSelected : MonoBehaviour {
+        private bool toolSelected;
         private MoveMetronome MoveMetronome => GetComponent<MoveMetronome>();
 
-        private void Start()
-        {
+        private void Start() {
+           
             MessageBroker.Instance().SubscribeTo<WateringToolSelectedMessage>(UpdateToolSelected);
+            MessageBroker.Instance().SubscribeTo<CancelSelectedToolMessage>(UpdateToolSelected);
         }
         
         void UpdateToolSelected(WateringToolSelectedMessage m) {
+            toolSelected = true;
             StartCoroutine(WaterThePlant());
+           
         }
+        
+        void UpdateToolSelected(CancelSelectedToolMessage m) {
+            toolSelected = false;
+        }
+        
+        
 
 
-        private IEnumerator WaterThePlant()
-        {
-            while(true){
+        private IEnumerator WaterThePlant() {
+            
+            while(toolSelected){
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 
                 if (Physics.Raycast(ray, out var hit) && Input.GetMouseButtonDown(0))
