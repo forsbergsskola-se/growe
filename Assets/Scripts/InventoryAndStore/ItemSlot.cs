@@ -47,14 +47,15 @@ namespace InventoryAndStore
 
                 newItemSlot.ItemSO = itemSO;
                 itemSlots.Add(newItemSlot);
-
-                if (itemSO.maxAmount <= 1) continue;
+                
                 if (count > itemSO.maxAmount) 
                     alreadyAssigned += itemSlots
                         .Where(itemData => Inventory.CheckIfIdentical(itemData.ItemSO, itemSO))
                         .Sum(itemData => itemData.amount);
                 
                 newItemSlot.amount = Math.Min(itemSO.maxAmount, count - alreadyAssigned);
+                if (itemSO.maxAmount <= 1)
+                    newItemSlot.amount = 1;
             }
         }
 
