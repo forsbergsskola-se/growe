@@ -448,6 +448,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -250
       objectReference: {fileID: 0}
+    - target: {fileID: 7200057738937115374, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7347527012176576133, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
       propertyPath: m_Value
       value: 1
