@@ -43,7 +43,7 @@ namespace WorldGrid
 
         public void AddObject(GridMoveObject gridObject, Vector3 gridPosition) {
             AddObject(gridObject, Vector2Int.FloorToInt(gridPosition));
-            SaveGridDataToDatabase();
+            // SaveGridDataToDatabase();
         }
         
         public void RemoveObject(GridMoveObject gridObject, Vector2Int fromPosition)
@@ -77,7 +77,6 @@ namespace WorldGrid
             if (Time.time > lastAutoSave + autoSaveDuration)
             {
                 lastAutoSave = Time.time;
-                Debug.Log("auto save calling save method");
                 SaveGridDataToDatabase();
             }
         }
@@ -185,12 +184,10 @@ namespace WorldGrid
 
         public void SaveGridDataToDatabase()
         {
-            Debug.Log("Save method called");
             // wait for min delay between each save. 
             if (lastSaveTime + minDelayBetweenSaves > Time.time)
                 return;
             
-            Debug.Log("Saving to database");
             lastSaveTime = Time.time;
 
             List<GridSaveInfo> gridSaveInfoList = new List<GridSaveInfo>();
