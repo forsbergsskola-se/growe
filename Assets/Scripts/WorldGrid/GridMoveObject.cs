@@ -1,3 +1,4 @@
+using System;
 using Broker;
 using Broker.Messages;
 using UnityEngine;
@@ -16,7 +17,16 @@ namespace WorldGrid
         public bool isOnGrid;
         private Grid grid;
         private Vector3 _previousCameraPosition;
-        
+
+        private void OnEnable() {
+            MessageBroker.Instance().SubscribeTo<ToolSelectedMessage>(UpdateToolSelected);
+            MessageBroker.Instance().SubscribeTo<CancelSelectedToolMessage>(UpdateToolSelected);
+        }
+        void OnDisable() {
+            MessageBroker.Instance().UnSubscribeFrom<ToolSelectedMessage>(UpdateToolSelected);
+            MessageBroker.Instance().UnSubscribeFrom<CancelSelectedToolMessage>(UpdateToolSelected);
+        }
+
         void Start() {
             grid = GetComponentInParent<Grid>();
 
@@ -25,8 +35,6 @@ namespace WorldGrid
                 return;
             grid.AddObject(this, this.transform.localPosition);
             
-            MessageBroker.Instance().SubscribeTo<ToolSelectedMessage>(UpdateToolSelected);
-            MessageBroker.Instance().SubscribeTo<CancelSelectedToolMessage>(UpdateToolSelected);
         }
 
         public void OnDrag(PointerEventData eventData) {
