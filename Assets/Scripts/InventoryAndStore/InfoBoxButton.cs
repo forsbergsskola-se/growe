@@ -41,13 +41,23 @@ namespace InventoryAndStore
         public void fusionButtomFunction()
         {
             ItemSO clone = Instantiate(ItemInfoData.itemData.ItemSO);
-            clone.name = "idk man looks kinda shiny";
+            clone.name = "Shiny " + clone.name;
             clone.isShiny = true;
             ItemInfoData.gameObject.SetActive(false);
-            for (int i = 0; i < 3; i++)
+
+            int removeCount = 0;
+
+            for (int i = 0; i < Inventories.Instance.playerInventory.items.Count; i++)
             {
-                ItemInfoData.playerInventory.Remove(ItemInfoData.itemData.ItemSO);
+                if (Inventory.CheckIfIdentical
+                    (ItemInfoData.itemData.ItemSO, Inventories.Instance.playerInventory.items[i]) && 
+                    removeCount < 3)
+                {
+                    Inventories.Instance.playerInventory.Remove(Inventories.Instance.playerInventory.items[i]);
+                    removeCount += 1;
+                }
             }
+            
             ItemInfoData.playerInventory.Add(clone);
         }
 
