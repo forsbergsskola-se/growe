@@ -5,16 +5,13 @@ using InventoryAndStore;
 using UnityEditor;
 using UnityEngine;
 
-namespace JSON
-{
-    public static class ConvertSO
-    {
-        public static ItemClass SOToClass(ItemSO itemSo)
-        {
+namespace JSON {
+    public static class ConvertSO {
+        public static ItemClass SOToClass(ItemSO itemSo) {
             ItemClass clone = new ItemClass {SeedBagDropTable = new List<ItemClass>()};
 
             if (itemSo.itemType == ItemSO.ItemType.Seedbag)
-                foreach (var droppableItem in itemSo.seedbag.items.droppableItems) 
+                foreach (var droppableItem in itemSo.seedbag.items.droppableItems)
                     clone.SeedBagDropTable.Add(SOToClass(droppableItem));
 
             clone.IsFertilized = itemSo.isFertilized;
@@ -36,18 +33,18 @@ namespace JSON
             clone.ItemLore = itemSo.itemLore;
             clone.Name = itemSo.name;
             clone.TimesCut = itemSo.timesCut;
-            clone.CuttingIconPath = AssetDatabase.GetAssetPath(itemSo.cuttingIcon);
-            clone.IconPath = AssetDatabase.GetAssetPath(itemSo.icon);
+            clone.IconPath = itemSo.icon.name;
+            clone.CuttingIconPath = itemSo.cuttingIcon.name;
             if (itemSo.itemType == ItemSO.ItemType.Seedbag) return clone;
             for (int i = 0; i < itemSo.growthStageSprites.Length; i++)
-                clone.GrowthStageSprites[i] = AssetDatabase.GetAssetPath(itemSo.growthStageSprites[i]);
-            
+                clone.GrowthStageSprites[i] = itemSo.growthStageSprites[i].name;
+
             return clone;
         }
-        public static ItemSO ClassToSO(ItemClass itemClass)
-        {
+
+        public static ItemSO ClassToSO(ItemClass itemClass) {
             var clone = ScriptableObject.CreateInstance<ItemSO>();
-            
+
             if (itemClass.ItemType == ItemSO.ItemType.Seedbag) {
                 clone.seedbag = new Seedbag {items = ScriptableObject.CreateInstance<DropTable>()};
                 clone.seedbag.items.droppableItems = new List<ItemSO>();
@@ -55,7 +52,7 @@ namespace JSON
                 foreach (var droppableItem in itemClass.SeedBagDropTable)
                     clone.seedbag.items.droppableItems.Add(ClassToSO(droppableItem));
             }
-            
+
             clone.isFertilized = itemClass.IsFertilized;
             clone.currentGrowthProgress = itemClass.CurrentGrowthProgress;
             clone.CurrentGrowthStage = itemClass.GrowthStage;
@@ -75,18 +72,18 @@ namespace JSON
             clone.itemLore = itemClass.ItemLore;
             clone.name = itemClass.Name;
             clone.timesCut = itemClass.TimesCut;
-            clone.cuttingIcon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.CuttingIconPath, typeof(Sprite));
-            clone.icon = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.IconPath, typeof(Sprite));
-            for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) 
-                clone.growthStageSprites[i] = (Sprite)AssetDatabase.LoadAssetAtPath(itemClass.GrowthStageSprites[i], typeof(Sprite));
-            
+            clone.icon = Resources.Load<Sprite>(itemClass.IconPath);
+            clone.cuttingIcon = Resources.Load<Sprite>(itemClass.CuttingIconPath);
+            for (int i = 0; i < itemClass.GrowthStageSprites.Length; i++) {
+                clone.growthStageSprites[i] = Resources.Load<Sprite>(itemClass.GrowthStageSprites[i]);
+            }
 
             return clone;
         }
     }
 
-    public class ItemClass
-    {
+
+    public class ItemClass {
         public ItemSO.TradeState TradeState;
         public ItemSO.ItemType ItemType;
         public ItemSO.Rarity Rarity;
@@ -94,10 +91,15 @@ namespace JSON
         public List<ItemClass> SeedBagDropTable;
         public int MAXAmount, CompostValue, SellValue, BuyValue, TimesCut;
         public bool IsShiny, HasLifeTime, IsFertilized;
-        public float LifeTimeHoursInInventory, Survivability, DropChance,
+
+        public float LifeTimeHoursInInventory,
+            Survivability,
+            DropChance,
             CurrentGrowthProgress;
+
         public Vector2 SizeDimensions;
         public string ItemLore, Name, IconPath, CuttingIconPath;
         public string[] GrowthStageSprites = new string[5];
     }
+
 }
