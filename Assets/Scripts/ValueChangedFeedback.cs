@@ -20,13 +20,11 @@ public class ValueChangedFeedback : MonoBehaviour
     public void ValueFeedbackAdd(float gained)
     {
         var feedback = Instantiate(valueFeedbackObj, parent);
-        feedback.GetComponent<Text>().text = "+" + gained;
-        feedback.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        feedback.GetComponent<FeedbackBehaviour>().SetValues(Color.green, "+" + gained);
     }
     public void ValueFeedbackDecrease(float lost)
     {
         var feedback = Instantiate(valueFeedbackObj, parent);
-        feedback.GetComponent<Text>().text = "-" + lost;
-        feedback.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        feedback.GetComponent<FeedbackBehaviour>().SetValues(Color.red, "-" + lost);
     }
 }
