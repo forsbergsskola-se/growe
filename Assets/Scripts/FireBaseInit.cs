@@ -9,7 +9,7 @@ public class FireBaseInit : MonoBehaviour {
 
     void Start() {  
         _authAnonymous = GetComponent<FireBaseAnonymousAuthentication>();
-        Debug.Log("Init");
+        Debug.Log("InitStart");
         AnonymousLogIn();
 
     }
