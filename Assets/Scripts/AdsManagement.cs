@@ -1,19 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using Broker;
+using Broker.Messages;
 using InventoryAndStore;
 using UnityEngine.Advertisements;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent (typeof (Button))]
 public class AdsManagement : MonoBehaviour, IUnityAdsListener {
+    [Tooltip("Text that shows error message when add is not ready")]
+    public Text noAdText;
+    [SerializeField, Tooltip("reward for watching ad")] 
+    private float value = 20.0f;
+    [SerializeField] private float adWaitTime = 300f;
+    [SerializeField] private Button myButton;
+    private float seconds = 0.0f;
+    bool testMode = true;
+    private Currency currency;
     
-    [SerializeField] public float value;
-    [SerializeField] public float seconds;
-    public Text noadtext;
- 
-    
-    #if UNITY_IOS
+#if UNITY_IOS
         private string gameId = "4052122";
         string mySurfacingId_Interstitial = "Interstitial_iOS";
         string mySurfacingId_Reward = "Rewarded_iOS";
@@ -26,18 +29,23 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
         string mySurfacingId_Interstitial = "Interstitial_iOS";
         string mySurfacingId_Reward = "Rewarded_iOS";
     #endif
-    
-    
-    bool testMode = true;
-    private Button myButton;
 
     void Start ()
     {
-        myButton = GetComponent<Button>();
+        currency = FindObjectOfType<Currency>();
+        if (currency == null)
+            Debug.Log("currency is null", this);
+        if (noAdText == null)
+            Debug.Log("no ad text is null", this);
+        if (myButton == null)
+            Debug.Log("advertisement button is null", this);
         myButton.interactable = Advertisement.IsReady(mySurfacingId_Reward);
         if (myButton) myButton.onClick.AddListener (ShowRewardedVideo);
+        
         Advertisement.AddListener (this);
         Advertisement.Initialize(gameId, testMode);
+        
+        MessageBroker.Instance().SubscribeTo<TimePassedMessage>(TimePassed);
     }
 
     //designers wanted rewarded video only
@@ -51,16 +59,21 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     }
     
     public void ShowRewardedVideo() {
-        if (Advertisement.IsReady(mySurfacingId_Reward) && seconds >= 300) {
-            noadtext.text = "";
+        if (seconds >= adWaitTime && Advertisement.IsReady(mySurfacingId_Reward)) {
+            Debug.Log("Showing ad");
+            noAdText.text = "";
             myButton.interactable = true;
             Advertisement.Show(mySurfacingId_Reward);
             seconds = 0;
         } 
-        else
+        else if (seconds < adWaitTime)
         {
-            noadtext.text = "Ads only available every 5 minutes.";
-            Debug.Log("Rewarded video is not ready at the moment! Please try again later!");
+            noAdText.text = "Ads only available every 5 minutes.";
+            Debug.Log("Gotta wait longer. current wait time: " + seconds + ", limit: " + adWaitTime);
+        }
+        else if (!Advertisement.IsReady(mySurfacingId_Reward))
+        {
+            Debug.Log("mySurfacingId_Reward is not ready");
         }
     }
     
@@ -74,21 +87,14 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
     public void OnUnityAdsDidFinish (string surfacingId, ShowResult showResult) {
         // Define conditional logic for each ad completion status:
         if (showResult == ShowResult.Finished) {
-            Currency reward = gameObject.AddComponent<Currency>();
-            reward.AddSoftCurrency(value);
-            Debug.Log ("20 amount of A-coins.");
-            Debug.Log (value);
+            currency.AddSoftCurrency(value);
+            Debug.Log ("awarded " + value + " amount of A-coins.");
         } else if (showResult == ShowResult.Skipped) {
             // No reward for you!
             Debug.Log ("Next time, don't skip! ;)");
         } else if (showResult == ShowResult.Failed) {
             Debug.LogWarning ("The ad did not finish due to an error.");
         }
-    }
-
-    public void Update()
-    {
-        seconds += Time.deltaTime;
     }
 
     public void OnUnityAdsDidError (string message) {
@@ -99,8 +105,13 @@ public class AdsManagement : MonoBehaviour, IUnityAdsListener {
         // Optional actions to take when the end-users triggers an ad.
     }
     
-    // When the object that subscribes to ad events is destroyed, remove the listener:
     public void OnDestroy() {
         Advertisement.RemoveListener(this);
+        MessageBroker.Instance().UnSubscribeFrom<TimePassedMessage>(TimePassed);
+    }
+
+    void TimePassed(TimePassedMessage m) {
+        this.seconds += m.timePassed;
+        myButton.interactable = Advertisement.IsReady(mySurfacingId_Reward) && seconds >= adWaitTime;
     }
 }
