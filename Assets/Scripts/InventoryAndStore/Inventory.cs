@@ -58,7 +58,8 @@ namespace InventoryAndStore
         public static bool CheckIfIdentical(ItemSO compare1, ItemSO compare2)
         {
             return compare1.name.StartsWith(compare2.name) && 
-                   compare1.isShiny == compare2.isShiny;
+                   compare1.isShiny == compare2.isShiny &&
+                   compare1.CurrentGrowthStage == compare2.CurrentGrowthStage;
         }
 
         public static int CountItem(IEnumerable<ItemSO> list, ItemSO countSO)
