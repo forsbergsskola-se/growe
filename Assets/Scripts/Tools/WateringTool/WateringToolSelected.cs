@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using Broker;
 using Broker.Messages;
 using InventoryAndStore;
 using UnityEngine;
 using WorldGrid;
+using Random = UnityEngine.Random;
 
 namespace Tools.WateringTool
 {
@@ -12,11 +14,15 @@ namespace Tools.WateringTool
         private MoveMetronome MoveMetronome => GetComponent<MoveMetronome>();
 
         private void Start() {
-           
             MessageBroker.Instance().SubscribeTo<WateringToolSelectedMessage>(UpdateToolSelected);
             MessageBroker.Instance().SubscribeTo<CancelSelectedToolMessage>(UpdateToolSelected);
         }
-        
+
+        void OnDestroy() {
+            MessageBroker.Instance().UnSubscribeFrom<WateringToolSelectedMessage>(UpdateToolSelected);
+            MessageBroker.Instance().UnSubscribeFrom<CancelSelectedToolMessage>(UpdateToolSelected);
+        }
+
         void UpdateToolSelected(WateringToolSelectedMessage m) {
             toolSelected = true;
             StartCoroutine(WaterThePlant());
@@ -27,9 +33,6 @@ namespace Tools.WateringTool
             toolSelected = false;
         }
         
-        
-
-
         private IEnumerator WaterThePlant() {
             
             while(toolSelected){

@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour
     
     [Header("Tap zoom settings")]
     [SerializeField, Tooltip("How long it takes for move to to reach its target position. For some reason this value is not exact but should at least affect how long it takes"), Range(0.001f, 2f)] 
-    private float moveDuration = 0.6f;
+    public float moveDuration = 0.6f;
     [SerializeField, Tooltip("Zoom distance on plant click"), Range(0.1f, 179.9f)] 
     private float targetCamSize = 3.65f;
     [SerializeField, Tooltip("The x offset from center for the plant close up")]
@@ -210,9 +210,9 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveRoutine()
     {
-        Vector2 result = Vector2.SmoothDamp(transform.position, moveXYTarget, 
-            ref moveXYVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
+        Vector2 result = Vector2.SmoothDamp(transform.position, moveXYTarget, ref moveXYVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
         transform.position = new Vector3(result.x, result.y, this.cameraZ); 
+        
         cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, this.targetCamSize, 
             ref moveCamSizeVelocity, moveDuration, float.MaxValue, Time.fixedDeltaTime);
         

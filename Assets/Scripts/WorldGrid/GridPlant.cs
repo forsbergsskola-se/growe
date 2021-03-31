@@ -4,8 +4,7 @@ using Broker.Messages;
 using InventoryAndStore;
 using UnityEngine;
 
-namespace WorldGrid
-{
+namespace WorldGrid {
     public class GridPlant : MonoBehaviour {
     
         [Header("Settings")]

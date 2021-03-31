@@ -108,6 +108,7 @@ namespace UI {
                     break;
             }
             MessageBroker.Instance().Send(new ToolSelectedMessage(toolSelected));
+            Debug.Log("ToolSelectedMessage: True");
         }
     }
 }

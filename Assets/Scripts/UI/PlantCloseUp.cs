@@ -29,6 +29,11 @@ namespace UI {
             _gridMoveObject.DestroyGridObj();
         }
 
+        public void SellPlant() {
+            FindObjectOfType<Currency>().AddSoftCurrency(_plant.sellValue);
+            _gridMoveObject.DestroyGridObj();
+        }
+
         public void ZoomOut() {
             FindObjectOfType<CameraMovement>().ZoomOut(_previousCameraSize);
         }
