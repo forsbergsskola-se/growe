@@ -38,7 +38,7 @@ namespace InventoryAndStore {
             itemSellValue.text = itemSO.sellValue.ToString();
             itemLore.text = itemSO.itemLore;
 
-            
+            UpdateItemInfoButton(itemSO);
         }
 
         public void UpdateItemInfoButton(ItemSO itemSO)
