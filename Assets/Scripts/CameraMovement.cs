@@ -17,11 +17,13 @@ public class CameraMovement : MonoBehaviour
     [SerializeField, Range(0f, 179.9f)] private float ZoomMaxBound = 179.9f;
 
     [Header("Panning settings")] 
+    [SerializeField, Range(0.0f, 0.7f), Tooltip("The game pans instead of zooms when two fingers move in the same direction. A lower value means it more inclined to pan than zoom")]
+    private float sameDirSensitivity = 0.4f;
     [SerializeField] private float minXPos = -4.5f;
     [SerializeField] private float maxXPos = 8.5f;
     [SerializeField] private float minYPos = -4.0f;
     [SerializeField] private float maxYPos = 6.0f;
-    
+
     [Header("Tap zoom settings")]
     [SerializeField, Tooltip("How long it takes for move to to reach its target position. For some reason this value is not exact but should at least affect how long it takes"), Range(0.001f, 2f)] 
     public float moveDuration = 0.6f;
@@ -133,7 +135,7 @@ public class CameraMovement : MonoBehaviour
                 cameraOnScrollOriginPosition = transform.position;
             }
 
-            bool fingersMoveSameDir = 0.4 < Vector2.Dot(tZero.deltaPosition.normalized, tOne.deltaPosition.normalized);
+            bool fingersMoveSameDir = sameDirSensitivity < Vector2.Dot(tZero.deltaPosition.normalized, tOne.deltaPosition.normalized);
             if (fingersMoveSameDir)
             {
                 touchDragActive = true;
