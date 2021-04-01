@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8449117054174938596}
   m_Layer: 5
   m_Name: SfxOnOffSlider
-  m_TagString: Untagged
+  m_TagString: SfxOnOffSlider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1670,7 +1670,7 @@ GameObject:
   - component: {fileID: 2524183228593859829}
   m_Layer: 5
   m_Name: MusicOnOffButton
-  m_TagString: Untagged
+  m_TagString: MusicOnOffButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

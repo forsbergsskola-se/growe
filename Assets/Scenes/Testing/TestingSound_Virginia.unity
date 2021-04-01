@@ -1098,6 +1098,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 8449117054174938596, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
 --- !u!1 &1204114535 stripped
@@ -1330,6 +1334,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2784082006697149958, guid: f89eee803b043ed47a5b7a67d559ce26, type: 3}
   m_PrefabInstance: {fileID: 169804217}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1847148990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8449117054174938596, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+  m_PrefabInstance: {fileID: 1204114534}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1884710495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2524183228593859829, guid: 7c56168c255bcdd46857b09f919dbb54, type: 3}
+  m_PrefabInstance: {fileID: 1204114534}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1907091426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1741,6 +1767,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2611191826071117668, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1847148990}
+    - target: {fileID: 2611191826071117668, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 1884710495}
+    - target: {fileID: 2611191826616637276, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1847148990}
+    - target: {fileID: 2611191826616637276, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 1884710495}
+    - target: {fileID: 2611191826710011534, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1847148990}
+    - target: {fileID: 2611191826710011534, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 1884710495}
+    - target: {fileID: 2611191826885226873, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1847148990}
+    - target: {fileID: 2611191826885226873, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 1884710495}
+    - target: {fileID: 2611191827392047372, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1847148990}
+    - target: {fileID: 2611191827392047372, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 1884710495}
+    - target: {fileID: 2611191827422391094, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1847148990}
+    - target: {fileID: 2611191827422391094, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 1884710495}
+    - target: {fileID: 2611191827690574323, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1847148990}
+    - target: {fileID: 2611191827690574323, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 1884710495}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5019b1cffde7284c89d5de51ce487e2, type: 3}
 --- !u!1001 &2958256745511938024

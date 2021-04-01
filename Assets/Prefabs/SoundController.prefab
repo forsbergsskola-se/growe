@@ -96,6 +96,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeParameter: SFXVParam
   audioMixer: {fileID: 24100000, guid: b8f9c6ad8a3fe4f44ab480b157590e68, type: 2}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
 --- !u!82 &2611191826071117659
 AudioSource:
   m_ObjectHideFlags: 0
@@ -238,6 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeParameter: SFXVParam
   audioMixer: {fileID: 24100000, guid: b8f9c6ad8a3fe4f44ab480b157590e68, type: 2}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
 --- !u!82 &2611191826616637267
 AudioSource:
   m_ObjectHideFlags: 0
@@ -380,6 +384,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeParameter: MusicVParam
   audioMixer: {fileID: 24100000, guid: b8f9c6ad8a3fe4f44ab480b157590e68, type: 2}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
 --- !u!82 &2611191826710011533
 AudioSource:
   m_ObjectHideFlags: 0
@@ -522,6 +528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeParameter: SFXVParam
   audioMixer: {fileID: 24100000, guid: b8f9c6ad8a3fe4f44ab480b157590e68, type: 2}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
 --- !u!82 &2611191826885226872
 AudioSource:
   m_ObjectHideFlags: 0
@@ -664,6 +672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeParameter: SFXVParam
   audioMixer: {fileID: 24100000, guid: b8f9c6ad8a3fe4f44ab480b157590e68, type: 2}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
 --- !u!82 &2611191827392047363
 AudioSource:
   m_ObjectHideFlags: 0
@@ -806,6 +816,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeParameter: SFXVParam
   audioMixer: {fileID: 24100000, guid: b8f9c6ad8a3fe4f44ab480b157590e68, type: 2}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
 --- !u!82 &2611191827422391093
 AudioSource:
   m_ObjectHideFlags: 0
@@ -948,6 +960,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeParameter: SFXVParam
   audioMixer: {fileID: 24100000, guid: b8f9c6ad8a3fe4f44ab480b157590e68, type: 2}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
 --- !u!82 &2611191827690574322
 AudioSource:
   m_ObjectHideFlags: 0
