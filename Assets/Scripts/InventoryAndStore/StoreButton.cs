@@ -32,10 +32,10 @@ namespace InventoryAndStore
             switch (ItemData.ItemSO.tradeState)
             {
                 case ItemSO.TradeState.Buyable:
-                    StoreDatabase.instance.Buy(ItemData.ItemSO);
+                    StoreDatabase.Instance.Buy(ItemData.ItemSO);
                     break;
                 case ItemSO.TradeState.Sellable:
-                    StoreDatabase.instance.Sell(ItemData.ItemSO);
+                    StoreDatabase.Instance.Sell(ItemData.ItemSO);
                     break;
             }
         }
