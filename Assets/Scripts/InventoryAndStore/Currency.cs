@@ -136,13 +136,5 @@ namespace InventoryAndStore {
             MessageBroker.Instance().Send(new CompostUpdateMessage(_data.Compost));
             return true;
         }
-
-        /// <summary>
-        /// Method used for testing
-        /// </summary>
-        /// <param name="amount"></param>
-        public void RemoveCurrency(int amount) {
-            TryRemoveFertilizer(amount);
-        }
     }
 }
