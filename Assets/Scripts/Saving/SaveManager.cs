@@ -11,10 +11,7 @@ using WorldGrid;
 namespace Saving {
     public class SaveManager : MonoBehaviour {
         private string key;
-        private string PLAYER_KEY
-        {
-            get => FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-        }
+        private string PLAYER_KEY => FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
         private FireBaseAnonymousAuthentication authAnonymous;
 

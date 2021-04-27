@@ -5,11 +5,11 @@ namespace InventoryAndStore
 {
     public class StoreDatabase : MonoBehaviour
     {
-        public static StoreDatabase instance;
+        public static StoreDatabase Instance;
 
         private void Start()
         {
-            instance = this;
+            Instance = this;
         }
 
         private static Currency Currency => FindObjectOfType<Currency>();

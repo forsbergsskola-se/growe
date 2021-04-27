@@ -7,12 +7,15 @@ using WorldGrid;
 
 namespace Tools {
     public class FertilizerTool : MonoBehaviour {
+        private bool _toolSelected;
+        private Currency _playerCurrency;
         
-        bool _toolSelected;
 
         void Start() {
             MessageBroker.Instance().SubscribeTo<FertilizerToolSelectedMessage>(UpdateToolSelected);
             MessageBroker.Instance().SubscribeTo<CancelSelectedToolMessage>(UpdateToolSelected);
+            
+            _playerCurrency = FindObjectOfType<Currency>();
         }
 
         void OnDestroy() {
@@ -30,17 +33,16 @@ namespace Tools {
         }
 
         IEnumerator FertilizePlant() {
-            while(_toolSelected) {
+            while(_toolSelected) 
+            {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out var hit) && Input.GetMouseButtonUp(0)) {
                     var currentPlant = hit.collider.transform.GetComponent<GridPlant>();
                     if (currentPlant != null) {
-                        MessageBroker.Instance().Send(new CompostUpdateMessage(0));
                         MessageBroker.Instance().Send(new ToolSelectedMessage(false));
-                        bool usedFertilizer = GameObject.Find("/GameManager").GetComponent<Currency>().TryRemoveFertilizer(1);
-                        if (usedFertilizer) {
+                        if (_playerCurrency.TryRemoveFertilizer(1))
                             currentPlant.plant.isFertilized = true;
-                        }
+                        
                         yield break;
                     }
                 }

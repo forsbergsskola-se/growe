@@ -124,7 +124,7 @@ namespace InventoryAndStore
                         break;
                     }
                     case ItemSO.TradeState.Sellable when ItemInfoData.storeUi.activeSelf:
-                        StoreDatabase.instance.Sell(itemSO);
+                        StoreDatabase.Instance.Sell(itemSO);
                         break;
                 }
         }
