@@ -27,6 +27,8 @@ namespace InventoryAndStore
         private void Update()
         {
             ItemTypeChecker();
+            
+            fusionButton.gameObject.SetActive(true);
 
             if (ItemInfoData.itemData.amount >= 3 && ItemInfoData.itemData.ItemSO.itemType == ItemSO.ItemType.Seed)
             {
@@ -35,6 +37,10 @@ namespace InventoryAndStore
             else
             {
                 fusionButton.interactable = false;
+                if (ItemInfoData.itemData.ItemSO.itemType != ItemSO.ItemType.Seed)
+                {
+                    fusionButton.gameObject.SetActive(false);
+                }
             }
         }
 
