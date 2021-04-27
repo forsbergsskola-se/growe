@@ -17,8 +17,6 @@ public class SoundController : MonoBehaviour
     void Awake()
     {
         GetVolume(audioMixer, volumeParameter);
-        Debug.Log(musicSlider.value);
-        Debug.Log(musicSlider.value);
     }
 
     void Start()
@@ -29,10 +27,9 @@ public class SoundController : MonoBehaviour
             mute.AddListener(Muting);
         }
     }
-    private void Update()
-    {
-        musicSlider = GameObject.FindGameObjectWithTag("MusicOnOffButton").GetComponent<Slider>();
-        sfxSlider = GameObject.FindGameObjectWithTag("SfxOnOffSlider").GetComponent<Slider>();
+    private void FixedUpdate() {
+        musicSlider = GameObject.FindGameObjectWithTag("MusicOnOffButton")?.GetComponent<Slider>();
+        sfxSlider = GameObject.FindGameObjectWithTag("SfxOnOffSlider")?.GetComponent<Slider>();
         GetVolume(audioMixer, volumeParameter);
     }
 
